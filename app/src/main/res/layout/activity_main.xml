@@ -110,7 +110,8 @@
             android:layout_marginBottom="12dp"
             android:layout_above="@+id/bLogin"
             android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
+            android:layout_alignParentStart="true"
+            android:onClick="add" />
 
         <Button
             android:text="Log in"
