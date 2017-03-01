@@ -117,7 +117,8 @@
             android:hint="Email ID"
             android:id="@+id/etEmail"
             android:singleLine="true"
-            android:inputType="textEmailAddress" />
+            android:inputType="textEmailAddress"
+            android:maxLength="25" />
     </android.support.design.widget.TextInputLayout>
 
     <android.support.design.widget.TextInputLayout
@@ -134,7 +135,8 @@
             android:hint="Password"
             android:id="@+id/etPassword"
             android:singleLine="true"
-            android:inputType="textPassword" />
+            android:inputType="textPassword"
+            android:maxLength="12" />
     </android.support.design.widget.TextInputLayout>
 
     <android.support.design.widget.TextInputLayout
@@ -151,7 +153,8 @@
             android:hint="Confirm Password"
             android:id="@+id/etConfirm"
             android:singleLine="true"
-            android:inputType="textPassword" />
+            android:inputType="textPassword"
+            android:maxLength="12" />
     </android.support.design.widget.TextInputLayout>
 
     <Button
