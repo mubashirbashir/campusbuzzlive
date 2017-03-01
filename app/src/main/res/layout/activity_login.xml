@@ -31,7 +31,7 @@
         style="@style/Widget.AppCompat.Button.Borderless" />
 
     <TextView
-        android:text="Log in tp Campus Buzz Live"
+        android:text="Log in to Campus Buzz Live"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/bSign"
