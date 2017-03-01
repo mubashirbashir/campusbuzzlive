@@ -67,9 +67,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/tilEnroll"
-        android:layout_alignRight="@+id/bSign"
-        android:layout_alignEnd="@+id/bSign"
-        android:id="@+id/tilPassword">
+        android:id="@+id/tilPassword"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true">
 
         <EditText
             android:layout_width="match_parent"
@@ -105,6 +105,9 @@
         android:id="@+id/tvForgot"
         android:background="@android:color/white"
         android:textColor="@android:color/darker_gray"
-        android:textSize="18sp" />
+        android:textSize="18sp"
+        android:clickable="true"
+        android:linksClickable="false"
+        android:onClick="add" />
 
 </RelativeLayout>
