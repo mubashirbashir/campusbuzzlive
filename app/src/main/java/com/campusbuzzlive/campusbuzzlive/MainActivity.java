@@ -8,8 +8,8 @@ import android.widget.Button;
 import android.support.design.widget.TextInputLayout;
 import android.widget.EditText;
 public class MainActivity extends AppCompatActivity {
- // Button bLogin =(Button) findViewById(R.id.bLogin);
-  // Button bSign =(Button) findViewById(R.id.bSign);
+ Button bLogin ;
+
   //  Button bGuest =(Button) findViewById(R.id.bGuest);
         Button bSign;
 
@@ -19,12 +19,21 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Button bSign =(Button) findViewById(R.id.bSign);
+        Button bLogin =(Button) findViewById(R.id.bLogin);
 
     }
 
 public void add(View v)
+
 {
-    Intent abc = new Intent(MainActivity.this,SignupActivity.class);
-    startActivity(abc);
+    if(v.getId() ==R.id.bSign) {
+        Intent abc = new Intent(MainActivity.this, SignupActivity.class);
+        startActivity(abc);
+    }
+    if(v.getId()==R.id.bLogin)
+    {
+        Intent Logintent= new Intent(MainActivity.this,LoginActivity.class);
+        startActivity(Logintent);
+    }
 }
 }
