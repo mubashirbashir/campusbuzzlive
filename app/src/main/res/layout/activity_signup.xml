@@ -9,8 +9,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.campusbuzzlive.campusbuzzlive.SignupActivity"
-    android:background="@android:color/white"
-    android:padding="0dp">
+    android:background="@android:color/white">
 
 
     <Button
@@ -28,8 +27,7 @@
         style="?android:attr/windowAnimationStyle"
         android:textStyle="normal|bold"
         android:gravity="center"
-        android:layout_marginBottom="12dp"
-        android:layout_above="@+id/bLogin"
+        android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
@@ -94,13 +92,6 @@
         android:layout_alignParentStart="true"
         android:id="@+id/tilCourse">
 
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Course"
-            android:id="@+id/etCourse"
-            android:singleLine="true"
-            android:inputType="textCapCharacters" />
     </android.support.design.widget.TextInputLayout>
 
     <android.support.design.widget.TextInputLayout
@@ -121,31 +112,32 @@
             android:maxLength="25" />
     </android.support.design.widget.TextInputLayout>
 
+    <Button
+        android:text="Submit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/bSubmit"
+        android:textSize="24sp"
+        android:textColor="@android:color/white"
+        android:background="@color/buzzcolor"
+        android:height="64dp"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:textStyle="normal|bold"
+        android:textAllCaps="false"
+        android:layout_marginRight="11dp"
+        android:layout_marginEnd="11dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
     <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/tilEmail"
+        android:id="@+id/tilConfirm"
+        android:layout_above="@+id/bSubmit"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:id="@+id/etPassword">
-
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Password"
-            android:id="@+id/etPassword"
-            android:singleLine="true"
-            android:inputType="textPassword"
-            android:maxLength="12" />
-    </android.support.design.widget.TextInputLayout>
-
-    <android.support.design.widget.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/etPassword"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:id="@+id/tilConfirm">
+        android:layout_marginBottom="24dp">
 
         <EditText
             android:layout_width="match_parent"
@@ -157,24 +149,33 @@
             android:maxLength="12" />
     </android.support.design.widget.TextInputLayout>
 
-    <Button
-        android:text="Submit"
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/etPassword"
+        android:layout_above="@+id/tilConfirm"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Password"
+            android:id="@+id/etPassword"
+            android:singleLine="true"
+            android:inputType="textPassword"
+            android:maxLength="12" />
+    </android.support.design.widget.TextInputLayout>
+
+    <RadioButton
+        android:text="Male"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/bLogin"
-        android:textSize="24sp"
-        android:textColor="@android:color/white"
-        android:background="@color/buzzcolor"
-        android:height="64dp"
-        style="@style/Widget.AppCompat.Button.Borderless"
-        android:textStyle="normal|bold"
-        android:textAllCaps="false"
-        android:layout_alignParentBottom="true"
+        android:id="@+id/rbMale"
+        android:layout_marginTop="16dp"
+        android:layout_below="@+id/tilEmail"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginBottom="32dp"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentStart="true" />
 
 
 </RelativeLayout>
