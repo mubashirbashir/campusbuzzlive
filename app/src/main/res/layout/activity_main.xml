@@ -60,24 +60,23 @@
 
 
         <Button
-            android:text="Guest Mode"
+            android:id="@+id/bGuest"
+            style="@style/Widget.AppCompat.ButtonBar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:height="30dp"
-            android:id="@+id/bGuest"
-            android:clickable="false"
-            android:capitalize="none"
-            android:textAllCaps="false"
-            android:textColor="@android:color/background_light"
-            android:background="@android:color/transparent"
-            android:textStyle="normal|bold"
-            android:textSize="22sp"
-
-            android:gravity="center"
             android:layout_alignParentBottom="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            style="@style/Widget.AppCompat.ButtonBar" />
+            android:height="30dp"
+            android:background="@android:color/transparent"
+            android:capitalize="none"
+            android:gravity="center"
+
+            android:text="Guest Mode"
+            android:textAllCaps="false"
+            android:textColor="@android:color/background_light"
+            android:textSize="22sp"
+            android:textStyle="normal|bold" />
 
         <ImageView
             android:layout_width="@android:dimen/app_icon_size"
@@ -93,46 +92,46 @@
             android:background="@mipmap/logol" />
 
         <Button
-            android:text="Sign up"
-            android:layout_width="match_parent"
             android:id="@+id/bSign"
-            android:textAllCaps="false"
-            android:width="150dp"
-            android:textSize="18sp"
-            android:textColor="@color/buzzcolor"
-            android:background="@android:color/background_light"
-            android:elegantTextHeight="false"
-            android:height="30dp"
-            android:layout_height="wrap_content"
             style="?android:attr/windowAnimationStyle"
-            android:textStyle="normal|bold"
-            android:gravity="center"
-            android:layout_marginBottom="12dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_above="@+id/bSubmit"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:onClick="add" />
+            android:layout_marginBottom="14dp"
+            android:width="150dp"
+            android:height="30dp"
+            android:background="@android:color/background_light"
+            android:elegantTextHeight="false"
+            android:gravity="center"
+            android:onClick="add"
+            android:text="Sign up"
+            android:textAllCaps="false"
+            android:textColor="@color/buzzcolor"
+            android:textSize="22sp"
+            android:textStyle="normal|bold" />
 
         <Button
-            android:text="Log in"
+            android:id="@+id/bSubmit"
+            style="@style/Base.Widget.AppCompat.Button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/bSubmit"
-            android:height="30dp"
-            android:textAllCaps="false"
-            android:width="150dp"
-            style="@style/Base.Widget.AppCompat.Button"
-            android:background="@android:color/background_light"
-            android:textSize="18sp"
-            android:textColor="@color/buzzcolor"
-            android:textStyle="normal|bold"
-
-            android:gravity="center"
-            android:layout_marginBottom="31dp"
             android:layout_above="@+id/bGuest"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:onClick="add" />
+            android:layout_marginBottom="29dp"
+            android:width="150dp"
+            android:height="30dp"
+            android:background="@android:color/background_light"
+            android:gravity="center"
+
+            android:onClick="add"
+            android:text="Log in"
+            android:textAllCaps="false"
+            android:textColor="@color/buzzcolor"
+            android:textSize="22sp"
+            android:textStyle="normal|bold" />
 
 
     </RelativeLayout>
