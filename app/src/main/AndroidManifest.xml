@@ -22,7 +22,7 @@
         <activity android:name=".ChangePassword" />
         <activity
             android:name=".RadioActivity"
-            android:label="@string/title_activity_radio"
+            android:label="Campus Buzz Live!"
             android:parentActivityName=".ChangePassword"
             android:theme="@style/AppTheme">
             <meta-data

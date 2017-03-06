@@ -30,32 +30,33 @@
         android:gravity="center"
         android:text="Sign up"
         android:textAllCaps="false"
-        android:textColor="@color/buzzcolor"
 
+        android:textColor="@color/buzzcolor"
         android:textSize="18sp"
         android:textStyle="normal|bold" />
 
 
     <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_marginTop="50dp"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:fadeScrollbars="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="25dp"
+        android:layout_marginTop="50dp"
+        android:fadeScrollbars="false"
         android:fillViewport="false"
         android:orientation="vertical"
         android:padding="10dp"
         android:scrollbarSize="@dimen/activity_vertical_margin"
-        android:scrollbarStyle="outsideOverlay"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true">
+        android:scrollbarStyle="outsideOverlay">
 
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:baselineAligned="false">
+            android:layout_marginTop="0dp"
+            android:baselineAligned="false"
+            android:orientation="vertical">
 
 
             <android.support.design.widget.TextInputLayout
@@ -70,7 +71,7 @@
                     android:id="@+id/etEnroll"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="24dp"
+                    android:layout_marginTop="0dp"
                     android:hint="Enrollment ID"
                     android:inputType="number"
                     android:maxLength="11"
@@ -217,7 +218,8 @@
 
             <Button
                 android:id="@+id/bSubmit"
-                style="@style/Widget.AppCompat.Button.Borderless"
+
+                style="@style/Base.Widget.AppCompat.Button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
@@ -225,14 +227,17 @@
                 android:layout_alignParentRight="true"
                 android:layout_marginEnd="0dp"
                 android:layout_marginRight="0dp"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="50dp"
+
                 android:height="@android:dimen/app_icon_size"
                 android:background="@color/buzzcolor"
+                android:elevation="20dp"
                 android:text="Submit"
                 android:textAllCaps="false"
                 android:textColor="@android:color/white"
                 android:textSize="24sp"
-                android:textStyle="normal|bold" />
+                android:textStyle="normal|bold"
+                android:theme="@style/AppTheme" />
         </LinearLayout>
     </ScrollView>
 

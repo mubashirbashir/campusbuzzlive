@@ -15,63 +15,64 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true">
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:addStatesFromChildren="true"
+        android:clickable="false">
 
         <TextView
-            android:text="Campus Buzz"
+            android:id="@+id/textView8"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/textView8"
-            android:textSize="36sp"
-            android:textColor="@android:color/white"
-            android:fontFamily="sans-serif"
-            android:textStyle="normal|bold"
             android:layout_above="@+id/textView9"
             android:layout_alignLeft="@+id/textView9"
-            android:layout_alignStart="@+id/textView9" />
-
-        <TextView
-            android:text="Keeping University Pulsating"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/textView10"
+            android:layout_alignStart="@+id/textView9"
+            android:fontFamily="sans-serif"
+            android:text="Campus Buzz"
             android:textColor="@android:color/white"
-            android:textSize="24sp"
-            android:layout_centerVertical="true"
-            android:layout_alignLeft="@+id/textView9"
-            android:layout_alignStart="@+id/textView9" />
-
-        <TextView
-            android:text="Live!"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/textView9"
             android:textSize="36sp"
+            android:textStyle="normal|bold" />
+
+        <TextView
+            android:id="@+id/textView10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/textView9"
+            android:layout_alignStart="@+id/textView9"
+            android:layout_centerVertical="true"
+            android:text="Keeping University Pulsating"
             android:textColor="@android:color/white"
-            android:textStyle="normal|bold"
-            android:layout_marginLeft="12dp"
-            android:layout_marginStart="12dp"
-            android:layout_marginBottom="44dp"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/textView9"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_above="@+id/textView10"
             android:layout_alignLeft="@+id/imageView3"
-            android:layout_alignStart="@+id/imageView3" />
+            android:layout_alignStart="@+id/imageView3"
+            android:layout_marginBottom="44dp"
+            android:layout_marginLeft="12dp"
+            android:layout_marginStart="12dp"
+            android:text="Live!"
+            android:textColor="@android:color/white"
+            android:textSize="36sp"
+            android:textStyle="normal|bold" />
 
 
         <Button
             android:id="@+id/bGuest"
-            style="@style/Widget.AppCompat.ButtonBar"
+            style="@style/Base.Widget.AppCompat.Button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+
             android:layout_alignParentBottom="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:height="30dp"
             android:background="@android:color/transparent"
-            android:capitalize="none"
             android:gravity="center"
-
             android:text="Guest Mode"
             android:textAllCaps="false"
             android:textColor="@android:color/background_light"
@@ -79,17 +80,17 @@
             android:textStyle="normal|bold" />
 
         <ImageView
+            android:id="@+id/imageView5"
             android:layout_width="@android:dimen/app_icon_size"
             android:layout_height="@android:dimen/notification_large_icon_height"
-            android:id="@+id/imageView5"
             android:layout_above="@+id/textView8"
-            android:layout_toRightOf="@+id/textView9"
-            android:layout_toEndOf="@+id/textView9"
+            android:layout_marginBottom="26dp"
             android:layout_marginLeft="41dp"
             android:layout_marginStart="41dp"
-            android:gravity="center"
-            android:layout_marginBottom="26dp"
-            android:background="@mipmap/logol" />
+            android:layout_toEndOf="@+id/textView9"
+            android:layout_toRightOf="@+id/textView9"
+            android:background="@mipmap/logol"
+            android:gravity="center" />
 
         <Button
             android:id="@+id/bSign"
@@ -117,15 +118,15 @@
             style="@style/Base.Widget.AppCompat.Button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+
             android:layout_above="@+id/bGuest"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:layout_marginBottom="29dp"
+            android:layout_marginBottom="20dp"
             android:width="150dp"
             android:height="30dp"
             android:background="@android:color/background_light"
             android:gravity="center"
-
             android:onClick="add"
             android:text="Log in"
             android:textAllCaps="false"

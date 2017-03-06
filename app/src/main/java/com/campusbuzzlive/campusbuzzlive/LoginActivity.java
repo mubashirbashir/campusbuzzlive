@@ -29,7 +29,7 @@ public class LoginActivity extends AppCompatActivity {
             startActivity(abc);
         }
         if (v.getId() == R.id.bSubmit) {
-            Intent Logintent = new Intent(LoginActivity.this, LoginActivity.class);
+            Intent Logintent = new Intent(LoginActivity.this, RadioActivity.class);
             startActivity(Logintent);
 
         }

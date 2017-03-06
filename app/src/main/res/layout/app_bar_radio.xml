@@ -16,7 +16,8 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
+            android:background="@color/buzzcolor"
+            android:minHeight="176dp"
             app:popupTheme="@style/AppTheme.PopupOverlay" />
 
     </android.support.design.widget.AppBarLayout>
@@ -29,7 +30,8 @@
         android:layout_margin="@dimen/fab_margin"
         app:srcCompat="@android:drawable/ic_dialog_email" />
 
-    <include layout="@layout/content_radio"
-        style="@style/AlertDialog.AppCompat" />
+    <include
+        style="@style/AlertDialog.AppCompat"
+        layout="@layout/content_radio" />
 
 </android.support.design.widget.CoordinatorLayout>

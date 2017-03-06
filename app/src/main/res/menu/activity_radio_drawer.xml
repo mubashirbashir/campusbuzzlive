@@ -3,33 +3,40 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_Camera"
-            android:icon="@drawable/ic_action_accounts"
+            android:id="@+id/nav_Home"
+            android:icon="@drawable/ic_home"
+
+            android:title="Home" />
+
+        <item
+            android:id="@+id/nav_Events"
+            android:icon="@drawable/ic_events"
+            android:title="Events" />
+        <item
+            android:id="@+id/nav_Notifications"
+            android:icon="@drawable/ic_notifications"
+            android:title="Noifications" />
+        <item
+            android:id="@+id/nav_Feedback"
+            android:icon="@drawable/ic_feedback"
+            android:title="Feedback" />
+        <item
+            android:id="@+id/nav_Profile"
+            android:icon="@drawable/ic_profile_set"
             android:title="Profile Settings" />
-        <item
-            android:id="@+id/nav_gallery"
-            android:icon="@drawable/ic_menu_gallery"
-            android:title="Gallery" />
-        <item
-            android:id="@+id/nav_slideshow"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="Slideshow" />
-        <item
-            android:id="@+id/nav_manage"
-            android:icon="@drawable/ic_menu_manage"
-            android:title="Tools" />
+
     </group>
 
-    <item android:title="Communicate">
+    <item >
         <menu>
             <item
-                android:id="@+id/nav_share"
-                android:icon="@drawable/ic_menu_share"
-                android:title="Share" />
+                android:id="@+id/nav_FAQ"
+                android:icon="@drawable/ic_question"
+                android:title="F.A.Q" />
             <item
-                android:id="@+id/nav_send"
-                android:icon="@drawable/ic_menu_send"
-                android:title="Send" />
+                android:id="@+id/nav_About"
+                android:icon="@drawable/ic_about"
+                android:title="About Us" />
         </menu>
     </item>
 
