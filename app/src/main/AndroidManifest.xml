@@ -26,6 +26,7 @@
         <activity
             android:name=".RadioActivity"
             android:label="Campus Buzz Live!"
+            android:configChanges="orientation|screenSize|keyboardHidden"
             android:parentActivityName=".ChangePassword"
             android:theme="@style/AppTheme">
             <meta-data

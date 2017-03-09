@@ -28,8 +28,10 @@
     </group>
 
     <item >
+
         <menu>
             <item
+
                 android:id="@+id/nav_FAQ"
                 android:icon="@drawable/ic_question"
                 android:title="F.A.Q" />
@@ -37,6 +39,11 @@
                 android:id="@+id/nav_About"
                 android:icon="@drawable/ic_about"
                 android:title="About Us" />
+            <item
+                android:id="@+id/nav_SignOut"
+                android:icon="@drawable/ic_sign_out"
+                android:title="Sign Out" />
+
         </menu>
     </item>
 
