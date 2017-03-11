@@ -1,107 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_change_password"
+    android:id="@+id/profile_frag_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.campusbuzzlive.campusbuzzlive.ChangePassword"
-    android:background="@android:color/white">
+    android:background="@android:color/white"
+    android:paddingBottom="0dp"
+    android:paddingLeft="0dp"
+    android:paddingRight="0dp"
+    android:paddingTop="0dp"
+    tools:context="com.campusbuzzlive.campusbuzzlive.ChangePassword">
 
 
-    <Button
-        android:text="Change Password"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/bChangePassword"
-        android:padding="0dp"
-        android:paddingBottom="0dp"
-        android:paddingEnd="0dp"
-        android:paddingStart="0dp"
-        android:paddingTop="0dp"
+    <ImageView
+        android:id="@+id/ivDP"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:height="60dp"
-        android:background="@android:color/white"
-        android:textAllCaps="false"
-        android:textColor="@color/buzzcolor"
-        android:textSize="22sp"
-        android:clickable="false" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/tvUserName"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_below="@+id/bChangePassword"
-        android:height="40dp"
-        android:textSize="24sp"
-        android:textStyle="normal|bold" />
-
-    <android.support.design.widget.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/tvUserName"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="14dp"
-        android:id="@+id/tilNewPass">
-
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="New Password"
-            android:id="@+id/etNewPass"
-            android:inputType="textPassword"
-            android:maxLength="12"
-            android:singleLine="true" />
-    </android.support.design.widget.TextInputLayout>
-
-    <android.support.design.widget.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:layout_below="@+id/tilNewPass"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:id="@+id/tilConfirmPass">
-
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Confirm Password"
-            android:id="@+id/etConfirmPass"
-            android:singleLine="true" />
-    </android.support.design.widget.TextInputLayout>
-
-    <Button
-        android:text="Chan9ge"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/tilConfirmPass"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="41dp"
-        android:id="@+id/bChange"
+        android:layout_alignParentTop="true"
+        android:layout_margin="5dp"
+        android:layout_marginLeft="13dp"
+        android:layout_marginStart="13dp"
+        android:layout_marginTop="11dp"
         android:background="@color/buzzcolor"
-        android:textColor="@android:color/white"
-        android:textAllCaps="false"
-        android:textSize="24sp" />
+        android:padding="1dp"
+        android:src="@color/buzzcolor1" />
 
-    <Button
-        android:id="@+id/tbtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/bChange"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="77dp"
-        android:text="Button" />
+    <ImageButton
+        android:id="@+id/ibCamera"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_alignBottom="@+id/ivDP"
+        android:layout_alignEnd="@+id/ivDP"
+        android:layout_alignRight="@+id/ivDP"
+        android:onClick="add"
+        app:srcCompat="@drawable/ic_camera_alt_white_18dp" />
 
 </RelativeLayout>
