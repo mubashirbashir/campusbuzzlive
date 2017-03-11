@@ -1,4 +1,5 @@
 package com.campusbuzzlive.campusbuzzlive;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -98,6 +99,10 @@ public class RadioActivity extends AppCompatActivity
                 break;
             case R.id.nav_About:
                 fragment = new AboutFragClass();
+                break;
+            case R.id.nav_SignOut:
+                Intent intent = new Intent(RadioActivity.this,MainActivity.class);
+                startActivity(intent);
                 break;
         }
 

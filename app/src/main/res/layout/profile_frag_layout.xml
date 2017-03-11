@@ -95,4 +95,13 @@
         android:textAllCaps="false"
         android:textSize="24sp" />
 
+    <Button
+        android:id="@+id/tbtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/bChange"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="77dp"
+        android:text="Button" />
+
 </RelativeLayout>
