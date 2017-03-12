@@ -114,17 +114,8 @@
                     android:layout_marginTop="5dp"
                     android:hint="Department"
                     android:inputType="textCapCharacters"
+                    android:maxLength="30"
                     android:singleLine="true" />
-            </android.support.design.widget.TextInputLayout>
-
-            <android.support.design.widget.TextInputLayout
-                android:id="@+id/tilCourse"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_below="@+id/tilDepartment">
-
             </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout

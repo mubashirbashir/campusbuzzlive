@@ -98,6 +98,7 @@
             android:layout_marginTop="5dp"
             android:hint="Password"
             android:inputType="textPassword"
+            android:maxLength="12"
             android:singleLine="true" />
     </android.support.design.widget.TextInputLayout>
 
