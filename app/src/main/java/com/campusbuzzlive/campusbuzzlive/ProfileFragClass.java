@@ -53,16 +53,52 @@ public class ProfileFragClass extends Fragment {
         context = rootView.getContext();
         imageButton4 = (ImageButton) rootView.findViewById(R.id.ibCamera);
         ivDP = (ImageView) rootView.findViewById(R.id.ivDP);
+        Button bChangePW = (Button)rootView.findViewById(R.id.bChangePW) ;
+        Button bPhone= (Button) rootView.findViewById(R.id.bPhone);
+        Button bEmail= (Button) rootView.findViewById(R.id.bEmail);
+
            imageButton4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //Pass the context and the Activity class you need to open from the Fragment Class, to the Intent
-
-                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                startActivityForResult(intent,
-                        CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE);
+                if (v.getId() == R.id.ibCamera) {
+                    Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                    startActivityForResult(intent,
+                            CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE);
+                }
             }
            });
+        bChangePW.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Pass the context and the Activity class you need to open from the Fragment Class, to the Intent
+                if (v.getId() == R.id.bChangePW) {
+                    Intent intent = new Intent(getActivity(),ChangePassword.class);
+                    startActivity(intent);
+                }
+            }
+        });
+        bEmail.setOnClickListener(new View.OnClickListener() {
+            @Override
+
+            public void onClick(View v) {
+                //Pass the context and the Activity class you need to open from the Fragment Class, to the Intent
+                if (v.getId() == R.id.bEmail) {
+                    Intent intent = new Intent(getActivity(),UpdateEmail.class);
+                    startActivity(intent);
+                }
+            }
+        });
+        bPhone.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Pass the context and the Activity class you need to open from the Fragment Class, to the Intent
+                if (v.getId() == R.id.bPhone) {
+                    Intent intent = new Intent(getActivity(),UpdatePhoneNo.class);
+                    startActivity(intent);
+                }
+            }
+        });
     return rootView;
     }
 

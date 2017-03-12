@@ -16,23 +16,22 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".LoginActivity"
-
-
-            />
+        <activity android:name=".LoginActivity" />
         <activity android:name=".SignupActivity" />
         <activity android:name=".ForgotPassword" />
         <activity android:name=".ChangePassword" />
         <activity
             android:name=".RadioActivity"
-            android:label="Campus Buzz Live!"
             android:configChanges="orientation|screenSize|keyboardHidden"
+            android:label="Campus Buzz Live!"
             android:parentActivityName=".ChangePassword"
             android:theme="@style/AppTheme">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.campusbuzzlive.campusbuzzlive.ChangePassword" />
         </activity>
+        <activity android:name=".UpdatePhoneNo" />
+        <activity android:name=".UpdateEmail"></activity>
     </application>
 
 </manifest>

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.campusbuzzlive.campusbuzzlive.UpdateEmail">
+
+
+
+    <Button
+        android:id="@+id/bUpdateEmail"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@android:color/white"
+
+        android:padding="0dp"
+        android:text="Update EMail."
+        android:textAllCaps="false"
+        android:textColor="@color/buzzcolor"
+        android:textSize="18sp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <EditText
+        android:id="@+id/etEmailUD"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/bUpdateEmail"
+        android:layout_marginTop="45dp"
+        android:ems="10"
+        android:hint="Enter Email."
+        android:inputType="textEmailAddress"
+        android:maxLength="25" />
+
+    <Button
+        android:id="@+id/bUpdateE"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:text="Update"
+        android:textAllCaps="false"
+        android:background="@color/buzzcolor"
+        android:textSize="18sp"
+        android:textColor="@android:color/white"
+        android:textStyle="normal|bold"
+        android:layout_marginRight="21dp"
+        android:layout_marginEnd="21dp"
+        android:layout_below="@+id/etEmailUD"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+</RelativeLayout>

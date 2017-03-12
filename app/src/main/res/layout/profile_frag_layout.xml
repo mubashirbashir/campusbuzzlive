@@ -38,4 +38,70 @@
         android:onClick="add"
         app:srcCompat="@drawable/ic_camera_alt_white_18dp" />
 
+    <Button
+        android:id="@+id/bChangeDP"
+        style="?android:attr/windowAnimationStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ivDP"
+        android:layout_marginTop="15dp"
+        android:layout_toEndOf="@+id/ivDP"
+        android:background="@android:color/white"
+        android:text="Change Display Picture"
+        android:textAlignment="textStart"
+        android:textAllCaps="false"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:textSize="18sp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        android:id="@+id/bChangePW"
+        style="?android:attr/windowAnimationStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/bChangeDP"
+        android:layout_marginTop="15dp"
+        android:background="@android:color/white"
+        android:onClick="add"
+        android:text="Change Password"
+        android:textAlignment="textStart"
+        android:textAllCaps="false"
+        android:textSize="18sp" />
+
+    <Button
+        android:id="@+id/bPhone"
+        style="?android:attr/windowAnimationStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/bChangePW"
+        android:layout_marginTop="15dp"
+        android:background="@android:color/white"
+        android:onClick="add"
+        android:text="Update Phone No."
+        android:textAlignment="textStart"
+        android:textAllCaps="false"
+        android:textSize="18sp" />
+
+    <Button
+        android:id="@+id/bEmail"
+        style="?android:attr/windowAnimationStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/bPhone"
+        android:layout_marginTop="15dp"
+        android:background="@android:color/white"
+        android:onClick="add"
+        android:text="Update Email"
+        android:textAlignment="textStart"
+        android:textAllCaps="false"
+        android:textSize="18sp" />
+
 </RelativeLayout>
