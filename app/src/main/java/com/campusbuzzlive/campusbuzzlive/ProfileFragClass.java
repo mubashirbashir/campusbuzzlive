@@ -58,8 +58,8 @@ public class ProfileFragClass extends Fragment {
         Button bEmail= (Button) rootView.findViewById(R.id.bEmail);
 
            imageButton4.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+                @Override
+                public void onClick(View v) {
                 //Pass the context and the Activity class you need to open from the Fragment Class, to the Intent
                 if (v.getId() == R.id.ibCamera) {
                     Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
