@@ -66,12 +66,15 @@ public class EventFragClass extends Fragment {
 
 
         // Color c =  getResources().getColor( );
+        getActivity().setTitle("Events");
+        linearLayout=(LinearLayout)rt.findViewById(R.id.linearLayout);
 
 
         FloatingActionButton fab = (FloatingActionButton) rt.findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View view) {
+
 ////Create your Controls(UI widget, Button,TextView) and add into layout
 
 
@@ -91,7 +94,7 @@ public class EventFragClass extends Fragment {
                 event =(EditText) dialog.findViewById(R.id.etEvent);
 
                 dialog.setTitle("ADD Event");
-dialog.show();
+
 
              //   date.setText(getCurrentDate());
 
@@ -153,10 +156,34 @@ dialog.show();
 
                         if(settime && setdate && !event.getText().equals(""))
                         {
+                            TextView btn = new TextView(getActivity());
+                            TextView btn1 = new TextView(getActivity());
+                            View btn3 = new View(getActivity());
+                            btn.setText(event.getText());
+                            btn.setTextSize(24 );
+                            btn.setTextColor(getResources().getColor(R.color.buzzcolor));
+
+                            btn1.setText(getCurrentDate() +"   "+getCurrentTime());
+                            btn1.setTextSize(20 );
+                            btn1.setId(i++);
+                            btn3.setBackgroundColor(getResources().getColor(R.color.colorPrimaryDark));
+                            btn3.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 2));
+
+                            btn.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+
+                            btn1.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+                            LinearLayout.LayoutParams params = (LinearLayout.LayoutParams)btn3.getLayoutParams();
+                            params.setMargins(40, 40, 40, 40); //substitute parameters for left, top, right, bottom
+                            btn3.setLayoutParams(params);
+                            linearLayout.addView(btn,0);
+                            linearLayout.addView(btn1,1);
+                            linearLayout.addView(btn3,2);
 
                         Toast.makeText(getContext()," Added", Toast.LENGTH_SHORT).show();
                             settime=false;
-                            setdate=false;                    }
+                            setdate=false;
+                            dialog.dismiss();
+                        }
                     }
                 });
 
@@ -178,7 +205,7 @@ dialog.show();
 }
     public String getCurrentDate() {
         StringBuilder builder = new StringBuilder();
-        builder.append("Current Date: ");
+       // builder.append("Current Date: ");
         builder.append((picker.getMonth() + 1) + "/");//month is 0 based
         builder.append(picker.getDayOfMonth() + "/");
         builder.append(picker.getYear());
@@ -187,7 +214,7 @@ dialog.show();
     @SuppressLint("NewApi")
     public String getCurrentTime() {
         StringBuilder builder = new StringBuilder();
-        builder.append("Current Time: ");
+     //   builder.append("Current Time: ");
         builder.append((TPicker.getHour() ) + ":");//month is 0 based
         builder.append(TPicker.getMinute() );
 
@@ -196,8 +223,9 @@ dialog.show();
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        //you can set the title for your toolbar here for different fragments different titles
-        getActivity().setTitle("Events");
+
+
+
 
     }
 }
