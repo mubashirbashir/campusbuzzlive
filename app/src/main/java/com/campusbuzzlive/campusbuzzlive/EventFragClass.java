@@ -4,18 +4,19 @@ package com.campusbuzzlive.campusbuzzlive;
  * Created by mubas on 3/6/2017.
  */
 
-import android.annotation.SuppressLint;
+
+import android.app.DatePickerDialog;
 import android.app.Dialog;
-import android.content.Context;
-import android.graphics.Color;
-import android.graphics.drawable.Drawable;
+import android.app.TimePickerDialog;
+
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.os.Bundle;
-import android.view.LayoutInflater;
+
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -24,30 +25,22 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.app.Dialog;
-import android.content.Context;
 import android.widget.TimePicker;
 import android.widget.Toast;
+
+import java.util.Calendar;
 
 
 public class EventFragClass extends Fragment {
     int i = 0;
+    Button bAdd;
+    ImageButton bDate, bTime, bLocation;
+    TextView tvDate, tvTime, tvLocation;
+    EditText etEvent;
+    String stringTime, stringDate;
+    boolean setDate, setTime; // ad lo alater
     private LinearLayout linearLayout = null;
-    DatePicker picker;
-    TimePicker TPicker;
-    Button okD,okT,Add;
-    ImageButton bDate,bTime;
-   TextView date, time;
-    EditText event ;
-
-
-
-
-
-
-
-
-    boolean setdate,settime ; // ad lo alater
+    private int mYear, mMonth, mDay, mHour, mMinute;
 
 
     public EventFragClass() {
@@ -62,169 +55,142 @@ public class EventFragClass extends Fragment {
 
         View rt = inflater.inflate(
                 R.layout.event_frag_layout, container, false);
-
-
-
-        // Color c =  getResources().getColor( );
         getActivity().setTitle("Events");
-        linearLayout=(LinearLayout)rt.findViewById(R.id.linearLayout);
-
+        linearLayout = (LinearLayout) rt.findViewById(R.id.linearLayout);
 
         FloatingActionButton fab = (FloatingActionButton) rt.findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View view) {
 
-////Create your Controls(UI widget, Button,TextView) and add into layout
-
-
+                //Create your Controls(UI widget, Button,TextView) and add into layout
                 final Dialog dialog = new Dialog(getContext());
-                event =(EditText) dialog.findViewById(R.id.etEvent);
-
                 dialog.setContentView(R.layout.event_dialog_layout);
-                picker = (DatePicker) dialog.findViewById(R.id.datePicker1);
-                okD = (Button) dialog.findViewById(R.id.bOkD);
-                Add = (Button) dialog.findViewById(R.id.bAdd);
+                bAdd = (Button) dialog.findViewById(R.id.bAdd);
                 bDate = (ImageButton) dialog.findViewById(R.id.bDate);
-                date = (TextView) dialog.findViewById(R.id.tvDate);
-                TPicker = (TimePicker) dialog.findViewById(R.id.TimePicker1);
-                okT = (Button) dialog.findViewById(R.id.bOkT);
+                tvDate = (TextView) dialog.findViewById(R.id.tvDate);
                 bTime = (ImageButton) dialog.findViewById(R.id.bTime);
-                time = (TextView) dialog.findViewById(R.id.tvTime);
-                event =(EditText) dialog.findViewById(R.id.etEvent);
-
+                tvTime = (TextView) dialog.findViewById(R.id.tvTime);
+                bLocation = (ImageButton) dialog.findViewById(R.id.bLoc);
+                tvLocation = (TextView) dialog.findViewById(R.id.tvloc);
+                etEvent = (EditText) dialog.findViewById(R.id.etEvent);
                 dialog.setTitle("ADD Event");
+                dialog.show();
 
 
-             //   date.setText(getCurrentDate());
+                bDate.setOnClickListener(new View.OnClickListener() {
 
-        bDate.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View view) {
-                okD.setVisibility(view.VISIBLE);
-                picker.setVisibility(view.VISIBLE);
-                date.setText(getCurrentDate());
-
-            }
-
-        });
-        okD.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                date.setText(getCurrentDate());
-                okD.setVisibility(view.INVISIBLE);
-                picker.setVisibility(view.INVISIBLE);
-                setdate=true;
+                    @Override
+                    public void onClick(View view) {
+                        // Get Current Date
+                        final Calendar c = Calendar.getInstance();
+                        mYear = c.get(Calendar.YEAR);
+                        mMonth = c.get(Calendar.MONTH);
+                        mDay = c.get(Calendar.DAY_OF_MONTH);
 
 
-            }
-        });
+                        DatePickerDialog datePickerDialog = new DatePickerDialog(getContext(),
+                                new DatePickerDialog.OnDateSetListener() {
+
+                                    @Override
+                                    public void onDateSet(DatePicker view, int year,
+                                                          int monthOfYear, int dayOfMonth) {
+                                        stringDate = dayOfMonth + "-" + (monthOfYear + 1) + "-" + year;
+
+                                        tvDate.setText(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
+                                        setDate = true;
+
+                                    }
+                                }, mYear, mMonth, mDay);
+                        datePickerDialog.show();
+                    }
+
+                });
+
 
                 bTime.setOnClickListener(new View.OnClickListener() {
 
                     @Override
                     public void onClick(View view) {
-                        okT.setVisibility(view.VISIBLE);
-                        TPicker.setVisibility(view.VISIBLE);
+                        // Get Current Time
+                        final Calendar c = Calendar.getInstance();
+                        mHour = c.get(Calendar.HOUR_OF_DAY);
+                        mMinute = c.get(Calendar.MINUTE);
 
-                        time.setText(getCurrentDate());
+                        // Launch Time Picker Dialog
+                        TimePickerDialog timePickerDialog = new TimePickerDialog(getContext(),
+                                new TimePickerDialog.OnTimeSetListener() {
 
+                                    @Override
+                                    public void onTimeSet(TimePicker view, int hourOfDay,
+                                                          int minute) {
+                                        stringTime = hourOfDay + ":" + minute;
+
+
+                                        tvTime.setText(hourOfDay + ":" + minute);
+                                        setTime = true;
+                                    }
+                                }, mHour, mMinute, false);
+                        timePickerDialog.show();
                     }
 
                 });
-                okT.setOnClickListener(new View.OnClickListener() {
+                bLocation.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        time.setText(getCurrentTime());
-                        okT.setVisibility(view.INVISIBLE);
-                        TPicker.setVisibility(view.INVISIBLE);
-
-                        settime=true;
-
-
-
+                        Toast.makeText(getContext(), "add code..", Toast.LENGTH_LONG).show();
 
                     }
                 });
 
 
-                    Add.setEnabled(true);
-                Add.setOnClickListener(new View.OnClickListener() {
+                bAdd.setEnabled(true);
+                bAdd.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
 
-                        if(settime && setdate && !event.getText().equals(""))
-                        {
-                            TextView btn = new TextView(getActivity());
-                            TextView btn1 = new TextView(getActivity());
-                            View btn3 = new View(getActivity());
-                            btn.setText(event.getText());
-                            btn.setTextSize(24 );
-                            btn.setTextColor(getResources().getColor(R.color.buzzcolor));
-
-                            btn1.setText(getCurrentDate() +"   "+getCurrentTime());
-                            btn1.setTextSize(20 );
-                            btn1.setId(i++);
-                            btn3.setBackgroundColor(getResources().getColor(R.color.colorPrimaryDark));
-                            btn3.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 2));
-
-                            btn.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
-
-                            btn1.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
-                            LinearLayout.LayoutParams params = (LinearLayout.LayoutParams)btn3.getLayoutParams();
+                        if (setTime && setDate && !etEvent.getText().toString().matches("")) {
+                            TextView tvDynamicEvent = new TextView(getActivity());
+                            TextView tvDynamicEtc = new TextView(getActivity());
+                            View vDynamicLine = new View(getActivity());
+                            tvDynamicEvent.setText(etEvent.getText());
+                            tvDynamicEvent.setTextSize(24);
+                            tvDynamicEvent.setGravity(Gravity.CENTER);
+                            tvDynamicEvent.setTextColor(getResources().getColor(R.color.buzzcolor));
+                            tvDynamicEtc.setTextSize(20);
+                            tvDynamicEtc.setGravity(Gravity.CENTER);
+                            tvDynamicEtc.setId(i++);
+                            vDynamicLine.setBackgroundColor(getResources().getColor(R.color.colorPrimaryDark));
+                            vDynamicLine.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 2));
+                            tvDynamicEvent.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+                            tvDynamicEtc.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+                            LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) vDynamicLine.getLayoutParams();
                             params.setMargins(40, 40, 40, 40); //substitute parameters for left, top, right, bottom
-                            btn3.setLayoutParams(params);
-                            linearLayout.addView(btn,0);
-                            linearLayout.addView(btn1,1);
-                            linearLayout.addView(btn3,2);
+                            vDynamicLine.setLayoutParams(params);
+                            tvDynamicEtc.setText(stringDate + "  " + stringTime + "  at" + " " + tvDynamicEtc.getId());
+                            linearLayout.addView(tvDynamicEvent, 0);
+                            linearLayout.addView(tvDynamicEtc, 1);
+                            linearLayout.addView(vDynamicLine, 2);
 
-                        Toast.makeText(getContext()," Added", Toast.LENGTH_SHORT).show();
-                            settime=false;
-                            setdate=false;
+                            Toast.makeText(getContext(), "Added", Toast.LENGTH_SHORT).show();
+                            setTime = false;
+                            setDate = false;
                             dialog.dismiss();
+                        } else {
+                            Toast.makeText(getContext(), "Fields are Empty..", Toast.LENGTH_LONG).show();
                         }
                     }
                 });
 
+            }
 
-        dialog.show();
-
-
-    }
-
-});
-
-
-
-
-
-
-
+        });
         return rt;
-}
-    public String getCurrentDate() {
-        StringBuilder builder = new StringBuilder();
-       // builder.append("Current Date: ");
-        builder.append((picker.getMonth() + 1) + "/");//month is 0 based
-        builder.append(picker.getDayOfMonth() + "/");
-        builder.append(picker.getYear());
-        return builder.toString();
     }
-    @SuppressLint("NewApi")
-    public String getCurrentTime() {
-        StringBuilder builder = new StringBuilder();
-     //   builder.append("Current Time: ");
-        builder.append((TPicker.getHour() ) + ":");//month is 0 based
-        builder.append(TPicker.getMinute() );
 
-        return builder.toString();
-    }
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
-
 
 
     }

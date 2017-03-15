@@ -5,12 +5,11 @@
     android:layout_height="wrap_content"
 
 
-  >
+    >
 
     <ScrollView
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        >
+        android:layout_height="wrap_content">
 
         <RelativeLayout
             android:layout_width="wrap_content"
@@ -60,10 +59,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/tilEnroll"
-                android:layout_margin="10dp"
                 android:layout_centerInParent="true"
-android:background="@drawable/ic_date_range_black_24dp"
+                android:layout_margin="10dp"
                 android:layout_marginBottom="20dp"
+                android:background="@drawable/ic_date_range_black_24dp"
 
 
                 android:foregroundGravity="top"
@@ -92,14 +91,13 @@ android:background="@drawable/ic_date_range_black_24dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/tvDate"
-                android:layout_margin="10dp"
                 android:layout_centerInParent="true"
+                android:layout_margin="10dp"
 
                 android:layout_marginBottom="20dp"
-android:background="@drawable/ic_access_time_black_24dp"
+                android:background="@drawable/ic_access_time_black_24dp"
 
-                android:hint="Time:"
-                />
+                android:hint="Time:" />
 
             <TextView
                 android:id="@+id/tvTime"
@@ -121,10 +119,10 @@ android:background="@drawable/ic_access_time_black_24dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/tvTime"
-                android:layout_margin="10dp"
-android:background="@drawable/ic_add_location_black_24dp"
-                android:layout_marginBottom="20dp"
                 android:layout_centerInParent="true"
+                android:layout_margin="10dp"
+                android:layout_marginBottom="20dp"
+                android:background="@drawable/ic_add_location_black_24dp"
 
 
                 android:hint="Date:"
@@ -137,14 +135,15 @@ android:background="@drawable/ic_add_location_black_24dp"
 
                 android:layout_below="@id/bLoc"
 
-                android:layout_margin="10dp"
                 android:layout_centerInParent="true"
+                android:layout_margin="10dp"
 
                 android:hint="Location:"
 
                 android:text="Tap above to add Location"
                 android:textAlignment="center"
                 android:textSize="28sp" />
+
             <Button
                 android:id="@+id/bAdd"
                 android:layout_width="match_parent"
@@ -154,69 +153,11 @@ android:background="@drawable/ic_add_location_black_24dp"
                 android:layout_margin="10dp"
 
                 android:background="@color/buzzcolor"
+                android:enabled="false"
                 android:text="ADD"
                 android:textAlignment="center"
                 android:textColor="@color/white"
-                android:textSize="20sp"
-                android:enabled="false"
-              />
-
-            <DatePicker
-                android:id="@+id/datePicker1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_centerHorizontal="true"
-                android:background="@color/white"
-                android:layout_margin="10dp"
-
-                android:textAlignment="center"
-                android:visibility="invisible" />
-            <TimePicker
-                android:id="@+id/TimePicker1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_centerHorizontal="true"
-                android:background="@color/white"
-                android:layout_margin="10dp"
-
-
-                android:textAlignment="center"
-                android:visibility="invisible" />
-
-            <Button
-            android:id="@+id/bOkD"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignEnd="@+id/datePicker1"
-            android:layout_alignRight="@+id/datePicker1"
-            android:layout_below="@+id/datePicker1"
-            android:layout_margin="10dp"
-
-            android:layout_marginTop="-20dp"
-
-            android:text="OK"
-            android:textAlignment="center"
-            android:textColor="@color/buzzcolor"
-            android:textSize="20sp"
-            android:visibility="invisible" />
-            <Button
-                android:id="@+id/bOkT"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignEnd="@+id/datePicker1"
-                android:layout_alignRight="@+id/datePicker1"
-                android:layout_below="@+id/datePicker1"
-                android:layout_margin="10dp"
-
-                android:layout_marginTop="-20dp"
-
-                android:text="OK"
-                android:textAlignment="center"
-                android:textColor="@color/buzzcolor"
-                android:textSize="20sp"
-                android:visibility="invisible" />
+                android:textSize="20sp" />
 
         </RelativeLayout>
     </ScrollView>
