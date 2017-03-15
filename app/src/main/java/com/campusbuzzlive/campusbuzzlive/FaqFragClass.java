@@ -15,6 +15,9 @@ import android.view.ViewGroup;
 
 public class FaqFragClass extends Fragment {
 
+
+
+
     public View onCreateView(LayoutInflater inflater,
                              @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
