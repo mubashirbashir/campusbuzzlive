@@ -48,17 +48,18 @@
         style="@style/Widget.AppCompat.Button.Borderless"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/etAddNo"
+        android:layout_marginEnd="18dp"
+        android:layout_marginRight="18dp"
         android:layout_marginTop="23dp"
+        android:background="@color/buzzcolor"
+        android:onClick="add"
         android:text="Update"
         android:textAllCaps="false"
-        android:background="@color/buzzcolor"
-        android:textSize="18sp"
         android:textColor="@android:color/white"
-        android:layout_below="@+id/etAddNo"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginRight="18dp"
-        android:layout_marginEnd="18dp"
-        android:textStyle="normal|bold"/>
+        android:textSize="18sp"
+        android:textStyle="normal|bold" />
 
 </RelativeLayout>
