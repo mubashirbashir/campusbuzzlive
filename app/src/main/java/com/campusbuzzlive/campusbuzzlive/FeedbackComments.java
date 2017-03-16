@@ -101,9 +101,9 @@ public class FeedbackComments extends AppCompatActivity {
                         vDynamicLine.setLayoutParams(params);
                         String currentDateTimeString = java.text.DateFormat.getDateTimeInstance().format(new Date());
                         tvDynamicEtc.setText(currentDateTimeString);
-                        linearLayout.addView(tvDynamicAnswer, 0);
-                        linearLayout.addView(tvDynamicEtc, 1);
-                       linearLayout.addView(vDynamicLine, 2);
+                        linearLayout.addView(tvDynamicAnswer, 3);
+                        linearLayout.addView(tvDynamicEtc, 4);
+                       linearLayout.addView(vDynamicLine, 5);
 
 
                         Toast.makeText(getApplicationContext(), "Added", Toast.LENGTH_SHORT).show();
