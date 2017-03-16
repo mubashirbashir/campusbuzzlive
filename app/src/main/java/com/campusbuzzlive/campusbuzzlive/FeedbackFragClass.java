@@ -6,6 +6,7 @@ package com.campusbuzzlive.campusbuzzlive;
 
 import android.app.Dialog;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
@@ -55,8 +56,8 @@ public class FeedbackFragClass extends Fragment {
                 bPost.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        TextView tvDynamicQuery = new TextView(getActivity());
-                        TextView tvDynamicEtc = new TextView(getActivity());
+                        final TextView tvDynamicQuery = new TextView(getActivity());
+                        final TextView tvDynamicEtc = new TextView(getActivity());
                         View vDynamicLine = new View(getActivity());
                         tvDynamicQuery.setText(etQuery.getText());
                         tvDynamicQuery.setTextSize(24);
@@ -74,9 +75,19 @@ public class FeedbackFragClass extends Fragment {
                         vDynamicLine.setLayoutParams(params);
                         String currentDateTimeString = java.text.DateFormat.getDateTimeInstance().format(new Date());
                         tvDynamicEtc.setText(currentDateTimeString);
+                         final String query =tvDynamicQuery.getText().toString();
                         linearLayout.addView(tvDynamicQuery, 0);
                         linearLayout.addView(tvDynamicEtc, 1);
                         linearLayout.addView(vDynamicLine, 2);
+                        tvDynamicQuery.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                Intent showfullquery = new Intent(getActivity(),FeedbackComments.class);
+                                showfullquery.putExtra("query",query);
+                                showfullquery.putExtra("etc",tvDynamicEtc.getText().toString());
+                                startActivity(showfullquery);
+                            }
+                        });
 
                         Toast.makeText(getContext(), "Added", Toast.LENGTH_SHORT).show();
                         dialog.dismiss();
