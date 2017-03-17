@@ -102,28 +102,30 @@
             android:singleLine="true" />
     </android.support.design.widget.TextInputLayout>
 
-    <Button
-        android:text="Log in"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:onClick="add"
+        <Button
+            android:id="@+id/bLog"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
 
-        android:id="@+id/bSubmit"
-        android:layout_marginTop="27dp"
-        android:background="@color/buzzcolor"
-        android:textColor="@android:color/white"
-        android:textAllCaps="false"
-        android:textStyle="normal|bold"
-        android:textSize="24sp"
-        android:layout_below="@+id/tilNewPass"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/tilNewPass"
+            android:layout_marginTop="27dp"
+            android:background="@color/buzzcolor"
+            android:enabled="false"
+
+            android:onClick="add"
+            android:text="Log in"
+            android:textAllCaps="false"
+            android:textColor="@android:color/white"
+            android:textSize="24sp"
+            android:textStyle="normal|bold" />
 
         <TextView
             android:id="@+id/tvForgot"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_below="@+id/bSubmit"
+            android:layout_below="@+id/bLog"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="30dp"
             android:background="@android:color/white"

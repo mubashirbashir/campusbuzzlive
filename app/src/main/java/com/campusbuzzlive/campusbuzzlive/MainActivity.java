@@ -18,7 +18,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Button bSign =(Button) findViewById(R.id.bSign);
-        Button bLogin =(Button) findViewById(R.id.bSubmit);
+        Button bLogin =(Button) findViewById(R.id.bLog);
 
     }
 
@@ -29,7 +29,7 @@ public void add(View v)
         Intent abc = new Intent(MainActivity.this, SignupActivity.class);
         startActivity(abc);
     }
-    if(v.getId()==R.id.bSubmit)
+    if(v.getId()==R.id.bLog)
     {
         Intent Logintent= new Intent(MainActivity.this,LoginActivity.class);
         startActivity(Logintent);

@@ -97,7 +97,7 @@
             style="?android:attr/windowAnimationStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_above="@+id/bSubmit"
+            android:layout_above="@+id/bLog"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_marginBottom="14dp"
@@ -114,7 +114,7 @@
             android:textStyle="normal|bold" />
 
         <Button
-            android:id="@+id/bSubmit"
+            android:id="@+id/bLog"
             style="@style/Base.Widget.AppCompat.Button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
