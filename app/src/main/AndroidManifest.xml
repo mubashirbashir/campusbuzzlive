@@ -61,7 +61,8 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.campusbuzzlive.campusbuzzlive.RadioActivity" />
         </activity>
-        <activity android:name=".FeedbackComments"></activity>
+        <activity android:name=".FeedbackComments" />
+        <activity android:name=".SettingsActivity"></activity>
     </application>
 
 </manifest>

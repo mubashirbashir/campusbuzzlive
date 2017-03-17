@@ -3,6 +3,8 @@ package com.campusbuzzlive.campusbuzzlive;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -34,9 +36,20 @@ public class LoginActivity extends AppCompatActivity {
     }
         public void LogInV(){
 
-            etEnroll.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+
+            etEnroll.addTextChangedListener(new TextWatcher() {
                 @Override
-                public void onFocusChange(View v, boolean hasFocus) {
+                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                }
+
+                @Override
+                public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                }
+
+                @Override
+                public void afterTextChanged(Editable s) {
                     if(etEnroll.getText().length()<11){
                         etEnroll.setError("Enrollment ID should be 11 Digits");
                     }
@@ -49,9 +62,19 @@ public class LoginActivity extends AppCompatActivity {
 
                 }
             });
-            etPassword.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            etPassword.addTextChangedListener(new TextWatcher() {
                 @Override
-                public void onFocusChange(View v, boolean hasFocus) {
+                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                }
+
+                @Override
+                public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                }
+
+                @Override
+                public void afterTextChanged(Editable s) {
                     if(etPassword.getText().toString().length()<8){
                         etPassword.setError("Password 8-12 Characters");
                     }
@@ -60,11 +83,12 @@ public class LoginActivity extends AppCompatActivity {
                         if(Pvalid &&Evalid) {
                             bLogin.setEnabled(true);
                         }
-                        }
                     }
 
 
-                });
+                }
+            });
+
 
         }
     public void add(View v)
