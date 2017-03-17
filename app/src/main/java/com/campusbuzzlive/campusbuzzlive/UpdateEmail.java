@@ -37,6 +37,7 @@ public class UpdateEmail extends AppCompatActivity {
             public void afterTextChanged(Editable s) {
                 if(!etEmailUD.getText().toString().trim().matches(emailPattern)){
                     etEmailUD.setError("Not Valid E-mail");
+                    bUpdateE.setEnabled(false);
                 }
                     else{
                     bUpdateE.setEnabled(true);

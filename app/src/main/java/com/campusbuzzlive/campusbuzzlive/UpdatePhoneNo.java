@@ -40,6 +40,7 @@ public class UpdatePhoneNo extends AppCompatActivity {
 
                 if(etAddNo.getText().toString().trim().length()<10) {
                     etAddNo.setError("Enter Valid 10 Digit Number");
+                    bUpdate.setEnabled(false);
                 }
                 else{
                     bUpdate.setEnabled(true);

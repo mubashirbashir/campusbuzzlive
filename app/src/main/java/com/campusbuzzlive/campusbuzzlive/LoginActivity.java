@@ -52,6 +52,7 @@ public class LoginActivity extends AppCompatActivity {
                 public void afterTextChanged(Editable s) {
                     if(etEnroll.getText().length()<11){
                         etEnroll.setError("Enrollment ID should be 11 Digits");
+                        bLogin.setEnabled(false);
                     }
                     else {
                         Evalid= true;
@@ -77,6 +78,7 @@ public class LoginActivity extends AppCompatActivity {
                 public void afterTextChanged(Editable s) {
                     if(etPassword.getText().toString().length()<8){
                         etPassword.setError("Password 8-12 Characters");
+                        bLogin.setEnabled(false);
                     }
                     else{
                         Pvalid=true;

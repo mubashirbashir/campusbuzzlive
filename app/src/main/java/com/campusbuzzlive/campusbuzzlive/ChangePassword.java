@@ -12,6 +12,7 @@ public class ChangePassword extends AppCompatActivity {
     EditText etConfirmPass;
     Button bChange;
     boolean NPvalid=false,CPvalid=false;
+    String prev;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,10 +40,15 @@ public class ChangePassword extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
+
             if(etNewPass.getText().toString().length()<8){
                 etNewPass.setError("Password be 8-12 Characters");
+
+                if(!etNewPass.getText().toString().equals(prev))
+                bChange.setEnabled(false);
             }
             else{
+                prev=etNewPass.getText().toString();
                 NPvalid=true;
                 if(NPvalid&&CPvalid){
                     bChange.setEnabled(true);
@@ -66,6 +72,7 @@ public class ChangePassword extends AppCompatActivity {
             public void afterTextChanged(Editable s) {
               if(!etConfirmPass.getText().toString().equals(etNewPass.getText().toString())){
                   etConfirmPass.setError("Passwords Don't Match");
+                  bChange.setEnabled(false);
               }
               else{
                   CPvalid=true;

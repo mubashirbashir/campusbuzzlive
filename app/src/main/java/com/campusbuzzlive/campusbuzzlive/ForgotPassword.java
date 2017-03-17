@@ -45,6 +45,7 @@ public class ForgotPassword extends AppCompatActivity {
             public void afterTextChanged(Editable s) {
                 if(etEnrollFind.getText().length()<11) {
                     etEnrollFind.setError("Enrollment must be 11 Digit");
+                    bSearch.setEnabled(false);
                 }
                     else{
                         EFvalid=true;
@@ -72,6 +73,7 @@ public class ForgotPassword extends AppCompatActivity {
             public void afterTextChanged(Editable s) {
                 if(!etEmailFind.getText().toString().trim().matches(emailPattern)){
                     etEmailFind.setError("Not Valid E-mail");
+                    bSearch.setEnabled(false);
                 }
                 else{
                     EMFvalid=true;
