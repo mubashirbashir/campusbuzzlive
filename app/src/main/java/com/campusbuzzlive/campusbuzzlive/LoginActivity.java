@@ -94,10 +94,7 @@ public class LoginActivity extends AppCompatActivity {
     public void add(View v)
 
     {
-        if(Evalid&&Pvalid)
-        {
-            bLogin.setEnabled(true);
-        }
+
         if (v.getId() == R.id.bSign) {
             Intent abc = new Intent(LoginActivity.this, SignupActivity.class);
             startActivity(abc);
@@ -105,6 +102,11 @@ public class LoginActivity extends AppCompatActivity {
         if (v.getId() == R.id.bLog) {
             Intent Logintent = new Intent(LoginActivity.this, RadioActivity.class);
             startActivity(Logintent);
+
+            etEnroll.setText("");
+            etPassword.setText("");
+            bLogin.setEnabled(false);
+
 
         }
         if (v.getId() == R.id.tvForgot) {
