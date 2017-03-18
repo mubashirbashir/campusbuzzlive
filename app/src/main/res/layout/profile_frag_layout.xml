@@ -25,6 +25,7 @@
         android:layout_marginStart="13dp"
         android:layout_marginTop="11dp"
         android:background="@color/buzzcolor"
+        android:scaleType="fitXY"
         android:padding="1dp"
         android:src="@color/buzzcolor1" />
 
@@ -43,18 +44,20 @@
         style="?android:attr/windowAnimationStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentStart="true"
         android:layout_below="@+id/ivDP"
         android:layout_marginTop="15dp"
         android:layout_toEndOf="@+id/ivDP"
         android:background="@android:color/white"
+        android:enabled="false"
+
         android:text="Change Display Picture"
         android:textAlignment="textStart"
         android:textAllCaps="false"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:textSize="18sp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:textSize="18sp" />
 
     <Button
         android:id="@+id/bChangePW"
