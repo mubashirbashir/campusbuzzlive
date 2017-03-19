@@ -37,12 +37,16 @@ public class HomeFragClass extends Fragment {
             public void onClick(View v) {
 
 
-                Uri uri = Uri.parse(format);
+               Intent intent = new Intent(getContext(),MapsListActivity.class);
 
+              startActivity(intent);
 
-                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intent);
+//                Uri uri = Uri.parse(format);
+//
+//
+//                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+//                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//                startActivity(intent);
             }
 
 

@@ -25,8 +25,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".LoginActivity"
-            android:windowSoftInputMode="stateAlwaysHidden"/>
+        <activity
+            android:name=".LoginActivity"
+            android:windowSoftInputMode="stateAlwaysHidden" />
         <activity android:name=".SignupActivity" />
         <activity android:name=".ForgotPassword" />
         <activity android:name=".ChangePassword" />
@@ -62,7 +63,10 @@
                 android:value="com.campusbuzzlive.campusbuzzlive.RadioActivity" />
         </activity>
         <activity android:name=".FeedbackComments" />
-        <activity android:name=".SettingsActivity"></activity>
+        <activity android:name=".SettingsActivity" />
+        <activity android:name=".MapsListActivity"
+            android:theme="@style/Theme.AppCompat.DayNight.DarkActionBar"
+            android:label="Locations"></activity>
     </application>
 
 </manifest>
