@@ -43,8 +43,6 @@ public class ChangePassword extends AppCompatActivity {
 
             if(etNewPass.getText().toString().length()<8){
                 etNewPass.setError("Password be 8-12 Characters");
-
-                if(!etNewPass.getText().toString().equals(prev))
                 bChange.setEnabled(false);
             }
             else{

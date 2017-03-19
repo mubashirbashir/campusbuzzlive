@@ -40,6 +40,7 @@ public class ProfileFragClass extends Fragment {
     Context context;
     ImageView ivDP;
     ImageButton imageButton4;
+    Button bChangeDP;
 
     public View onCreateView(LayoutInflater inflater,
                              @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -56,6 +57,7 @@ public class ProfileFragClass extends Fragment {
         Button bChangePW = (Button)rootView.findViewById(R.id.bChangePW) ;
         Button bPhone= (Button) rootView.findViewById(R.id.bPhone);
         Button bEmail= (Button) rootView.findViewById(R.id.bEmail);
+        bChangeDP= (Button) rootView.findViewById(R.id.bChangeDP);
 
            imageButton4.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -99,6 +101,7 @@ public class ProfileFragClass extends Fragment {
                 }
             }
         });
+
     return rootView;
     }
 
@@ -120,7 +123,7 @@ public class ProfileFragClass extends Fragment {
 
 
                 ivDP.setImageBitmap(bitmap);
-
+                bChangeDP.setEnabled(true);
             }
         }
     }
