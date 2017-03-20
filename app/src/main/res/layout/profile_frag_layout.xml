@@ -29,15 +29,7 @@
         android:padding="1dp"
         android:src="@color/buzzcolor1" />
 
-    <ImageButton
-        android:id="@+id/ibCamera"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_alignBottom="@+id/ivDP"
-        android:layout_alignEnd="@+id/ivDP"
-        android:layout_alignRight="@+id/ivDP"
-        android:onClick="add"
-      />
+
 
     <Button
         android:id="@+id/bChangeDP"
