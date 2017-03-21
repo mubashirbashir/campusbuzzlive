@@ -31,7 +31,8 @@ public void add(View v)
     }
     if(v.getId()==R.id.bLog)
     {
-        Intent Logintent= new Intent(MainActivity.this,LoginActivity.class);
+        Intent Logintent= new Intent(MainActivity.this,RadioActivity.class);
+
         startActivity(Logintent);
     }
 }

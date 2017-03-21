@@ -2,6 +2,7 @@ package com.campusbuzzlive.campusbuzzlive;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.Typeface;
@@ -79,7 +80,14 @@ LinearLayout linearLayout,linearLayout11;
                          dyanamicCatogories.setOnClickListener(new View.OnClickListener() {
                              @Override
                              public void onClick(View v) {
+                                 double lat = 34.063751;
+
+                                 double lng = 74.809215;
                                  Toast.makeText(context,abc,Toast.LENGTH_SHORT).show();
+                                 Intent showMap = new Intent(getApplicationContext(),MapsActivity.class);
+                                 showMap.putExtra("lat",lat);
+                                 showMap.putExtra("lng",lng);
+                                 startActivity(showMap);
                              }
                          });
                      }
