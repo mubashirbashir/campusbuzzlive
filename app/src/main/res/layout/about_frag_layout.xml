@@ -23,7 +23,7 @@
         android:layout_centerHorizontal="true"
         android:layout_centerInParent="true"
         android:singleLine="false"
-        android:text="About Us"
+        android:text=" About Us"
         android:textColor="@color/buzzcolor"
         android:textSize="20sp"
         android:textStyle="bold" />
@@ -31,11 +31,35 @@
     <TextView
         android:id="@+id/textView3"
         android:layout_width="320dp"
-        android:layout_height="350dp"
-        android:text="hello ,  we are the spartans oooo we are the spartans oooo we are the spartans oooo we are the spartans oooo we are the spartans oooo we are the spartans oooo we are the spartans oooo we are the spartans oooo we are the spartans oooo we are the spartans oooo we are the spartans oooo we are the spartans oooo we are the spartans oooo we are the spartans oooo we are the spartans oooo we are the spartans oooo we are the spartans oooo we are the spartans oooo we are the spartans oooo we are the spartans oooo we are the spartans oooo we are the spartans oooo we are the spartans oooo "
-        android:textColorLink="@android:color/black"
+        android:layout_height="320dp"
+        android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
+        android:text="Campus buzz live - primarily designed for the students/staff of kashmir university.It is easy-to-use and a must have app for the KU students, we have set a guest mode where an outsider can have a limited access to it.The main purpose of this application is to remove the gap between the students and faculty by  providing an interactive medium where a student can retrieve all sorts of information (from events to navigation)through this application. and also the highlighting part is the online (live streaming) radio of our own that covers all the news regarding the campus.                    "
+        android:textColorLink="@android:color/black" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Developers"
+        android:textColor="@android:color/black"
+        android:textSize="20sp"
+        android:layout_above="@+id/textView5"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="12dp" />
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="27dp"
+        android:text="Mubashir     Usman    Umer   Asim"
+        android:textColor="@color/common_google_signin_btn_text_light_focused"
+        android:textSize="14sp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
 
 </RelativeLayout>

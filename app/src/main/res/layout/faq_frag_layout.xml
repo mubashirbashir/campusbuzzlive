@@ -28,7 +28,7 @@
                 android:id="@+id/tvFQ1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="-Ye Kya karta kya kya karta ji"
+                android:text="where can i find deptt of electronics"
                 android:textColor="@color/buzzcolor"
                 android:textSize="24sp" />
 
@@ -37,14 +37,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:singleLine="false"
-                android:text="*wo yu karta yu yu karta ji sjkbsb jksba kjsgs jksaf skjafb sjgbasfb sajkf"
+                android:text="simply click on the maps button and select the department"
                 android:textSize="20sp" />
 
             <TextView
                 android:id="@+id/tvFQ2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="-Ye Kya karta kya kya karta ji"
+                android:text="where is the vc office ?"
                 android:textColor="@color/buzzcolor"
                 android:textSize="24sp" />
 
@@ -53,14 +53,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:singleLine="false"
-                android:text="*wo yu karta yu yu karta ji sjkbsb jksba kjsgs jksaf skjafb sjgbasfb sajkf"
+                android:text="look for vc chamber in the map "
                 android:textSize="20sp" />
 
             <TextView
                 android:id="@+id/tvFQ3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="-Ye Kya karta kya kya karta ji"
+                android:text="sir i have applied for pg entrance where do i submit the form?"
                 android:textColor="@color/buzzcolor"
                 android:textSize="24sp" />
 
@@ -69,14 +69,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:singleLine="false"
-                android:text="*wo yu karta yu yu karta ji sjkbsb jksba kjsgs jksaf skjafb sjgbasfb sajkf"
+                android:text="go to the administration block by using maps"
                 android:textSize="20sp" />
 
             <TextView
                 android:id="@+id/tvFQ4"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="-Ye Kya karta kya kya karta ji"
+                android:text="will we get informed about the postponement of exam on a campus  radio?"
                 android:textColor="@color/buzzcolor"
                 android:textSize="24sp" />
 
@@ -85,14 +85,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:singleLine="false"
-                android:text="*wo yu karta yu yu karta ji sjkbsb jksba kjsgs jksaf skjafb sjgbasfb sajkf"
+                android:text="we will surely announce through the campus radio once we get the official statement of postponement "
                 android:textSize="20sp" />
 
             <TextView
                 android:id="@+id/tvFQ5"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="-Ye Kya karta kya kya karta ji"
+                android:text="where is this microsoft dreamspark event being held ?"
                 android:textColor="@color/buzzcolor"
                 android:textSize="24sp" />
 
@@ -101,14 +101,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:singleLine="false"
-                android:text="*wo yu karta yu yu karta ji sjkbsb jksba kjsgs jksaf skjafb sjgbasfb sajkf"
+                android:text="check the events list ,you will get  time and date of the event "
                 android:textSize="20sp" />
 
             <TextView
                 android:id="@+id/tvFQ6"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="-Ye Kya karta kya kya karta ji"
+                android:text="please announce the selection list of btech entrance on a campus radio "
                 android:textColor="@color/buzzcolor"
                 android:textSize="24sp" />
 
@@ -117,14 +117,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:singleLine="false"
-                android:text="*wo yu karta yu yu karta ji sjkbsb jksba kjsgs jksaf skjafb sjgbasfb sajkf"
+                android:text="we will do that shortly "
                 android:textSize="20sp" />
 
             <TextView
                 android:id="@+id/tvFQ7"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="-Ye Kya karta kya kya karta ji"
+                android:text="i have lost my migration certificate what to do?"
                 android:textColor="@color/buzzcolor"
                 android:textSize="24sp" />
 
@@ -133,14 +133,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:singleLine="false"
-                android:text="*wo yu karta yu yu karta ji sjkbsb jksba kjsgs jksaf skjafb sjgbasfb sajkf"
+                android:text="navigate to the admission block"
                 android:textSize="20sp" />
 
             <TextView
                 android:id="@+id/tvFQ8"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="-Ye Kya karta kya kya karta ji"
+                android:text="at what time do you talk with an official on a campus radio? "
                 android:textColor="@color/buzzcolor"
                 android:textSize="24sp" />
 
@@ -149,7 +149,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:singleLine="false"
-                android:text="*wo yu karta yu yu karta ji sjkbsb jksba kjsgs jksaf skjafb sjgbasfb sajkf"
+                android:text="mostly @10am and sometimes in the afternoon session i.e 2pm"
                 android:textSize="20sp" />
 
 
