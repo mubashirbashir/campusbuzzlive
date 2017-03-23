@@ -8,14 +8,16 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-
+import android.widget.ProgressBar;
 
 
 public class NotificationFragClass extends Fragment {
     public WebView mWebView;
+    private ProgressBar progressBarT4 = null;
     String googleDocs = "https://docs.google.com/viewer?url=";
 
     public View onCreateView(LayoutInflater inflater,
@@ -23,15 +25,29 @@ public class NotificationFragClass extends Fragment {
 
         View v= inflater.inflate(R.layout.notification_frag_layout, container, false);
 
-
-
-
+        progressBarT4 = (ProgressBar) v.findViewById(R.id.progressBarT4);
         mWebView = (WebView) v.findViewById(R.id.webview);
+        mWebView.setWebViewClient(new WebViewClient());
+        mWebView.setWebChromeClient(new WebChromeClient(){
+            public void onProgressChanged(WebView view, int progress) {
+                progressBarT4.setVisibility(View.VISIBLE);
+                progressBarT4.setProgress(progress);
+                if (progress == 100) {
+                    progressBarT4.setVisibility(View.GONE); // Make the bar disappear after URL is loaded
+                }
+            }
+        });
+        progressBarT4.setVisibility(View.VISIBLE);
+
+
+
         mWebView.loadUrl("http://www.kashmiruniversity.net/notifications.aspx");
 
         // Enable Javascript
         WebSettings webSettings = mWebView.getSettings();
         webSettings.setJavaScriptEnabled(true);
+        mWebView.getSettings().setSupportZoom(true);
+        mWebView.getSettings().setBuiltInZoomControls(false);
 
         // Force links and redirects to open in the WebView instead of in a browser
         mWebView.setWebViewClient(new WebViewClient());

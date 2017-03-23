@@ -12,20 +12,24 @@
     tools:context="com.campusbuzzlive.campusbuzzlive.ChangePassword">
 
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true">
+
 
 
             <WebView
                 android:id="@+id/webview"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent" >
+
+
+            </WebView>
+        <ProgressBar
+        android:id="@+id/progressBarT4"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+            android:layout_centerInParent="true" />
 
 
 
-    </ScrollView>
+
 </RelativeLayout>
