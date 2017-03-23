@@ -28,7 +28,7 @@
                 android:id="@+id/tvFQ1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="where can i find deptt of electronics"
+                android:text="How can i change my password ?"
                 android:textColor="@color/buzzcolor"
                 android:textSize="24sp" />
 
@@ -37,14 +37,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:singleLine="false"
-                android:text="simply click on the maps button and select the department"
+                android:text="Go to your profile settings and click on 'change password'"
                 android:textSize="20sp" />
 
             <TextView
                 android:id="@+id/tvFQ2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="where is the vc office ?"
+                android:text="My friend is having trouble in signing up prompts 'invalid user'"
                 android:textColor="@color/buzzcolor"
                 android:textSize="24sp" />
 
@@ -53,14 +53,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:singleLine="false"
-                android:text="look for vc chamber in the map "
+                android:text="Make sure the user is entering the valid enrollment number"
                 android:textSize="20sp" />
 
             <TextView
                 android:id="@+id/tvFQ3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="sir i have applied for pg entrance where do i submit the form?"
+                android:text="I want to change my E-mail ,whats the procedure ? "
                 android:textColor="@color/buzzcolor"
                 android:textSize="24sp" />
 
@@ -69,14 +69,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:singleLine="false"
-                android:text="go to the administration block by using maps"
+                android:text="You can update your E-mail in your profile settings"
                 android:textSize="20sp" />
 
             <TextView
                 android:id="@+id/tvFQ4"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="will we get informed about the postponement of exam on a campus  radio?"
+                android:text="How to find a particular department of the campus ?"
                 android:textColor="@color/buzzcolor"
                 android:textSize="24sp" />
 
@@ -85,14 +85,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:singleLine="false"
-                android:text="we will surely announce through the campus radio once we get the official statement of postponement "
+                android:text="Click on maps and select your desired department from the given list "
                 android:textSize="20sp" />
 
             <TextView
                 android:id="@+id/tvFQ5"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="where is this microsoft dreamspark event being held ?"
+                android:text="Can i set a desired profile picture ?"
                 android:textColor="@color/buzzcolor"
                 android:textSize="24sp" />
 
@@ -101,14 +101,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:singleLine="false"
-                android:text="check the events list ,you will get  time and date of the event "
+                android:text="Yes you can,goto your profile settings and by clicking on your picture,you will get various options there  "
                 android:textSize="20sp" />
 
             <TextView
                 android:id="@+id/tvFQ6"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="please announce the selection list of btech entrance on a campus radio "
+                android:text="In case i forget my password, what's the criteria for that ? "
                 android:textColor="@color/buzzcolor"
                 android:textSize="24sp" />
 
@@ -117,14 +117,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:singleLine="false"
-                android:text="we will do that shortly "
+                android:text="Click on forgot password and set a new password via OTP verification"
                 android:textSize="20sp" />
 
             <TextView
                 android:id="@+id/tvFQ7"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="i have lost my migration certificate what to do?"
+                android:text="How to add an event ?"
                 android:textColor="@color/buzzcolor"
                 android:textSize="24sp" />
 
@@ -133,24 +133,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:singleLine="false"
-                android:text="navigate to the admission block"
+                android:text="Once you click on events ,you will get a + sign down below,On clicking that button you will be able to add an event  "
                 android:textSize="20sp" />
 
-            <TextView
-                android:id="@+id/tvFQ8"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="at what time do you talk with an official on a campus radio? "
-                android:textColor="@color/buzzcolor"
-                android:textSize="24sp" />
 
-            <TextView
-                android:id="@+id/tvFA8"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:singleLine="false"
-                android:text="mostly @10am and sometimes in the afternoon session i.e 2pm"
-                android:textSize="20sp" />
 
 
         </LinearLayout>
