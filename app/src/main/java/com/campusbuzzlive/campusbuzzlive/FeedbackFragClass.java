@@ -63,7 +63,7 @@ public class FeedbackFragClass extends Fragment {
                         tvDynamicQuery.setTextSize(24);
                         tvDynamicQuery.setGravity(Gravity.LEFT);
                         tvDynamicQuery.setTextColor(getResources().getColor(R.color.buzzcolor));
-                        tvDynamicEtc.setTextSize(16);
+                        tvDynamicEtc.setTextSize(12);
                         tvDynamicEtc.setGravity(Gravity.RIGHT);
                         tvDynamicEtc.setId(i++);
                         vDynamicLine.setBackgroundColor(getResources().getColor(R.color.colorPrimaryDark));

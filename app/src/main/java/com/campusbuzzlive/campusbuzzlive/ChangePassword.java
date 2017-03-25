@@ -35,23 +35,28 @@ public class ChangePassword extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if(etNewPass.getText().toString().length()<8){
+                    etNewPass.setError("Password be 8-12 Characters");
+                    bChange.setEnabled(false);
+                }
+                else{
+                    prev=etNewPass.getText().toString();
+                    NPvalid=true;
+                    if(NPvalid&&CPvalid){
+                        bChange.setEnabled(true);
+                    }
+                }
 
             }
 
             @Override
             public void afterTextChanged(Editable s) {
-
-            if(etNewPass.getText().toString().length()<8){
-                etNewPass.setError("Password be 8-12 Characters");
-                bChange.setEnabled(false);
-            }
-            else{
-                prev=etNewPass.getText().toString();
-                NPvalid=true;
-                if(NPvalid&&CPvalid){
-                    bChange.setEnabled(true);
+                if(!etConfirmPass.getText().toString().equals(etNewPass.getText().toString())){
+                    etConfirmPass.setError("Passwords Don't Match");
+                    bChange.setEnabled(false);
                 }
-            }
+
+
             }
         });
 
@@ -63,21 +68,23 @@ public class ChangePassword extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if(!etConfirmPass.getText().toString().equals(etNewPass.getText().toString())){
+                    etConfirmPass.setError("Passwords Don't Match");
+                    bChange.setEnabled(false);
+                }
+                else{
+                    CPvalid=true;
+                    if(NPvalid&&CPvalid){
+                        bChange.setEnabled(true);
+                    }
+                }
 
             }
 
             @Override
             public void afterTextChanged(Editable s) {
-              if(!etConfirmPass.getText().toString().equals(etNewPass.getText().toString())){
-                  etConfirmPass.setError("Passwords Don't Match");
-                  bChange.setEnabled(false);
-              }
-              else{
-                  CPvalid=true;
-                  if(NPvalid&&CPvalid){
-                      bChange.setEnabled(true);
-                  }
-              }
+
+
 
             }
         });

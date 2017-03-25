@@ -163,20 +163,27 @@ public class SignupActivity extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (etPassword.getText().toString().length() < 8) {
+                    etPassword.setError("Password 8-12 Characters");
+                } else {
+                    Pvalid = true;
+                    if(Pvalid &&Evalid&&Nvalid&&Dvalid&&Cvalid) {
+                        bLog.setEnabled(true);
+                    }
+
+                }
+
 
             }
 
             @Override
             public void afterTextChanged(Editable s) {
-                if (etPassword.getText().toString().length() < 8) {
-                    etPassword.setError("Password 8-12 Characters");
-                } else {
-                    Pvalid = true;
-                   if(Pvalid &&Evalid&&Nvalid&&Dvalid&&Cvalid) {
-                        bLog.setEnabled(true);
-                    }
-
+                if(!etConfirm.getText().toString().equals(etPassword.getText().toString())){
+                    etConfirm.setError("Passwords Don't Match");
+                    bLog.setEnabled(false);
                 }
+
+
             }
         });
 

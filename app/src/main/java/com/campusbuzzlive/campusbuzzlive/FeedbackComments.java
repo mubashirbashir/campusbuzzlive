@@ -2,6 +2,7 @@ package com.campusbuzzlive.campusbuzzlive;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.graphics.Typeface;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -43,10 +44,11 @@ public class FeedbackComments extends AppCompatActivity {
         TextView tvDynamicEtc = new TextView(context);
         View vDynamicLine = new View(context);
         tvDynamicAnswer.setText(query);
+        tvDynamicAnswer.setTypeface(Typeface.DEFAULT_BOLD);
         tvDynamicAnswer.setTextSize(20);
-        tvDynamicAnswer.setGravity(Gravity.CENTER);
+       // tvDynamicAnswer.setGravity(Gravity.CENTER);
         tvDynamicAnswer.setTextColor(getResources().getColor(R.color.buzzcolor));
-        tvDynamicEtc.setTextSize(16);
+        tvDynamicEtc.setTextSize(12);
         tvDynamicEtc.setGravity(Gravity.RIGHT);
         tvDynamicEtc.setId(i++);
         vDynamicLine.setBackgroundColor(getResources().getColor(R.color.colorPrimaryDark));
@@ -54,8 +56,11 @@ public class FeedbackComments extends AppCompatActivity {
         tvDynamicAnswer.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
         tvDynamicEtc.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
         LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) vDynamicLine.getLayoutParams();
-        params.setMargins(40, 40, 40, 40); //substitute parameters for left, top, right, bottom
+        params.setMargins(0, 30, 0, 40); //substitute parameters for left, top, right, bottom
         vDynamicLine.setLayoutParams(params);
+        LinearLayout.LayoutParams params1 = (LinearLayout.LayoutParams) tvDynamicAnswer.getLayoutParams();
+        params1.setMargins(0, 0, 0, 20); //substitute parameters for left, top, right, bottom
+        tvDynamicAnswer.setLayoutParams(params1);
        // String currentDateTimeString = java.text.DateFormat.getDateTimeInstance().format(new Date());
         tvDynamicEtc.setText(etc);
         linearLayout.addView(tvDynamicAnswer, 0);
@@ -89,7 +94,7 @@ public class FeedbackComments extends AppCompatActivity {
                         tvDynamicAnswer.setTextSize(20);
                         tvDynamicAnswer.setGravity(Gravity.LEFT);
                         tvDynamicAnswer.setTextColor(getResources().getColor(R.color.buzzcolor));
-                        tvDynamicEtc.setTextSize(16);
+                        tvDynamicEtc.setTextSize(12);
                         tvDynamicEtc.setGravity(Gravity.RIGHT);
                         tvDynamicEtc.setId(i++);
                         vDynamicLine.setBackgroundColor(getResources().getColor(R.color.colorPrimaryDark));
