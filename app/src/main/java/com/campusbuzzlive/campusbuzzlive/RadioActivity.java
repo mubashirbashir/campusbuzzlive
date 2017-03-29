@@ -14,14 +14,21 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 public class RadioActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-
+    String name,enrollmentid;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_radio);
+     name  =getIntent().getStringExtra("name");
+        enrollmentid=getIntent().getStringExtra("enrollmentid");
+
+
+
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -35,6 +42,14 @@ public class RadioActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+
+        View headerView = navigationView.getHeaderView(0);
+        TextView tvUsername  = (TextView) headerView.findViewById(R.id.tvUserName);
+        TextView tvEnrollmentid  = (TextView) headerView.findViewById(R.id.tvEnroll);
+
+        tvUsername.setText(name);
+        tvEnrollmentid.setText(enrollmentid);
 
         //add this line to display menu1 when the activity is loaded
         displaySelectedScreen(R.id.nav_Home);
@@ -123,6 +138,8 @@ public class RadioActivity extends AppCompatActivity
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
+       // TextView tvusername = (TextView) findViewById(R.id.tvUserName);
+        //tvusername.setText(name);
 
         //calling the method displayselectedscreen and passing the id of selected menu
         displaySelectedScreen(item.getItemId());

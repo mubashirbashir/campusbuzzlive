@@ -1,6 +1,8 @@
 package com.campusbuzzlive.campusbuzzlive;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
@@ -8,7 +10,16 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class LoginActivity extends AppCompatActivity {
     Button bsign;
@@ -30,6 +41,7 @@ public class LoginActivity extends AppCompatActivity {
         TextView tvForgot = (TextView) findViewById(R.id.tvForgot) ;
         etEnroll = (EditText) findViewById(R.id.etEnroll);
         etPassword =(EditText) findViewById(R.id.etPassword);
+       // etEnroll.setText(getIntent().getStringExtra("enrollmentid"));
 
         LogInV();
 
@@ -101,20 +113,72 @@ public class LoginActivity extends AppCompatActivity {
             Intent abc = new Intent(LoginActivity.this, SignupActivity.class);
             startActivity(abc);
         }
-        if (v.getId() == R.id.bLog) {
-            Intent Logintent = new Intent(LoginActivity.this, RadioActivity.class);
-            startActivity(Logintent);
-
-            etEnroll.setText("");
-            etPassword.setText("");
-            bLogin.setEnabled(false);
-
-
-        }
         if (v.getId() == R.id.tvForgot) {
             Intent fp = new Intent(LoginActivity.this,ForgotPassword.class);
             startActivity(fp);
 
         }
+        if (v.getId() == R.id.bLog) {
+        final    String enrollmentid = etEnroll.getText().toString().trim();
+         final    String password = etPassword.getText().toString().trim();
+          final ProgressDialog progressDialog= new ProgressDialog(this);
+            progressDialog.setTitle("logging in.....");
+            progressDialog.show();
+
+           // Toast.makeText(this,enrollmentid+" "+password,Toast.LENGTH_LONG).show();
+
+            Response.Listener<String> responseListener = new Response.Listener<String>() {
+
+                @Override
+                public void onResponse(String response) {
+                    try {
+                        JSONObject jsonResponse = new JSONObject(response);
+
+
+                        boolean error = jsonResponse.getBoolean("error");
+
+                        if (!error) {
+
+                            String name = jsonResponse.getString("name");
+                            //int age = jsonResponse.getInt("age");
+                          //  String msg =jsonResponse.getString("error_msg");
+
+
+                            Intent intent = new Intent(LoginActivity.this, RadioActivity.class);
+                             intent.putExtra("name",name);
+                            intent.putExtra("enrollmentid",enrollmentid);
+                            progressDialog.dismiss();
+                            LoginActivity.this.startActivity(intent);
+                        } else {
+                            String msg =jsonResponse.getString("error_msg");
+                            AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
+                            builder.setMessage(msg)
+                                    .setNegativeButton("Retry", null)
+                                    .create()
+                                    .show();
+                            progressDialog.dismiss();
+                        }
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+            };
+
+
+            LoginRequest loginRequest = new LoginRequest(enrollmentid, password, responseListener);
+            RequestQueue queue = Volley.newRequestQueue(LoginActivity.this);
+            queue.add(loginRequest);
+        }
+//            Intent Logintent = new Intent(LoginActivity.this, RadioActivity.class);
+//            startActivity(Logintent);
+//
+//            etEnroll.setText("");
+//            etPassword.setText("");
+//            bLogin.setEnabled(false);
+
+
+
+
     }
 }
