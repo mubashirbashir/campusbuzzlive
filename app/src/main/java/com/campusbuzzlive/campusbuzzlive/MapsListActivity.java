@@ -31,11 +31,11 @@ LinearLayout linearLayout,linearLayout11;
         linearLayout=(LinearLayout)findViewById(R.id.linearLayout);
         for (int i=0;i<20;i++){
       Button tvDyanamicCatogories = new Button(this);
-        tvDyanamicCatogories.setText("abc "+i);
-        tvDyanamicCatogories.setBackgroundResource(R.drawable.transparent_button);
+        tvDyanamicCatogories.setText("abcjfhgkjdhfgkjhfdkghdkjfghkjfdhgkjfdhkjghkjdfhgkdfhgkjhdfkjghkdfjhgkdfhgkdfhgkjdfhkjgh "+i);
+        tvDyanamicCatogories.setBackgroundColor(getResources().getColor(R.color.white));
         tvDyanamicCatogories.setTextSize(24);
 
-       //tvDyanamicCatogories.setBackgroundResource(R.color.buzzcolor);
+       //tvDyanamicCatogories.setBackgroundResource(getResources().getColor(R.color.white));
         tvDyanamicCatogories.setPadding(10,10,10,10);
             tvDyanamicCatogories.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
 
@@ -59,7 +59,7 @@ LinearLayout linearLayout,linearLayout11;
                        linearLayout=(LinearLayout)dialog1.findViewById(R.id.linearLayout11);
                      for (int i=0;i<20;i++){
                         Button dyanamicCatogories = new Button(dialog1.getContext());
-                         dyanamicCatogories.setText("abc "+i);
+                         dyanamicCatogories.setText("abcgfhdsgfsgdjfgsdjfgjhdsgfjhgsdjhjdsgfhdsgfhgdsfgdjfgjsdgfdsjhfg "+i);
                         final String abc = dyanamicCatogories.getText().toString();
                          dyanamicCatogories.setBackgroundResource(R.drawable.transparent_button);
                          dyanamicCatogories.setTextSize(24);
