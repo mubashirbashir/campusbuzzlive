@@ -36,7 +36,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
         AlertDialog.Builder builder = new AlertDialog.Builder(MapsActivity.this);
-          builder.setMessage("Tap on the red marker for more optionslat=!")
+          builder.setMessage("Tap on the red marker for more options!")
                   .setNegativeButton("ok", null)
                   .create()
                     .show();
