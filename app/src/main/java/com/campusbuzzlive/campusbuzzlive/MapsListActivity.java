@@ -178,7 +178,7 @@ public class MapsListActivity extends AppCompatActivity {
 
                                             linearLayout=(LinearLayout)dialog1.findViewById(R.id.linearLayout11);
                                             for (int i=0;i<personList.size();i++){
-                                                Button dyanamicCatogories = new Button(dialog1.getContext());
+                                                final Button dyanamicCatogories = new Button(dialog1.getContext());
                                                 String text = personList.get(i).get("name");
                                                 dyanamicCatogories.setText(text);
                                                 final String abc = dyanamicCatogories.getText().toString();
@@ -195,7 +195,7 @@ public class MapsListActivity extends AppCompatActivity {
                                                 dyanamicCatogories.setTypeface(Typeface.DEFAULT_BOLD);
                                                 dyanamicCatogories.setAllCaps(true);
                                                 dyanamicCatogories.setId(i);
-                                                index=dyanamicCatogories.getId();
+
                                                 dyanamicCatogories.setTextColor(getResources().getColor(R.color.buzzcolor));
                                                 LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) dyanamicCatogories.getLayoutParams();
                                                 params.setMargins(20, 0,20, 0); //substitute parameters for left, top, right, bottom
@@ -205,7 +205,7 @@ public class MapsListActivity extends AppCompatActivity {
                                                 dyanamicCatogories.setOnClickListener(new View.OnClickListener() {
                                                     @Override
                                                     public void onClick(View v) {
-
+                                                        index=dyanamicCatogories.getId();
                                                         double lat = Double.parseDouble(personList.get(index).get("lat"));
 
                                                         double lng = Double.parseDouble(personList.get(index).get("lng"));;
