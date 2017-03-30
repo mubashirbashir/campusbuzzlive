@@ -1,6 +1,7 @@
 package com.campusbuzzlive.campusbuzzlive;
 
 import android.Manifest;
+import android.app.AlertDialog;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.support.v4.app.ActivityCompat;
@@ -29,10 +30,16 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         setContentView(R.layout.activity_maps);
         lat = getIntent().getDoubleExtra("lat", 1);
         lng = getIntent().getDoubleExtra("lng", 2);
+        title = getIntent().getStringExtra("name");
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+        AlertDialog.Builder builder = new AlertDialog.Builder(MapsActivity.this);
+          builder.setMessage("Tap on the red marker for more options!")
+                  .setNegativeButton("ok", null)
+                  .create()
+                    .show();
     }
 
 
@@ -54,7 +61,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         // Add a marker in Sydney and move the camera
         LatLng sydney = new LatLng(lat, lng);
 
-        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
+        mMap.addMarker(new MarkerOptions().position(sydney).title(title));
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
                 == PackageManager.PERMISSION_GRANTED) {
             mMap.setMyLocationEnabled(true);

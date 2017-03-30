@@ -41,7 +41,11 @@ public class LoginActivity extends AppCompatActivity {
         TextView tvForgot = (TextView) findViewById(R.id.tvForgot) ;
         etEnroll = (EditText) findViewById(R.id.etEnroll);
         etPassword =(EditText) findViewById(R.id.etPassword);
-       // etEnroll.setText(getIntent().getStringExtra("enrollmentid"));
+     //  String enroll ;
+     //  enroll= getIntent().getStringExtra("enrollmentid");
+     //   etEnroll.setText(enroll);
+
+
 
         LogInV();
 
@@ -123,6 +127,8 @@ public class LoginActivity extends AppCompatActivity {
          final    String password = etPassword.getText().toString().trim();
           final ProgressDialog progressDialog= new ProgressDialog(this);
             progressDialog.setTitle("logging in.....");
+            progressDialog.setCanceledOnTouchOutside(false);
+
             progressDialog.show();
 
            // Toast.makeText(this,enrollmentid+" "+password,Toast.LENGTH_LONG).show();
@@ -180,5 +186,11 @@ public class LoginActivity extends AppCompatActivity {
 
 
 
+    }
+    @Override
+    public void onBackPressed()
+    {
+        Intent intent = new Intent(this,MainActivity.class);
+        startActivity(intent);
     }
 }

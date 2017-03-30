@@ -239,6 +239,8 @@ public class SignupActivity extends AppCompatActivity {
             final String gender = rbGender.getText().toString();
             final ProgressDialog progressDialog= new ProgressDialog(this);
             progressDialog.setTitle("Registering User...");
+            progressDialog.setCanceledOnTouchOutside(false);
+
             progressDialog.show();
 
 
@@ -260,7 +262,7 @@ public class SignupActivity extends AppCompatActivity {
                             Intent intent = new Intent(SignupActivity.this, LoginActivity.class);
 
 
-                         //   intent.putExtra("enrollmentid",enrollmentid);
+                         //  intent.putExtra("enrollmentid",enrollmentid);
                             SignupActivity.this.startActivity(intent);
                         } else {
                             String msg= jsonResponse.getString("error_msg");
