@@ -108,7 +108,7 @@ public class FeedbackComments extends AppCompatActivity {
                         tvDynamicEtc.setText(currentDateTimeString);
                         linearLayout.addView(tvDynamicAnswer, 3);
                         linearLayout.addView(tvDynamicEtc, 4);
-                       linearLayout.addView(vDynamicLine, 5);
+                        linearLayout.addView(vDynamicLine, 5);
 
 
                         Toast.makeText(getApplicationContext(), "Added", Toast.LENGTH_SHORT).show();
