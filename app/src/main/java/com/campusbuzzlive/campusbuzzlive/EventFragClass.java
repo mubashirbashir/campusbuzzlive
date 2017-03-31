@@ -5,10 +5,14 @@ package com.campusbuzzlive.campusbuzzlive;
  */
 
 
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.TimePickerDialog;
 
+import android.content.DialogInterface;
+import android.content.res.Resources;
+import android.graphics.drawable.Drawable;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
@@ -34,10 +38,11 @@ import java.util.Calendar;
 public class EventFragClass extends Fragment {
     int i = 0;
     Button bAdd;
+
     ImageButton bDate, bTime, bLocation;
     TextView tvDate, tvTime, tvLocation;
     EditText etEvent;
-    String stringTime, stringDate;
+    String stringTime, stringDate , locText;
     boolean setDate, setTime; // ad lo alater
     private LinearLayout linearLayout = null;
     private int mYear, mMonth, mDay, mHour, mMinute;
@@ -74,6 +79,7 @@ public class EventFragClass extends Fragment {
                 bLocation = (ImageButton) dialog.findViewById(R.id.bLoc);
                 tvLocation = (TextView) dialog.findViewById(R.id.tvloc);
                 etEvent = (EditText) dialog.findViewById(R.id.etEvent);
+
                 dialog.setTitle("ADD Event");
                 dialog.show();
 
@@ -95,9 +101,9 @@ public class EventFragClass extends Fragment {
                                     @Override
                                     public void onDateSet(DatePicker view, int year,
                                                           int monthOfYear, int dayOfMonth) {
-                                        stringDate = dayOfMonth + "-" + (monthOfYear + 1) + "-" + year;
+                                        stringDate = year + "/" + (monthOfYear + 1) + "/" + dayOfMonth;
 
-                                        tvDate.setText(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
+                                        tvDate.setText(year + "/" + (monthOfYear + 1) + "/" + dayOfMonth);
                                         setDate = true;
 
                                     }
@@ -124,10 +130,10 @@ public class EventFragClass extends Fragment {
                                     @Override
                                     public void onTimeSet(TimePicker view, int hourOfDay,
                                                           int minute) {
-                                        stringTime = hourOfDay + ":" + minute;
+                                        stringTime = hourOfDay + ":" + minute+":00";
 
 
-                                        tvTime.setText(hourOfDay + ":" + minute);
+                                        tvTime.setText(hourOfDay + ":" + minute+":00");
                                         setTime = true;
                                     }
                                 }, mHour, mMinute, false);
@@ -138,7 +144,25 @@ public class EventFragClass extends Fragment {
                 bLocation.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Toast.makeText(getContext(), "add code..", Toast.LENGTH_LONG).show();
+                         AlertDialog.Builder alertDialog = new AlertDialog.Builder(getContext());
+                        final  EditText etLocations = new EditText(getContext());
+
+                        alertDialog.setView(etLocations);
+                        alertDialog.setTitle("Enter location name");
+
+                        alertDialog.setPositiveButton("ok", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                              locText= String.valueOf(etLocations.getText());
+                                tvLocation.setText(locText);
+
+                                Toast.makeText(getContext(), "add code..", Toast.LENGTH_LONG).show();
+
+
+                            }
+                        });
+                       // Toast.makeText(getContext(), "add code..", Toast.LENGTH_LONG).show();
+                        alertDialog.show();
 
                     }
                 });
@@ -149,7 +173,7 @@ public class EventFragClass extends Fragment {
                     @Override
                     public void onClick(View v) {
 
-                        if (setTime && setDate && !etEvent.getText().toString().matches("")) {
+                        if (setTime && setDate && !etEvent.getText().toString().matches("") && !locText.matches("")) {
                             TextView tvDynamicEvent = new TextView(getActivity());
                             TextView tvDynamicEtc = new TextView(getActivity());
                             View vDynamicLine = new View(getActivity());
@@ -167,7 +191,7 @@ public class EventFragClass extends Fragment {
                             LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) vDynamicLine.getLayoutParams();
                             params.setMargins(40, 40, 40, 40); //substitute parameters for left, top, right, bottom
                             vDynamicLine.setLayoutParams(params);
-                            tvDynamicEtc.setText(stringDate + "  " + stringTime + "  at" + " " + tvDynamicEtc.getId());
+                            tvDynamicEtc.setText(stringDate + "  " + stringTime + "  at" + " " + locText);
                             linearLayout.addView(tvDynamicEvent, 0);
                             linearLayout.addView(tvDynamicEtc, 1);
                             linearLayout.addView(vDynamicLine, 2);
