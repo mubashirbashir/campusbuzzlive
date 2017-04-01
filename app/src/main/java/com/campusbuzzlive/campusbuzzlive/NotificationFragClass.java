@@ -1,7 +1,9 @@
 package com.campusbuzzlive.campusbuzzlive;
 
 
+import android.os.Build;
 import android.support.annotation.Nullable;
+import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.os.Bundle;
@@ -20,6 +22,7 @@ public class NotificationFragClass extends Fragment {
     private ProgressBar progressBarT4 = null;
     String googleDocs = "https://docs.google.com/viewer?url=";
 
+    @RequiresApi(api = Build.VERSION_CODES.CUPCAKE)
     public View onCreateView(LayoutInflater inflater,
                              @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
@@ -41,8 +44,6 @@ public class NotificationFragClass extends Fragment {
 
 
 
-        mWebView.loadUrl("http://www.kashmiruniversity.net/notifications.aspx");
-
         // Enable Javascript
         WebSettings webSettings = mWebView.getSettings();
         webSettings.setJavaScriptEnabled(true);
@@ -51,13 +52,15 @@ public class NotificationFragClass extends Fragment {
 
         // Force links and redirects to open in the WebView instead of in a browser
         mWebView.setWebViewClient(new WebViewClient());
+
         mWebView.setWebViewClient(new HelloWebViewClient());
+        mWebView.loadUrl("http://www.kashmiruniversity.net/notifications.aspx");
 
         return v;
 
 
     }
-    private class HelloWebViewClient extends WebViewClient {
+        private class HelloWebViewClient extends WebViewClient {
         @Override
         public boolean shouldOverrideUrlLoading(WebView webview, String url){
             if (url.endsWith(".pdf"))
@@ -69,10 +72,16 @@ public class NotificationFragClass extends Fragment {
             else
             {
                 // Load all other urls normally.
-                webview.loadUrl(url);
+               mWebView.loadUrl("http://www.kashmiruniversity.net/notifications.aspx");
             }
             return true;
         }
+
+           @Override
+            public void onPageFinished(WebView view, String url)
+            {
+                view.loadUrl("javascript:document.getElementsByClassName('wrapper row1').style.display = 'none';");
+            }
 
     }
 
