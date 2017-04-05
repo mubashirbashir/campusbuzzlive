@@ -14,11 +14,13 @@ import android.app.TimePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.os.Bundle;
@@ -38,15 +40,21 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.toolbox.Volley;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 
 
 public class EventFragClass extends Fragment {
     int i = 0;
     Button bAdd;
+    JSONArray eventArray = null;
+    ArrayList<HashMap<String, String>> eventList;
+    HashMap<String,String> eventMap = new HashMap<String,String>();
 
     ImageButton bDate, bTime, bLocation;
     TextView tvDate, tvTime, tvLocation;
@@ -55,6 +63,7 @@ public class EventFragClass extends Fragment {
     boolean setDate, setTime; // ad lo alater
     private LinearLayout linearLayout = null;
     private int mYear, mMonth, mDay, mHour, mMinute;
+    SwipeRefreshLayout   mSwipeRefreshLayout;
 
 
     public EventFragClass() {
@@ -64,6 +73,8 @@ public class EventFragClass extends Fragment {
 
     public View onCreateView(LayoutInflater inflater,
                              @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+
+
 
         //Inflate the layout for this fragment
 
@@ -208,6 +219,7 @@ public class EventFragClass extends Fragment {
                                    .setNegativeButton("ok", null)
                                     .create()
                                     .show();
+                                            refreshItems();
 
                                          //   Intent intent = new Intent(SignupActivity.this, LoginActivity.class);
 
@@ -254,9 +266,153 @@ public class EventFragClass extends Fragment {
         return rt;
     }
 
+    private void refreshItems() {
+        linearLayout.removeAllViews();
+
+        eventList = new ArrayList<HashMap<String,String>>();
+        linearLayout=(LinearLayout)getActivity().findViewById(R.id.linearLayout);
+
+        Response.Listener<String> responseListener = new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject jsonResponse = new JSONObject(response);
+                  //  boolean error = jsonResponse.getBoolean("error");
+
+                    eventArray= jsonResponse.getJSONArray("events");
+
+
+
+
+                    for(int i=0;i<eventArray.length();i++) {
+                        JSONObject c = eventArray.getJSONObject(i);
+                        String userName = c.getString("name");
+
+                        String eventName = c.getString("eventname");
+
+                        String date = c.getString("date");
+
+                        String time = c.getString("time");
+
+                        String location = c.getString("location");
+
+                        String enrollmentid = c.getString("enrollmentid");
+                        HashMap<String,String> eventMap = new HashMap<String,String>();
+
+                        eventMap.put("name",userName);
+                        eventMap.put("eventname",eventName);
+                        eventMap.put("date",date);
+                        eventMap.put("time",time);
+                        eventMap.put("location",location);
+                        eventMap.put("enrollmentid",enrollmentid);
+
+
+
+
+                        eventList.add(eventMap);
+
+
+                    }
+                    mSwipeRefreshLayout.setRefreshing(false);
+
+                  display();
+
+
+
+
+
+
+
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        };
+
+        GetEventRequest getEventRequest = new GetEventRequest(  responseListener);
+        RequestQueue queue = Volley.newRequestQueue(getContext());
+        queue.add(getEventRequest);
+
+        // refresf from db
+
+
+
+        Toast.makeText(getContext(),"refreshing",Toast.LENGTH_LONG).show();
+    }
+
+    private void display() {
+
+        for (int i=0;i<eventList.size();i++)
+        {
+
+
+            //display items
+
+            TextView tvDynamicEvent = new TextView(getActivity());
+            TextView tvDynamicEtc = new TextView(getActivity());
+            TextView tvDynamicName = new TextView(getActivity());
+            TextView tvDynamicEnroll = new TextView(getActivity());
+            View vDynamicLine = new View(getActivity());
+
+            //
+            String nameText = (eventList.get(i).get("name"));
+            String eventNameText = (eventList.get(i).get("eventname"));
+            String dateText = (eventList.get(i).get("date"));
+            String timeText = (eventList.get(i).get("time"));
+            String locationText = (eventList.get(i).get("location"));
+            String enrollmentText = (eventList.get(i).get("enrollmentid"));
+            //
+            tvDynamicEvent.setText(eventNameText);
+            tvDynamicEvent.setTextSize(24);
+
+            tvDynamicName.setTextSize(18);
+            tvDynamicName.setTypeface(Typeface.defaultFromStyle(Typeface.BOLD));
+            tvDynamicName.setText(nameText);
+            tvDynamicEnroll.setText(enrollmentText);
+            tvDynamicEnroll.setTextSize(16);
+            //  tvDynamicEvent.setGravity(Gravity.LEFT);
+            tvDynamicEvent.setTextColor(getResources().getColor(R.color.buzzcolor));
+            tvDynamicEtc.setTextSize(16);
+              tvDynamicEtc.setGravity(Gravity.RIGHT);
+           // tvDynamicEtc.setId(i++);
+            vDynamicLine.setBackgroundColor(getResources().getColor(R.color.colorPrimaryDark));
+            vDynamicLine.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 2));
+            tvDynamicEvent.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+            tvDynamicEtc.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+            LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) vDynamicLine.getLayoutParams();
+            params.setMargins(40, 40, 40, 40); //substitute parameters for left, top, right, bottom
+            vDynamicLine.setLayoutParams(params);
+            tvDynamicEtc.setText(dateText + "  " + timeText + "  at" + " " + locationText);
+            linearLayout.addView(tvDynamicName);
+            linearLayout.addView(tvDynamicEnroll);
+            linearLayout.addView(tvDynamicEvent);
+            linearLayout.addView(tvDynamicEtc);
+            linearLayout.addView(vDynamicLine);
+
+
+
+
+
+
+
+
+
+        }
+    }
+
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        refreshItems();
+        mSwipeRefreshLayout=(SwipeRefreshLayout) getActivity().findViewById(R.id.swipeRefreshLayout);
+        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                // Refresh items
+                refreshItems();
+            }
+        });
 
 
     }
