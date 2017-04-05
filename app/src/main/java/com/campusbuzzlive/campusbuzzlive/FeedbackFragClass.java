@@ -135,7 +135,6 @@ public class FeedbackFragClass extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         //you can set the title for your toolbar here for different fragments different titles
 
-        refreshItems();
         mSwipeRefreshLayout=(SwipeRefreshLayout) getActivity().findViewById(R.id.swipeRefreshLayout);
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -144,6 +143,8 @@ public class FeedbackFragClass extends Fragment {
                 refreshItems();
             }
         });
+        mSwipeRefreshLayout.setRefreshing(true);
+        refreshItems();
 
     }
 
@@ -160,47 +161,46 @@ public class FeedbackFragClass extends Fragment {
                     JSONObject jsonResponse = new JSONObject(response);
                     //  boolean error = jsonResponse.getBoolean("error");
 
-                    questionArray= jsonResponse.getJSONArray("questions");
+                    questionArray = jsonResponse.getJSONArray("questions");
 
 
+                    if (questionArray.length() > 0){
+
+                        for (int i = 0; i < questionArray.length(); i++) {
+                            JSONObject c = questionArray.getJSONObject(i);
+                            String userName = c.getString("name");
+                            String questionId = c.getString("questionid");
+
+                            String questionText = c.getString("question");
+
+                            String datetime = c.getString("datetime");
 
 
-                    for(int i=0;i<questionArray.length();i++) {
-                        JSONObject c = questionArray.getJSONObject(i);
-                        String userName = c.getString("name");
-                        String questionId=c.getString("questionid");
+                            String enrollmentid = c.getString("enrollmentid");
+                            HashMap<String, String> questionMap = new HashMap<String, String>();
 
-                        String questionText = c.getString("question");
+                            questionMap.put("name", userName);
+                            questionMap.put("question", questionText);
+                            questionMap.put("datetime", datetime);
 
-                        String datetime = c.getString("datetime");
-
-
-
-                        String enrollmentid = c.getString("enrollmentid");
-                        HashMap<String,String> questionMap = new HashMap<String,String>();
-
-                        questionMap.put("name",userName);
-                        questionMap.put("question",questionText);
-                        questionMap.put("datetime",datetime);
-
-                        questionMap.put("enrollmentid",enrollmentid);
-                        questionMap.put("questionid",questionId);
+                            questionMap.put("enrollmentid", enrollmentid);
+                            questionMap.put("questionid", questionId);
 
 
+                            questionList.add(questionMap);
 
 
-                        questionList.add(questionMap);
-
-
-                    }
+                        }
                     mSwipeRefreshLayout.setRefreshing(false);
 
                     display();
 
 
-
-
-
+                }
+                else {
+                        Toast.makeText(getContext(),"Nothing to Show",Toast.LENGTH_LONG).show();
+                        mSwipeRefreshLayout.setRefreshing(false);
+                    }
 
 
 
@@ -266,7 +266,7 @@ public class FeedbackFragClass extends Fragment {
             LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) vDynamicLine.getLayoutParams();
             params.setMargins(40, 40, 40, 40); //substitute parameters for left, top, right, bottom
             vDynamicLine.setLayoutParams(params);
-            String currentDateTimeString = java.text.DateFormat.getDateTimeInstance().format(new Date());
+           // String currentDateTimeString = java.text.DateFormat.getDateTimeInstance().format(new Date());
             tvDynamicEtc.setText(dateTimeText);
             final String query = tvDynamicQuery.getText().toString();
             linearLayout.addView(tvDynamicName);

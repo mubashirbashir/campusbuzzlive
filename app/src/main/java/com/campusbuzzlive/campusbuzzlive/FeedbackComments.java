@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.graphics.Typeface;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -37,9 +38,9 @@ import static com.campusbuzzlive.campusbuzzlive.R.id.etQuery;
 import static com.campusbuzzlive.campusbuzzlive.R.id.linearLayout;
 
 public class FeedbackComments extends AppCompatActivity {
-    JSONArray answerArray = null;
+    JSONArray answerArray ;
     ArrayList<HashMap<String, String>> answerList;
-    HashMap<String,String> answerMap = new HashMap<String,String>();
+    HashMap<String,String> answerMap;
     SwipeRefreshLayout mSwipeRefreshLayout;
 
 
@@ -58,23 +59,31 @@ public class FeedbackComments extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_feedback_comments);
-        refreshItems();
-       // mSwipeRefreshLayout=(SwipeRefreshLayout) findViewById(R.id.swipeRefreshLayout);
-        //mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-          //  @Override
-           // public void onRefresh() {
+
+       mSwipeRefreshLayout=(SwipeRefreshLayout) findViewById(R.id.swipeRefreshLayout);
+        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
                 // Refresh items
-             //   refreshItems();
-            //}
-        //});
+               refreshItems();
+            }
+        });
 
 
+        answerArray = null;
         query=getIntent().getStringExtra("query");
         etc=getIntent().getStringExtra("etc");
         questionId=getIntent().getStringExtra("questionid");
         userName=getIntent().getStringExtra("name");
         enroll=getIntent().getStringExtra("enrollmentid");
+
+        linearLayout=(LinearLayout)findViewById(R.id.linearLayout);
+
+
         linearLayout2 = (LinearLayout) findViewById(R.id.linearLayout2);
+
+        mSwipeRefreshLayout.setRefreshing(true);
+        refreshItems();
         TextView tvDynamicAnswer = new TextView(context);
         TextView tvDynamicEtc = new TextView(context);
 
@@ -87,8 +96,11 @@ public class FeedbackComments extends AppCompatActivity {
         tvDynamicAnswer.setText(query);
         tvDynamicAnswer.setTypeface(Typeface.DEFAULT_BOLD);
         tvDynamicAnswer.setTextSize(20);
+        tvDynamicName.setTextSize(18);
+        tvDynamicName.setTypeface(Typeface.defaultFromStyle(Typeface.BOLD));
+        tvDynamicEnroll.setTextSize(16);
        // tvDynamicAnswer.setGravity(Gravity.CENTER);
-        tvDynamicAnswer.setTextColor(getResources().getColor(R.color.buzzcolor));
+        tvDynamicAnswer.setTextColor(getResources().getColor(R.color.white));
         tvDynamicEtc.setTextSize(12);
         tvDynamicEtc.setGravity(Gravity.RIGHT);
         //tvDynamicEtc.setId(i++);
@@ -108,8 +120,7 @@ public class FeedbackComments extends AppCompatActivity {
         linearLayout2.addView(tvDynamicEnroll,1);
         linearLayout2.addView(tvDynamicAnswer, 2);
         linearLayout2.addView(tvDynamicEtc, 3);
-        linearLayout2.addView(vDynamicLine, 4);
-
+       // linearLayout2.addView(vDynamicLine, 4);
 
 
 
@@ -132,7 +143,7 @@ public class FeedbackComments extends AppCompatActivity {
 
 
 
-                        LinearLayout linearLayout = (LinearLayout)findViewById(R.id.linearLayout);
+
 
                         final ProgressDialog progressDialog=new ProgressDialog(context);
                         progressDialog.setTitle("Adding Answer");
@@ -158,7 +169,7 @@ public class FeedbackComments extends AppCompatActivity {
 
 
 
-                                    //    refreshItems();
+                                     refreshItems();
                                         //   Intent intent = new Intent(SignupActivity.this, LoginActivity.class);
 
 
@@ -197,60 +208,74 @@ public class FeedbackComments extends AppCompatActivity {
     }
 
     private void refreshItems() {
-        linearLayout2.removeAllViews();
+        // Toast.makeText(this,questionId,Toast.LENGTH_LONG).show();
 
-        answerList = new ArrayList<HashMap<String,String>>();
-        linearLayout=(LinearLayout)findViewById(R.id.linearLayout);
+
+        linearLayout.removeAllViews();
+        //  answerArray=null;
+
+        answerList = new ArrayList<HashMap<String, String>>();
+
 
         Response.Listener<String> responseListener = new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 try {
                     JSONObject jsonResponse = new JSONObject(response);
-                    //  boolean error = jsonResponse.getBoolean("error");
-
-                    answerArray= jsonResponse.getJSONArray("answers");
-
-
+                    // boolean error = jsonResponse.getBoolean("error");
+                    //String msg =jsonResponse.getString("error_msg");
+                    //if(!error) {
 
 
-                    for(int i=0;i<answerArray.length();i++) {
-                        JSONObject c = answerArray.getJSONObject(i);
-                        String userName = c.getString("name");
-                       // String questionId=c.getString("questionid");
+                    answerArray = jsonResponse.getJSONArray("mubashir");
 
-                        String answerText = c.getString("answer");
+                    if(answerArray.length()>0) {
+                        for (int i = 0; i < answerArray.length(); i++) {
+                            JSONObject c = answerArray.getJSONObject(i);
+                            String userName = c.getString("name");
+                            // String questionId=c.getString("questionid");
 
-                        String datetime = c.getString("datetime");
+                            String answerText = c.getString("answer");
 
-
-
-                        String enrollmentid = c.getString("enrollmentid");
-                        HashMap<String,String> answerMap = new HashMap<String,String>();
-
-                        answerMap.put("name",userName);
-                        answerMap.put("answer",answerText);
-                        answerMap.put("datetime",datetime);
-
-                        answerMap.put("enrollmentid",enrollmentid);
+                            String datetime = c.getString("datetime");
 
 
+                            String enrollmentid = c.getString("enrollmentid");
+                            HashMap<String, String> answerMap = new HashMap<String, String>();
+
+                            answerMap.put("name", userName);
+                            answerMap.put("answer", answerText);
+                            answerMap.put("datetime", datetime);
+
+                            answerMap.put("enrollmentid", enrollmentid);
 
 
+                            answerList.add(answerMap);
 
-                        answerList.add(answerMap);
 
+                        }
+
+
+                        display();
 
                     }
-                    mSwipeRefreshLayout.setRefreshing(false);
-
-                    display();
+                    else {
 
 
 
+                       Toast.makeText(getApplicationContext(),"Noting to show",Toast.LENGTH_LONG).show();
+                        mSwipeRefreshLayout.setRefreshing(false);
+                    }
 
-
-
+                    // }
+                    // else {
+                    //String msg= jsonResponse.getString("error_msg");
+                    //      android.support.v7.app.AlertDialog.Builder builder = new android.support.v7.app.AlertDialog.Builder(context);
+                    //    builder.setMessage(msg)
+                    //          .setNegativeButton("Retry", null)
+                    //        .create()
+                    //      .show();
+                    //}
 
 
                 } catch (JSONException e) {
@@ -259,18 +284,19 @@ public class FeedbackComments extends AppCompatActivity {
             }
         };
 
-        GetAnswersRequest getAnswersRequest = new GetAnswersRequest( questionId, responseListener);
-        RequestQueue queue = Volley.newRequestQueue(this);
+        GetAnswersRequest getAnswersRequest = new GetAnswersRequest(questionId, responseListener);
+        RequestQueue queue = Volley.newRequestQueue(FeedbackComments.this);
         queue.add(getAnswersRequest);
 
         // refresf from db
 
 
 
-        Toast.makeText(this,"Refreshing...",Toast.LENGTH_LONG).show();
+
     }
 
     private void display() {
+
 
         for (int i = 0; i < answerList.size(); i++) {
 
@@ -285,12 +311,12 @@ public class FeedbackComments extends AppCompatActivity {
 
             final String enrollmentText = (answerList.get(i).get("enrollmentid"));
            // final String questionid=(questionList.get(i).get("questionid"));
-            final TextView tvDynamicName = new TextView(this);
-            final TextView tvDynamicEnroll = new TextView(this);
+            final TextView tvDynamicName = new TextView(context);
+            final TextView tvDynamicEnroll = new TextView(context);
 
-            final TextView tvDynamicQuery = new TextView(this);
-            final TextView tvDynamicEtc = new TextView(this);
-            View vDynamicLine = new View(this);
+            final TextView tvDynamicQuery = new TextView(context);
+            final TextView tvDynamicEtc = new TextView(context);
+            View vDynamicLine = new View(context);
 
             tvDynamicEnroll.setText(enrollmentText);
             tvDynamicName.setTextSize(18);
@@ -315,9 +341,9 @@ public class FeedbackComments extends AppCompatActivity {
             LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) vDynamicLine.getLayoutParams();
             params.setMargins(40, 40, 40, 40); //substitute parameters for left, top, right, bottom
             vDynamicLine.setLayoutParams(params);
-            String currentDateTimeString = java.text.DateFormat.getDateTimeInstance().format(new Date());
+          //  String currentDateTimeString = java.text.DateFormat.getDateTimeInstance().format(new Date());
             tvDynamicEtc.setText(dateTimeText);
-            final String query = tvDynamicQuery.getText().toString();
+            //final String query = tvDynamicQuery.getText().toString();
             linearLayout.addView(tvDynamicName);
             linearLayout.addView(tvDynamicEnroll);
             linearLayout.addView(tvDynamicQuery);
