@@ -13,6 +13,12 @@
     tools:context="com.campusbuzzlive.campusbuzzlive.ChangePassword">
 
 
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/swipeRefreshLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -32,9 +38,12 @@
 
     </ScrollView>
 
+    </android.support.v4.widget.SwipeRefreshLayout>
+
+
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fabFF"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"

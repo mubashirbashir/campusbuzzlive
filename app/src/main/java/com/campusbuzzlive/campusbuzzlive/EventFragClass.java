@@ -205,7 +205,7 @@ public class EventFragClass extends Fragment {
                             progressDialog.setTitle("Loading...");
                             progressDialog.setMessage("Please wait!");
                             progressDialog.show();
-                            Response.Listener<String> responseListener = new Response.Listener<String>() {
+                                                       Response.Listener<String> responseListener = new Response.Listener<String>() {
                                 @Override
                                 public void onResponse(String response) {
                                     try {
@@ -213,19 +213,19 @@ public class EventFragClass extends Fragment {
                                         boolean error = jsonResponse.getBoolean("error");
                                         if (!error) {
                                             progressDialog.dismiss();
-                                           // Toast.makeText(getApplicationContext(),"Registration Successfull.Please Log In to continue.",Toast.LENGTH_LONG).show();
+                                            // Toast.makeText(getApplicationContext(),"Registration Successfull.Please Log In to continue.",Toast.LENGTH_LONG).show();
                                             android.support.v7.app.AlertDialog.Builder builder = new android.support.v7.app.AlertDialog.Builder(getContext());
-                           builder.setMessage(" Event Added Successfully!")
-                                   .setNegativeButton("ok", null)
-                                    .create()
-                                    .show();
+                                            builder.setMessage(" Event Added Successfully!")
+                                                    .setNegativeButton("ok", null)
+                                                    .create()
+                                                    .show();
                                             refreshItems();
 
-                                         //   Intent intent = new Intent(SignupActivity.this, LoginActivity.class);
+                                            //   Intent intent = new Intent(SignupActivity.this, LoginActivity.class);
 
 
                                             //  intent.putExtra("enrollmentid",enrollmentid);
-                                        //    SignupActivity.this.startActivity(intent);
+                                            //    SignupActivity.this.startActivity(intent);
                                         } else {
                                             String msg= jsonResponse.getString("error_msg");
                                             android.support.v7.app.AlertDialog.Builder builder = new android.support.v7.app.AlertDialog.Builder(getContext());
@@ -269,126 +269,126 @@ public class EventFragClass extends Fragment {
     private void refreshItems() {
         linearLayout.removeAllViews();
 
-        eventList = new ArrayList<HashMap<String,String>>();
-        linearLayout=(LinearLayout)getActivity().findViewById(R.id.linearLayout);
+    eventList = new ArrayList<HashMap<String,String>>();
+    linearLayout=(LinearLayout)getActivity().findViewById(R.id.linearLayout);
 
-        Response.Listener<String> responseListener = new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                try {
-                    JSONObject jsonResponse = new JSONObject(response);
-                  //  boolean error = jsonResponse.getBoolean("error");
+    Response.Listener<String> responseListener = new Response.Listener<String>() {
+        @Override
+        public void onResponse(String response) {
+            try {
+                JSONObject jsonResponse = new JSONObject(response);
+                //  boolean error = jsonResponse.getBoolean("error");
 
-                    eventArray= jsonResponse.getJSONArray("events");
-
-
-
-
-                    for(int i=0;i<eventArray.length();i++) {
-                        JSONObject c = eventArray.getJSONObject(i);
-                        String userName = c.getString("name");
-
-                        String eventName = c.getString("eventname");
-
-                        String date = c.getString("date");
-
-                        String time = c.getString("time");
-
-                        String location = c.getString("location");
-
-                        String enrollmentid = c.getString("enrollmentid");
-                        HashMap<String,String> eventMap = new HashMap<String,String>();
-
-                        eventMap.put("name",userName);
-                        eventMap.put("eventname",eventName);
-                        eventMap.put("date",date);
-                        eventMap.put("time",time);
-                        eventMap.put("location",location);
-                        eventMap.put("enrollmentid",enrollmentid);
+                eventArray= jsonResponse.getJSONArray("events");
 
 
 
 
-                        eventList.add(eventMap);
+                for(int i=0;i<eventArray.length();i++) {
+                    JSONObject c = eventArray.getJSONObject(i);
+                    String userName = c.getString("name");
+
+                    String eventName = c.getString("eventname");
+
+                    String date = c.getString("date");
+
+                    String time = c.getString("time");
+
+                    String location = c.getString("location");
+
+                    String enrollmentid = c.getString("enrollmentid");
+                    HashMap<String,String> eventMap = new HashMap<String,String>();
+
+                    eventMap.put("name",userName);
+                    eventMap.put("eventname",eventName);
+                    eventMap.put("date",date);
+                    eventMap.put("time",time);
+                    eventMap.put("location",location);
+                    eventMap.put("enrollmentid",enrollmentid);
 
 
-                    }
-                    mSwipeRefreshLayout.setRefreshing(false);
-
-                  display();
 
 
+                    eventList.add(eventMap);
 
 
-
-
-
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
                 }
-            }
-        };
+                mSwipeRefreshLayout.setRefreshing(false);
 
-        GetEventRequest getEventRequest = new GetEventRequest(  responseListener);
-        RequestQueue queue = Volley.newRequestQueue(getContext());
-        queue.add(getEventRequest);
-
-        // refresf from db
+        display();
 
 
 
-        Toast.makeText(getContext(),"refreshing",Toast.LENGTH_LONG).show();
+
+
+
+
+
+    } catch (JSONException e) {
+        e.printStackTrace();
     }
+}
+    };
 
-    private void display() {
+            GetEventRequest getEventRequest = new GetEventRequest(  responseListener);
+            RequestQueue queue = Volley.newRequestQueue(getContext());
+            queue.add(getEventRequest);
+
+            // refresf from db
+
+
+
+            Toast.makeText(getContext(),"refreshing",Toast.LENGTH_LONG).show();
+            }
+
+private void display() {
 
         for (int i=0;i<eventList.size();i++)
         {
 
 
-            //display items
+        //display items
 
-            TextView tvDynamicEvent = new TextView(getActivity());
-            TextView tvDynamicEtc = new TextView(getActivity());
-            TextView tvDynamicName = new TextView(getActivity());
-            TextView tvDynamicEnroll = new TextView(getActivity());
-            View vDynamicLine = new View(getActivity());
+        TextView tvDynamicEvent = new TextView(getActivity());
+        TextView tvDynamicEtc = new TextView(getActivity());
+        TextView tvDynamicName = new TextView(getActivity());
+        TextView tvDynamicEnroll = new TextView(getActivity());
+        View vDynamicLine = new View(getActivity());
 
-            //
-            String nameText = (eventList.get(i).get("name"));
-            String eventNameText = (eventList.get(i).get("eventname"));
-            String dateText = (eventList.get(i).get("date"));
-            String timeText = (eventList.get(i).get("time"));
-            String locationText = (eventList.get(i).get("location"));
-            String enrollmentText = (eventList.get(i).get("enrollmentid"));
-            //
-            tvDynamicEvent.setText(eventNameText);
-            tvDynamicEvent.setTextSize(24);
+        //
+        String nameText = (eventList.get(i).get("name"));
+        String eventNameText = (eventList.get(i).get("eventname"));
+        String dateText = (eventList.get(i).get("date"));
+        String timeText = (eventList.get(i).get("time"));
+        String locationText = (eventList.get(i).get("location"));
+        String enrollmentText = (eventList.get(i).get("enrollmentid"));
+        //
+        tvDynamicEvent.setText(eventNameText);
+        tvDynamicEvent.setTextSize(24);
 
-            tvDynamicName.setTextSize(18);
-            tvDynamicName.setTypeface(Typeface.defaultFromStyle(Typeface.BOLD));
-            tvDynamicName.setText(nameText);
-            tvDynamicEnroll.setText(enrollmentText);
-            tvDynamicEnroll.setTextSize(16);
-            //  tvDynamicEvent.setGravity(Gravity.LEFT);
-            tvDynamicEvent.setTextColor(getResources().getColor(R.color.buzzcolor));
-            tvDynamicEtc.setTextSize(16);
-              tvDynamicEtc.setGravity(Gravity.RIGHT);
-           // tvDynamicEtc.setId(i++);
-            vDynamicLine.setBackgroundColor(getResources().getColor(R.color.colorPrimaryDark));
-            vDynamicLine.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 2));
-            tvDynamicEvent.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
-            tvDynamicEtc.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
-            LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) vDynamicLine.getLayoutParams();
-            params.setMargins(40, 40, 40, 40); //substitute parameters for left, top, right, bottom
-            vDynamicLine.setLayoutParams(params);
-            tvDynamicEtc.setText(dateText + "  " + timeText + "  at" + " " + locationText);
-            linearLayout.addView(tvDynamicName);
-            linearLayout.addView(tvDynamicEnroll);
-            linearLayout.addView(tvDynamicEvent);
-            linearLayout.addView(tvDynamicEtc);
-            linearLayout.addView(vDynamicLine);
+        tvDynamicName.setTextSize(18);
+        tvDynamicName.setTypeface(Typeface.defaultFromStyle(Typeface.BOLD));
+        tvDynamicName.setText(nameText);
+        tvDynamicEnroll.setText(enrollmentText);
+        tvDynamicEnroll.setTextSize(16);
+        //  tvDynamicEvent.setGravity(Gravity.LEFT);
+        tvDynamicEvent.setTextColor(getResources().getColor(R.color.buzzcolor));
+        tvDynamicEtc.setTextSize(16);
+        tvDynamicEtc.setGravity(Gravity.RIGHT);
+        // tvDynamicEtc.setId(i++);
+        vDynamicLine.setBackgroundColor(getResources().getColor(R.color.colorPrimaryDark));
+        vDynamicLine.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 2));
+        tvDynamicEvent.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+        tvDynamicEtc.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+        LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) vDynamicLine.getLayoutParams();
+        params.setMargins(40, 40, 40, 40); //substitute parameters for left, top, right, bottom
+        vDynamicLine.setLayoutParams(params);
+        tvDynamicEtc.setText(dateText + "  " + timeText + "  at" + " " + locationText);
+        linearLayout.addView(tvDynamicName);
+        linearLayout.addView(tvDynamicEnroll);
+        linearLayout.addView(tvDynamicEvent);
+        linearLayout.addView(tvDynamicEtc);
+        linearLayout.addView(vDynamicLine);
 
 
 
