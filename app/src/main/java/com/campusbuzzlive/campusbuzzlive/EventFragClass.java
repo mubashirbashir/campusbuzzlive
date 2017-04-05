@@ -8,9 +8,11 @@ package com.campusbuzzlive.campusbuzzlive;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.app.TimePickerDialog;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.Nullable;
@@ -32,6 +34,13 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.Calendar;
 
 
@@ -42,7 +51,7 @@ public class EventFragClass extends Fragment {
     ImageButton bDate, bTime, bLocation;
     TextView tvDate, tvTime, tvLocation;
     EditText etEvent;
-    String stringTime, stringDate , locText;
+    String stringTime, stringDate , locText,location,eventName;
     boolean setDate, setTime; // ad lo alater
     private LinearLayout linearLayout = null;
     private int mYear, mMonth, mDay, mHour, mMinute;
@@ -146,6 +155,7 @@ public class EventFragClass extends Fragment {
                     public void onClick(View v) {
                          AlertDialog.Builder alertDialog = new AlertDialog.Builder(getContext());
                         final  EditText etLocations = new EditText(getContext());
+                        etLocations.setSingleLine(true);
 
                         alertDialog.setView(etLocations);
                         alertDialog.setTitle("Enter location name");
@@ -156,7 +166,7 @@ public class EventFragClass extends Fragment {
                               locText= String.valueOf(etLocations.getText());
                                 tvLocation.setText(locText);
 
-                                Toast.makeText(getContext(), "add code..", Toast.LENGTH_LONG).show();
+
 
 
                             }
@@ -174,29 +184,61 @@ public class EventFragClass extends Fragment {
                     public void onClick(View v) {
 
                         if (setTime && setDate && !etEvent.getText().toString().matches("") && !locText.matches("")) {
-                            TextView tvDynamicEvent = new TextView(getActivity());
-                            TextView tvDynamicEtc = new TextView(getActivity());
-                            View vDynamicLine = new View(getActivity());
-                            tvDynamicEvent.setText(etEvent.getText());
-                            tvDynamicEvent.setTextSize(24);
-                            tvDynamicEvent.setGravity(Gravity.CENTER);
-                            tvDynamicEvent.setTextColor(getResources().getColor(R.color.buzzcolor));
-                            tvDynamicEtc.setTextSize(20);
-                            tvDynamicEtc.setGravity(Gravity.CENTER);
-                            tvDynamicEtc.setId(i++);
-                            vDynamicLine.setBackgroundColor(getResources().getColor(R.color.colorPrimaryDark));
-                            vDynamicLine.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 2));
-                            tvDynamicEvent.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
-                            tvDynamicEtc.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
-                            LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) vDynamicLine.getLayoutParams();
-                            params.setMargins(40, 40, 40, 40); //substitute parameters for left, top, right, bottom
-                            vDynamicLine.setLayoutParams(params);
-                            tvDynamicEtc.setText(stringDate + "  " + stringTime + "  at" + " " + locText);
-                            linearLayout.addView(tvDynamicEvent, 0);
-                            linearLayout.addView(tvDynamicEtc, 1);
-                            linearLayout.addView(vDynamicLine, 2);
+                            eventName =etEvent.getText().toString();
+                            location =tvLocation.getText().toString();
 
-                            Toast.makeText(getContext(), "Added", Toast.LENGTH_SHORT).show();
+                            // add event db here
+
+                          final  ProgressDialog progressDialog = new ProgressDialog(getContext());
+                            progressDialog.setCanceledOnTouchOutside(false);
+                            progressDialog.setTitle("Loading...");
+                            progressDialog.setMessage("Please wait!");
+                            progressDialog.show();
+                            Response.Listener<String> responseListener = new Response.Listener<String>() {
+                                @Override
+                                public void onResponse(String response) {
+                                    try {
+                                        JSONObject jsonResponse = new JSONObject(response);
+                                        boolean error = jsonResponse.getBoolean("error");
+                                        if (!error) {
+                                            progressDialog.dismiss();
+                                           // Toast.makeText(getApplicationContext(),"Registration Successfull.Please Log In to continue.",Toast.LENGTH_LONG).show();
+                                            android.support.v7.app.AlertDialog.Builder builder = new android.support.v7.app.AlertDialog.Builder(getContext());
+                           builder.setMessage(" Event Added Successfully!")
+                                   .setNegativeButton("ok", null)
+                                    .create()
+                                    .show();
+
+                                         //   Intent intent = new Intent(SignupActivity.this, LoginActivity.class);
+
+
+                                            //  intent.putExtra("enrollmentid",enrollmentid);
+                                        //    SignupActivity.this.startActivity(intent);
+                                        } else {
+                                            String msg= jsonResponse.getString("error_msg");
+                                            android.support.v7.app.AlertDialog.Builder builder = new android.support.v7.app.AlertDialog.Builder(getContext());
+                                            builder.setMessage(msg)
+                                                    .setNegativeButton("Retry", null)
+                                                    .create()
+                                                    .show();
+                                            progressDialog.dismiss();
+                                        }
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
+                                    }
+                                }
+                            };
+
+                            AddEventRequest addEventRequestRequest = new AddEventRequest(eventName, stringDate, stringTime, location, "14045110035",  responseListener);
+                            RequestQueue queue = Volley.newRequestQueue(getContext());
+                            queue.add(addEventRequestRequest);
+
+
+
+
+
+                            //
+
                             setTime = false;
                             setDate = false;
                             dialog.dismiss();
