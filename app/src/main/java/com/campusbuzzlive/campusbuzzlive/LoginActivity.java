@@ -124,6 +124,7 @@ public class LoginActivity extends AppCompatActivity {
 
         if (v.getId() == R.id.bSign) {
             Intent abc = new Intent(LoginActivity.this, SignupActivity.class);
+
             startActivity(abc);
         }
         if (v.getId() == R.id.tvForgot) {
@@ -170,7 +171,7 @@ public class LoginActivity extends AppCompatActivity {
 
                             Intent intent = new Intent(LoginActivity.this, RadioActivity.class);
                           //  intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
-
+                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
                              intent.putExtra("name",name);
                             intent.putExtra("enrollmentid",enrollmentid);
                             progressDialog.dismiss();

@@ -25,10 +25,12 @@ public class RadioActivity extends AppCompatActivity
     String name,enrollmentid;
     SharedPreferences sharedPreferences;
     Session session = new Session();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_radio);
+
      name  =getIntent().getStringExtra("name");
         enrollmentid=getIntent().getStringExtra("enrollmentid");
 
@@ -73,11 +75,8 @@ session.setEnrollSession(sessionEnroll);
             drawer.closeDrawer(GravityCompat.START);
         } else {
 
-            if (getFragmentManager().getBackStackEntryCount() > 0) {
-                getFragmentManager().popBackStack();
-            } else {
                 super.onBackPressed();
-            }
+
         }
     }
 
@@ -107,6 +106,7 @@ session.setEnrollSession(sessionEnroll);
 
     private void displaySelectedScreen(int itemId) {
 
+
         //creating fragment object
         Fragment fragment = null;
 
@@ -114,6 +114,7 @@ session.setEnrollSession(sessionEnroll);
         switch (itemId) {
             case R.id.nav_Home:
                 fragment = new HomeFragClass();
+
                 break;
             case R.id.nav_Profile:
                 fragment = new ProfileFragClass();
@@ -135,6 +136,10 @@ session.setEnrollSession(sessionEnroll);
                 break;
             case R.id.nav_SignOut:
                 Intent intent = new Intent(RadioActivity.this,MainActivity.class);
+                SharedPreferences.Editor editor =sharedPreferences.edit();
+                editor.putBoolean("isLoggedIn",false);
+                editor.commit();
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
                 break;
             case R.id.nav_Locations:
