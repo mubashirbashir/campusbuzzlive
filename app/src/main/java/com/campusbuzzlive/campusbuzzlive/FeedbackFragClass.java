@@ -8,6 +8,8 @@ import android.app.Dialog;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.res.ColorStateList;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -21,6 +23,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -41,6 +44,7 @@ import java.util.HashMap;
 
 public class FeedbackFragClass extends Fragment {
     private LinearLayout linearLayout = null;
+    Session session ;
     Button bPost;
     EditText etQuery;
     int i=0;
@@ -49,14 +53,15 @@ public class FeedbackFragClass extends Fragment {
     HashMap<String,String> questiontMap = new HashMap<String,String>();
     SwipeRefreshLayout   mSwipeRefreshLayout;
 
+
     public View onCreateView(LayoutInflater inflater,
-                             @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+                             @Nullable ViewGroup container, @Nullable final Bundle savedInstanceState) {
 
         //Inflate the layout for this fragment
 
         View rt =inflater.inflate(
                 R.layout.feedback_frag_layout  , container, false);
-        getActivity().setTitle("Feedback Forum");
+        getActivity().setTitle("KU Forum");
         linearLayout = (LinearLayout) rt.findViewById(R.id.linearLayout);
 
 
@@ -69,13 +74,16 @@ public class FeedbackFragClass extends Fragment {
                 dialog.setContentView(R.layout.feedback_dialog_layout);
                 bPost = (Button) dialog.findViewById(R.id.bPost);
                 etQuery= (EditText) dialog.findViewById(R.id.etQuery);
-                dialog.setTitle("Post a Query");
+                //dialog.setTitle("Post a Query");
                 dialog.show();
                 bPost.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        session = new Session();
+
                       final  ProgressDialog progressDialog=new ProgressDialog(getContext());
-                        progressDialog.setTitle("Adding Question");
+                       // progressDialog.setTitle(session.getEnrollSession());
+
                         progressDialog.setMessage("please wait!");
                         progressDialog.show();
                         dialog.dismiss();
@@ -117,7 +125,7 @@ public class FeedbackFragClass extends Fragment {
                             }
                         };
 
-                        AddQuestionRequest addQuestionRequest = new AddQuestionRequest(etQuery.getText().toString(), java.text.DateFormat.getDateTimeInstance().format((new Date())), "14045110028",  responseListener);
+                        AddQuestionRequest addQuestionRequest = new AddQuestionRequest(etQuery.getText().toString(), java.text.DateFormat.getDateTimeInstance().format((new Date())), session.getEnrollSession(),  responseListener);
                         RequestQueue queue = Volley.newRequestQueue(getContext());
                         queue.add(addQuestionRequest);
 
@@ -218,7 +226,7 @@ public class FeedbackFragClass extends Fragment {
 
 
 
-        Toast.makeText(getContext(),"Refreshing...",Toast.LENGTH_LONG).show();
+        Toast.makeText(getContext(),"Refreshing...",Toast.LENGTH_SHORT).show();
     }
 
     private void display() {
@@ -244,11 +252,11 @@ public class FeedbackFragClass extends Fragment {
             View vDynamicLine = new View(getActivity());
 
             tvDynamicEnroll.setText(enrollmentText);
-            tvDynamicName.setTextSize(18);
-            tvDynamicEnroll.setTextSize(16);
+            tvDynamicName.setTextSize(16);
+            tvDynamicEnroll.setTextSize(14);
             tvDynamicName.setText(nameText);
             tvDynamicName.setTypeface(Typeface.defaultFromStyle(Typeface.BOLD));
-
+            tvDynamicName.setTextColor(getResources().getColor(R.color.black));
 
 
 
@@ -269,6 +277,10 @@ public class FeedbackFragClass extends Fragment {
            // String currentDateTimeString = java.text.DateFormat.getDateTimeInstance().format(new Date());
             tvDynamicEtc.setText(dateTimeText);
             final String query = tvDynamicQuery.getText().toString();
+
+
+
+
             linearLayout.addView(tvDynamicName);
             linearLayout.addView(tvDynamicEnroll);
             linearLayout.addView(tvDynamicQuery);

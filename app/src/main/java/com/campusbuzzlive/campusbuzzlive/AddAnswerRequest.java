@@ -10,7 +10,9 @@ import java.util.Map;
  * Created by mubas on 4/5/2017.
  */
 public class AddAnswerRequest extends StringRequest {
-    private static final String REGISTER_REQUEST_URL = "https://terminological-hois.000webhostapp.com/addAnswer.php";
+    static host h =new host();
+
+    private static final String REGISTER_REQUEST_URL = h.address+"/addAnswer.php";
     private Map<String, String> params;
 
     public AddAnswerRequest(String questtionid, String datetime  , String answer,String enrollmentid, Response.Listener<String> listener) {

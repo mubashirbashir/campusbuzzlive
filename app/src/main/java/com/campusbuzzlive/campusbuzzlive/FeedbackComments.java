@@ -17,6 +17,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -38,6 +39,7 @@ import static com.campusbuzzlive.campusbuzzlive.R.id.etQuery;
 import static com.campusbuzzlive.campusbuzzlive.R.id.linearLayout;
 
 public class FeedbackComments extends AppCompatActivity {
+    Session session;
     JSONArray answerArray ;
     ArrayList<HashMap<String, String>> answerList;
     HashMap<String,String> answerMap;
@@ -59,7 +61,7 @@ public class FeedbackComments extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_feedback_comments);
-
+session=new Session();
        mSwipeRefreshLayout=(SwipeRefreshLayout) findViewById(R.id.swipeRefreshLayout);
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -92,9 +94,12 @@ public class FeedbackComments extends AppCompatActivity {
         tvDynamicName.setText(userName);
         tvDynamicEnroll.setText(enroll);
 
+
+        tvDynamicName.setTextColor(getResources().getColor(R.color.black));
+
         View vDynamicLine = new View(context);
         tvDynamicAnswer.setText(query);
-        tvDynamicAnswer.setTypeface(Typeface.DEFAULT_BOLD);
+       // tvDynamicAnswer.setTypeface(Typeface.DEFAULT_BOLD);
         tvDynamicAnswer.setTextSize(20);
         tvDynamicName.setTextSize(18);
         tvDynamicName.setTypeface(Typeface.defaultFromStyle(Typeface.BOLD));
@@ -135,7 +140,7 @@ public class FeedbackComments extends AppCompatActivity {
                 dialog.setContentView(R.layout.comments_dialog_layout);
                 bComment = (Button) dialog.findViewById(R.id.bComment);
                 etAnswer= (EditText) dialog.findViewById(R.id.etAnswer);
-                dialog.setTitle("Post an Answer");
+               // dialog.setTitle("Post an Answer");
                 dialog.show();
                 bComment.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -189,8 +194,9 @@ public class FeedbackComments extends AppCompatActivity {
                                 }
                             }
                         };
+                        Session session = new Session();
 
-                        AddAnswerRequest addAnswerRequest = new AddAnswerRequest(questionId,java.text.DateFormat.getDateTimeInstance().format((new Date())),etAnswer.getText().toString(),"14045110011",  responseListener);
+                        AddAnswerRequest addAnswerRequest = new AddAnswerRequest(questionId,java.text.DateFormat.getDateTimeInstance().format((new Date())),etAnswer.getText().toString(),session.getEnrollSession(),  responseListener);
                         RequestQueue queue = Volley.newRequestQueue(context);
                         queue.add(addAnswerRequest);
 
@@ -233,7 +239,7 @@ public class FeedbackComments extends AppCompatActivity {
                         for (int i = 0; i < answerArray.length(); i++) {
                             JSONObject c = answerArray.getJSONObject(i);
                             String userName = c.getString("name");
-                            // String questionId=c.getString("questionid");
+                             String answerId=c.getString("answerid");
 
                             String answerText = c.getString("answer");
 
@@ -248,6 +254,7 @@ public class FeedbackComments extends AppCompatActivity {
                             answerMap.put("datetime", datetime);
 
                             answerMap.put("enrollmentid", enrollmentid);
+                            answerMap.put("answerid",answerId);
 
 
                             answerList.add(answerMap);
@@ -308,24 +315,27 @@ public class FeedbackComments extends AppCompatActivity {
             final String nameText = (answerList.get(i).get("name"));
             String answerNameText = (answerList.get(i).get("answer"));
             String dateTimeText = (answerList.get(i).get("datetime"));
+            final String answerid = (answerList.get(i).get("answerid"));
 
             final String enrollmentText = (answerList.get(i).get("enrollmentid"));
            // final String questionid=(questionList.get(i).get("questionid"));
             final TextView tvDynamicName = new TextView(context);
             final TextView tvDynamicEnroll = new TextView(context);
-
+             final ImageView dynamicDelete = new ImageView(context);
             final TextView tvDynamicQuery = new TextView(context);
             final TextView tvDynamicEtc = new TextView(context);
             View vDynamicLine = new View(context);
 
             tvDynamicEnroll.setText(enrollmentText);
-            tvDynamicName.setTextSize(18);
-            tvDynamicEnroll.setTextSize(16);
+            tvDynamicName.setTextSize(16);
+            tvDynamicEnroll.setTextSize(14);
             tvDynamicName.setText(nameText);
             tvDynamicName.setTypeface(Typeface.defaultFromStyle(Typeface.BOLD));
 
+              tvDynamicName.setTextColor(getResources().getColor(R.color.black));
 
-
+            tvDynamicName.setGravity(Gravity.LEFT);
+            tvDynamicEnroll.setGravity(Gravity.LEFT);
 
             tvDynamicQuery.setText(answerNameText);
             tvDynamicQuery.setTextSize(24);
@@ -344,8 +354,23 @@ public class FeedbackComments extends AppCompatActivity {
           //  String currentDateTimeString = java.text.DateFormat.getDateTimeInstance().format(new Date());
             tvDynamicEtc.setText(dateTimeText);
             //final String query = tvDynamicQuery.getText().toString();
+
+
+
+
+
+
             linearLayout.addView(tvDynamicName);
             linearLayout.addView(tvDynamicEnroll);
+            if(session.getEnrollSession().toString().equals(tvDynamicEnroll.getText().toString())){
+               // Toast.makeText(this,session.getEnrollSession(),Toast.LENGTH_LONG).show();
+                dynamicDelete.setImageResource(R.drawable.ic_delete_black_24dp);
+
+                dynamicDelete.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.MATCH_PARENT));
+                LinearLayout.LayoutParams params1 = (LinearLayout.LayoutParams) dynamicDelete.getLayoutParams();
+                params1.gravity=(Gravity.RIGHT);
+                dynamicDelete.setLayoutParams(params1);
+                linearLayout.addView(dynamicDelete);}
             linearLayout.addView(tvDynamicQuery);
             linearLayout.addView(tvDynamicEtc );
             linearLayout.addView(vDynamicLine);
@@ -354,6 +379,67 @@ public class FeedbackComments extends AppCompatActivity {
             //Toast.makeText(getContext(), "Added", Toast.LENGTH_SHORT).show();
 
             //dialog.dismiss();
+            dynamicDelete.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    deleteanswer(answerid);
+                }
+            });
         }
+    }
+
+    private void deleteanswer(String answerid) {
+
+
+
+        Response.Listener<String> responseListener = new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                ProgressDialog progressDialog=new ProgressDialog(context);
+                progressDialog.setMessage("Please Wait...");
+                progressDialog.show();
+                try {
+                    JSONObject jsonResponse = new JSONObject(response);
+                    boolean error = jsonResponse.getBoolean("error");
+                    if (!error) {
+                        progressDialog.dismiss();
+                        // Toast.makeText(getApplicationContext(),"Registration Successfull.Please Log In to continue.",Toast.LENGTH_LONG).show();
+                        android.support.v7.app.AlertDialog.Builder builder = new android.support.v7.app.AlertDialog.Builder(context);
+                        builder.setMessage(" Successfully Deleted!")
+                                .setNegativeButton("ok", null)
+                                .create()
+                                .show();
+                        refreshItems();
+
+                        //   Intent intent = new Intent(SignupActivity.this, LoginActivity.class);
+
+
+                        //  intent.putExtra("enrollmentid",enrollmentid);
+                        //    SignupActivity.this.startActivity(intent);
+                    } else {
+                        String msg= jsonResponse.getString("error_msg");
+                        android.support.v7.app.AlertDialog.Builder builder = new android.support.v7.app.AlertDialog.Builder(context);
+                        builder.setMessage(msg)
+                                .setNegativeButton("Retry", null)
+                                .create()
+                                .show();
+                        progressDialog.dismiss();
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        };
+
+
+        DeleteAnswerRequest deleteAnswerRequest = new DeleteAnswerRequest(answerid,  responseListener);
+        RequestQueue queue = Volley.newRequestQueue(context);
+        queue.add(deleteAnswerRequest);
+
+
+
+
+
     }
 }

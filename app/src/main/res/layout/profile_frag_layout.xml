@@ -9,94 +9,135 @@
     android:paddingBottom="0dp"
     android:paddingLeft="0dp"
     android:paddingRight="0dp"
-    android:paddingTop="0dp"
+    android:paddingTop="20dp"
     tools:context="com.campusbuzzlive.campusbuzzlive.ChangePassword">
 
 
-    <ImageView
-        android:id="@+id/ivDP"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_margin="5dp"
-        android:layout_marginLeft="13dp"
-        android:layout_marginStart="13dp"
-        android:layout_marginTop="11dp"
-        android:background="@color/buzzcolor"
-        android:scaleType="fitXY"
-        android:padding="1dp"
-        android:src="@color/buzzcolor1" />
-
-
-
-    <Button
-        android:id="@+id/bChangeDP"
-        style="?android:attr/windowAnimationStyle"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/ivDP"
-        android:layout_marginTop="15dp"
-        android:layout_toEndOf="@+id/ivDP"
-        android:background="@android:color/white"
-        android:enabled="false"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:id="@+id/ll">
 
-        android:text="Change Display Picture"
-        android:textAlignment="textStart"
-        android:textAllCaps="false"
-        android:textSize="18sp" />
+        <ImageView
+            android:id="@+id/ivDP"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
 
-    <Button
-        android:id="@+id/bChangePW"
-        style="?android:attr/windowAnimationStyle"
+
+
+            android:background="@color/buzzcolor"
+            android:scaleType="fitXY"
+            android:padding="1dp"
+            />
+        <Button
+            android:id="@+id/bChangeDP"
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+
+            android:layout_marginTop="15dp"
+
+            android:background="@android:color/white"
+            android:enabled="false"
+
+            android:text="Change Display Picture"
+
+            android:textAllCaps="false"
+            android:textSize="18sp" />
+
+
+    </LinearLayout>
+
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/bChangeDP"
-        android:layout_marginTop="15dp"
-        android:background="@android:color/white"
-        android:onClick="add"
-        android:text="Change Password"
-        android:textAlignment="textStart"
-        android:textAllCaps="false"
-        android:textSize="18sp" />
+        android:orientation="vertical"
+        android:layout_below="@id/ll"
+        android:gravity="center"
+        android:id="@+id/lo"
+        android:layout_margin="10dp">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ic_edit_black_24dp"/>
 
-    <Button
-        android:id="@+id/bPhone"
-        style="?android:attr/windowAnimationStyle"
+
+        <Button
+            android:id="@+id/bChangePW"
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+
+            android:layout_marginTop="15dp"
+            android:background="@android:color/white"
+            android:onClick="add"
+            android:text="Change Password"
+
+            android:textAllCaps="false"
+            android:textSize="18sp" />
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/bChangePW"
-        android:layout_marginTop="15dp"
-        android:background="@android:color/white"
-        android:onClick="add"
-        android:text="Update Phone No."
-        android:textAlignment="textStart"
-        android:textAllCaps="false"
-        android:textSize="18sp" />
+        android:orientation="vertical"
+        android:layout_below="@id/lo"
+        android:id="@+id/lp"
+        android:gravity="center"
+        android:layout_margin="10dp">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ic_email_black_24dp"/>
 
-    <Button
-        android:id="@+id/bEmail"
-        style="?android:attr/windowAnimationStyle"
+
+        <Button
+            android:id="@+id/bEmail"
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:layout_marginTop="15dp"
+            android:background="@android:color/white"
+            android:onClick="add"
+            android:text="Update Email"
+            android:textAllCaps="false"
+            android:textSize="18sp" />
+    </LinearLayout>
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/bPhone"
-        android:layout_marginTop="15dp"
-        android:background="@android:color/white"
-        android:onClick="add"
-        android:text="Update Email"
-        android:textAlignment="textStart"
-        android:textAllCaps="false"
-        android:textSize="18sp" />
+        android:orientation="vertical"
+        android:layout_below="@id/lp"
+        android:gravity="center"
+        android:layout_margin="10dp">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ic_phone_iphone_black_24dp"/>
+
+        <Button
+            android:id="@+id/bPhone"
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:layout_marginTop="16dp"
+            android:background="@android:color/white"
+            android:onClick="add"
+            android:text="Update Mobile Number"
+
+            android:textAllCaps="false"
+            android:textSize="18sp" />
+    </LinearLayout>
+
+
+
+
 
 </RelativeLayout>

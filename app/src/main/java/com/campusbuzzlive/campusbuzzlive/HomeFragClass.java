@@ -31,26 +31,7 @@ public class HomeFragClass extends Fragment {
 
         View rootView = inflater.inflate(
                 R.layout.home_frag_layout, container, false);
-       ImageButton maps = (ImageButton) rootView.findViewById(R.id.maps);
-        maps.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
-
-               Intent intent = new Intent(getContext(),MapsListActivity.class);
-
-              startActivity(intent);
-
-//                Uri uri = Uri.parse(format);
-//
-//
-//                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-//                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//                startActivity(intent);
-            }
-
-
-});
         return rootView;
     }
     @Override

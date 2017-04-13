@@ -53,6 +53,7 @@
                     android:layout_below="@id/tvEventLabel"
                     android:layout_margin="10dp"
                     android:hint="Event Tittle"
+                    android:inputType="textPersonName|textCapWords"
                     android:singleLine="true"
                     android:textAlignment="center" />
 

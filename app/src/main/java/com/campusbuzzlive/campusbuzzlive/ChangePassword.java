@@ -1,18 +1,30 @@
 package com.campusbuzzlive.campusbuzzlive;
 
+import android.app.ProgressDialog;
+import android.content.Intent;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-public class ChangePassword extends AppCompatActivity {
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+public class ChangePassword extends AppCompatActivity implements View.OnClickListener {
     EditText etNewPass;
     EditText etConfirmPass;
     Button bChange;
     boolean NPvalid=false,CPvalid=false;
     String prev;
+    Session session= new Session();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +35,7 @@ public class ChangePassword extends AppCompatActivity {
         etConfirmPass=(EditText) findViewById(R.id.etConfirmPass);
 
         ChangePW();
+       bChange.setOnClickListener(this);
     }
 
     public void ChangePW(){
@@ -90,4 +103,57 @@ public class ChangePassword extends AppCompatActivity {
         });
     }
 
+
+
+    @Override
+    public void onClick(View v) {
+        final ProgressDialog progressDialog =new ProgressDialog(this);
+        progressDialog.setTitle("Changing Password");
+        progressDialog.setMessage("Please Wait...");
+        progressDialog.setCanceledOnTouchOutside(false);
+        progressDialog.show();
+
+
+
+        Response.Listener<String> responseListener = new Response.Listener<String>() {
+
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject jsonResponse = new JSONObject(response);
+
+
+                    boolean error = jsonResponse.getBoolean("error");
+
+                    if (!error) {
+
+                        AlertDialog.Builder builder =new AlertDialog.Builder(ChangePassword.this);
+                        builder.setMessage("Password successfully changed" )
+                                .setNegativeButton("ok",null)
+                                .create()
+                                .show();
+                        Intent gotoLogin = new Intent(ChangePassword.this,LoginActivity.class);
+                        startActivity(gotoLogin);
+                    } else {
+                        String msg =jsonResponse.getString("error_msg");
+                        AlertDialog.Builder builder = new AlertDialog.Builder(ChangePassword.this);
+                        builder.setMessage(msg)
+                                .setNegativeButton("ok", null)
+                                .create()
+                                .show();
+
+                    }
+                    progressDialog.dismiss();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        };
+
+
+         ChangePasswordRequest changePasswordRequest = new ChangePasswordRequest(session.getEnrollSession(), etNewPass.getText().toString(), responseListener);
+        RequestQueue queue = Volley.newRequestQueue(ChangePassword.this);
+        queue.add(changePasswordRequest);
+
+    }
 }

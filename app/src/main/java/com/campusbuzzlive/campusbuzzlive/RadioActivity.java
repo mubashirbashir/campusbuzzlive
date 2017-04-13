@@ -1,6 +1,9 @@
 package com.campusbuzzlive.campusbuzzlive;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
@@ -15,10 +18,13 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class RadioActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     String name,enrollmentid;
+    SharedPreferences sharedPreferences;
+    Session session = new Session();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,8 +32,12 @@ public class RadioActivity extends AppCompatActivity
      name  =getIntent().getStringExtra("name");
         enrollmentid=getIntent().getStringExtra("enrollmentid");
 
+        sharedPreferences=getSharedPreferences(LoginActivity.MyPreferences, Context.MODE_PRIVATE);
+String sessionEnroll =sharedPreferences.getString("sessionEnroll",null);
+        String sessionName =sharedPreferences.getString("sessionName",null);
+session.setEnrollSession(sessionEnroll);
 
-
+        Toast.makeText(this,"Hi, "+sessionName,Toast.LENGTH_LONG).show();
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -48,11 +58,12 @@ public class RadioActivity extends AppCompatActivity
         TextView tvUsername  = (TextView) headerView.findViewById(R.id.tvUserName);
         TextView tvEnrollmentid  = (TextView) headerView.findViewById(R.id.tvEnroll);
 
-        tvUsername.setText(name);
-        tvEnrollmentid.setText(enrollmentid);
+        tvUsername.setText(sessionName);
+        tvEnrollmentid.setText(sessionEnroll);
 
         //add this line to display menu1 when the activity is loaded
         displaySelectedScreen(R.id.nav_Home);
+
     }
 
     @Override
@@ -61,7 +72,12 @@ public class RadioActivity extends AppCompatActivity
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-            super.onBackPressed();
+
+            if (getFragmentManager().getBackStackEntryCount() > 0) {
+                getFragmentManager().popBackStack();
+            } else {
+                super.onBackPressed();
+            }
         }
     }
 
@@ -121,14 +137,24 @@ public class RadioActivity extends AppCompatActivity
                 Intent intent = new Intent(RadioActivity.this,MainActivity.class);
                 startActivity(intent);
                 break;
+            case R.id.nav_Locations:
+                Intent intent1 = new Intent(RadioActivity.this,MapsListActivity.class);
+                startActivity(intent1);
+                break;
+
         }
 
         //replacing the fragment
-        if (fragment != null) {
+                if (fragment != null) {
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+
             ft.replace(R.id.content_frame, fragment);
+                    ft.addToBackStack(null);
             ft.commit();
-        }
+
+           // ft.addToBackStack(null);
+    }
+
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

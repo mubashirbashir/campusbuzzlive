@@ -12,35 +12,33 @@
     tools:context="com.campusbuzzlive.campusbuzzlive.UpdateEmail">
 
 
-
     <Button
         android:id="@+id/bUpdateEmail"
         style="@style/Widget.AppCompat.Button.Borderless"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@android:color/white"
 
+
+        android:layout_alignParentTop="true"
         android:padding="0dp"
-        android:text="Update EMail."
+        android:text="Update Email"
+        android:textAlignment="center"
         android:textAllCaps="false"
         android:textColor="@color/buzzcolor"
-        android:textSize="18sp"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:textSize="18sp" />
 
     <EditText
         android:id="@+id/etEmailUD"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/bUpdateEmail"
         android:layout_marginTop="45dp"
         android:ems="10"
-        android:hint="Enter Email."
+        android:hint="Enter Email..."
         android:inputType="textEmailAddress"
-        android:maxLength="25" />
+        android:maxLength="60" />
 
     <Button
         android:id="@+id/bUpdateE"

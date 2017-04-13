@@ -11,7 +11,10 @@ import java.util.Map;
  */
 
 public class CoordinatesRequest extends StringRequest {
-    private static final String LOGIN_REQUEST_URL = "https://terminological-hois.000webhostapp.com/getcoordinates.php";
+    static host h =new host();
+
+    private static final String LOGIN_REQUEST_URL = h.address+"/getcoordinates.php";
+    //private static final String LOGIN_REQUEST_URL = "https://terminological-hois.000webhostapp.com/getcoordinates.php";
     private Map<String, String> params;
 
     public CoordinatesRequest(String name ,Response.Listener<String> listener) {

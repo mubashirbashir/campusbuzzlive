@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.graphics.drawable.ColorDrawable;
 import android.support.annotation.ColorInt;
 import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.app.AlertDialog;
@@ -33,6 +34,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import static android.view.Gravity.CENTER;
 import static com.campusbuzzlive.campusbuzzlive.R.color.buzzcolor;
 
 public class MapsListActivity extends AppCompatActivity {
@@ -47,6 +49,7 @@ public class MapsListActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_maps_list);
         personList = new ArrayList<HashMap<String,String>>();
 //       final ProgressDialog pgDialog=new ProgressDialog(this);
@@ -54,9 +57,17 @@ public class MapsListActivity extends AppCompatActivity {
 //        pgDialog.show();
 
         linearLayout=(LinearLayout)findViewById(R.id.linearLayout);
-       final ProgressBar pb =new ProgressBar(this);
-        pb.setVisibility(View.VISIBLE);
-        linearLayout.addView(pb);
+       final ProgressDialog pb =new ProgressDialog(this);
+        pb.setCanceledOnTouchOutside(false);
+
+        pb.setTitle("Loading...");
+        pb.setMessage("Please Wait");
+        //LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) pb.getLayoutParams();
+      //  params.
+        //params.setMargins(10, 10,10, 10); //substitute parameters for left, top, right, bottom
+      //  pb.setLayoutParams(params);
+       pb.show();
+
 
        //HashMap<String,String> persons = new HashMap<String,String>();
 
@@ -81,7 +92,7 @@ public class MapsListActivity extends AppCompatActivity {
 
                     }
                   //  pgDialog.dismiss();
-                    pb.setVisibility(View.INVISIBLE);
+                    pb.dismiss();
 
 
                     for (int i=0;i<personList.size();i++){
@@ -89,20 +100,23 @@ public class MapsListActivity extends AppCompatActivity {
                         String locationtext = (personList.get(i).get("categories"));
                         tvDyanamicCatogories.setText(locationtext);
                         tvDyanamicCatogories.setBackgroundResource(R.drawable.transparent_button);
-                        tvDyanamicCatogories.setTextSize(24);
+                        tvDyanamicCatogories.setTextSize(19);
 
 
                         //tvDyanamicCatogories.setBackgroundResource(R.color.buzzcolor);
                         tvDyanamicCatogories.setPadding(10,10,10,10);
                         tvDyanamicCatogories.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
 
-                        tvDyanamicCatogories.setGravity(Gravity.CENTER);
+                        tvDyanamicCatogories.setGravity(CENTER);
 
-                        tvDyanamicCatogories.setTypeface(Typeface.DEFAULT_BOLD);
-                        tvDyanamicCatogories.setAllCaps(true);
+                     //   tvDyanamicCatogories.setTypeface(Typeface.DEFAULT_BOLD);
+
+
+                    // tvDyanamicCatogories.setInputType();
+                       tvDyanamicCatogories.setAllCaps(false);
                         tvDyanamicCatogories.setTextColor(getResources().getColor(R.color.buzzcolor));
                         LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) tvDyanamicCatogories.getLayoutParams();
-                        params.setMargins(20, 20,20, 20); //substitute parameters for left, top, right, bottom
+                        params.setMargins(10, 10,10, 10); //substitute parameters for left, top, right, bottom
                         tvDyanamicCatogories.setLayoutParams(params);
                         linearLayout.addView(tvDyanamicCatogories);
                         tvDyanamicCatogories.setOnClickListener(new View.OnClickListener() {
@@ -114,6 +128,7 @@ public class MapsListActivity extends AppCompatActivity {
                                 pb.setVisibility(View.VISIBLE);
                                 linearLayout.addView(pb);
                                 dynammicCatogoriesText = tvDyanamicCatogories.getText().toString();
+                                Toast.makeText(context,dynammicCatogoriesText,Toast.LENGTH_LONG).show();
 
                                 getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
                                         WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
@@ -175,6 +190,7 @@ public class MapsListActivity extends AppCompatActivity {
 
                                             final  Dialog dialog1 = new Dialog(context);
                                             dialog1.setContentView(R.layout.locations);
+                                            dialog1.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
 
                                             linearLayout=(LinearLayout)dialog1.findViewById(R.id.linearLayout11);
                                             for (int i=0;i<personList.size();i++){
@@ -183,20 +199,20 @@ public class MapsListActivity extends AppCompatActivity {
                                                 dyanamicCatogories.setText(text);
                                                 final String abc = dyanamicCatogories.getText().toString();
                                                 dyanamicCatogories.setBackgroundResource(R.drawable.transparent_button);
-                                                dyanamicCatogories.setTextSize(24);
+                                                dyanamicCatogories.setTextSize(17);
                                                 dialog1.setCanceledOnTouchOutside(false);
 
                                                 // dyanamicCatogories.setBackgroundResource(R.color.buzzcolor);
                                                 //  dyanamicCatogories.setPadding(10,10,10,10);
                                                 dyanamicCatogories.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
 
-                                                dyanamicCatogories.setGravity(Gravity.CENTER);
+                                                dyanamicCatogories.setGravity(CENTER);
 
-                                                dyanamicCatogories.setTypeface(Typeface.DEFAULT_BOLD);
-                                                dyanamicCatogories.setAllCaps(true);
+                                               // dyanamicCatogories.setTypeface(Typeface.DEFAULT_BOLD);
+                                                dyanamicCatogories.setAllCaps(false);
                                                 dyanamicCatogories.setId(i);
 
-                                                dyanamicCatogories.setTextColor(getResources().getColor(R.color.buzzcolor));
+                                                dyanamicCatogories.setTextColor(getResources().getColor(R.color.white));
                                                 LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) dyanamicCatogories.getLayoutParams();
                                                 params.setMargins(20, 0,20, 0); //substitute parameters for left, top, right, bottom
                                                 dyanamicCatogories.setLayoutParams(params);

@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 public class ForgotPassword extends AppCompatActivity {
+
     Button bNext;
     Button bSearch;
     EditText etEnrollFind, etEmailFind;

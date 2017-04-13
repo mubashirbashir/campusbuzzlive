@@ -10,7 +10,10 @@ import java.util.Map;
  * Created by mubas on 4/5/2017.
  */
 public class AddEventRequest extends StringRequest {
-    private static final String REGISTER_REQUEST_URL = "https://terminological-hois.000webhostapp.com/addevent.php";
+    static host h =new host();
+
+    private static final String REGISTER_REQUEST_URL = h.address+"/addevent.php";
+  //  private static final String REGISTER_REQUEST_URL = "https://terminological-hois.000webhostapp.com/addevent.php";
     private Map<String, String> params;
 
     public AddEventRequest(String eventName, String date, String time, String location,String enrollmentid, Response.Listener<String> listener) {

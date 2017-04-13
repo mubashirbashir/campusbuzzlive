@@ -4,7 +4,6 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
 
-
     <!--
          The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
          Google Maps Android API v2, but you must specify either coarse or fine
@@ -19,16 +18,16 @@
         android:largeHeap="true"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name=".splashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".MainActivity" />
         <activity
             android:name=".LoginActivity"
-
             android:windowSoftInputMode="stateAlwaysHidden" />
         <activity android:name=".SignupActivity" />
         <activity android:name=".ForgotPassword" />
@@ -66,9 +65,11 @@
         </activity>
         <activity android:name=".FeedbackComments" />
         <activity android:name=".SettingsActivity" />
-        <activity android:name=".MapsListActivity"
-            android:theme="@style/Base.Theme.AppCompat.Light"
-            android:label="Locations"></activity>
+        <activity
+            android:name=".MapsListActivity"
+             />
+
+        <activity android:name=".Guestmode"></activity>
     </application>
 
 </manifest>

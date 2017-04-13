@@ -10,7 +10,10 @@ import java.util.Map;
  * Created by mubas on 3/30/2017.
  */
 public class LocationRequest extends StringRequest {
-    private static final String LOGIN_REQUEST_URL = "https://terminological-hois.000webhostapp.com/getlocations.php";
+    static host h =new host();
+
+    private static final String LOGIN_REQUEST_URL = h.address+"/getlocations.php";
+   // private static final String LOGIN_REQUEST_URL = "https://terminological-hois.000webhostapp.com/getlocations.php";
     private Map<String, String> params;
 
     public LocationRequest(Response.Listener<String> listener) {

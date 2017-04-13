@@ -1,7 +1,10 @@
 package com.campusbuzzlive.campusbuzzlive;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.pm.PackageInstaller;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -29,12 +32,18 @@ public class LoginActivity extends AppCompatActivity {
     boolean Evalid=false;
     boolean Pvalid=false;
     Button bLogin;
+    SharedPreferences sharedPreferences;
+    public static final String MyPreferences="MyPrefes";
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
 
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_login);
         Button bSign = (Button) findViewById(R.id.bSign);
         bLogin = (Button) findViewById(R.id.bLog);
@@ -122,6 +131,7 @@ public class LoginActivity extends AppCompatActivity {
             startActivity(fp);
 
         }
+
         if (v.getId() == R.id.bLog) {
         final    String enrollmentid = etEnroll.getText().toString().trim();
          final    String password = etPassword.getText().toString().trim();
@@ -148,13 +158,23 @@ public class LoginActivity extends AppCompatActivity {
                             String name = jsonResponse.getString("name");
                             //int age = jsonResponse.getInt("age");
                           //  String msg =jsonResponse.getString("error_msg");
+                            sharedPreferences=getSharedPreferences(MyPreferences,Context.MODE_PRIVATE);
+
+                            SharedPreferences.Editor editor =sharedPreferences.edit();
+                            editor.putString("sessionEnroll",etEnroll.getText().toString());
+                            editor.putString("sessionName",name);
+
+                            editor.putBoolean("isLoggedIn",true);
+                            editor.commit();
 
 
                             Intent intent = new Intent(LoginActivity.this, RadioActivity.class);
+                          //  intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
+
                              intent.putExtra("name",name);
                             intent.putExtra("enrollmentid",enrollmentid);
                             progressDialog.dismiss();
-                            LoginActivity.this.startActivity(intent);
+                            startActivity(intent);
                         } else {
                             String msg =jsonResponse.getString("error_msg");
                             AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
@@ -187,10 +207,5 @@ public class LoginActivity extends AppCompatActivity {
 
 
     }
-    @Override
-    public void onBackPressed()
-    {
-        Intent intent = new Intent(this,MainActivity.class);
-        startActivity(intent);
-    }
+
 }

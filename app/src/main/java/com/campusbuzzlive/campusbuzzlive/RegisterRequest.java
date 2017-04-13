@@ -11,7 +11,10 @@ import java.util.Map;
  */
 
 public class RegisterRequest extends StringRequest {
-    private static final String REGISTER_REQUEST_URL = "https://terminological-hois.000webhostapp.com/Register.php";
+    static host h =new host();
+
+    private static final String REGISTER_REQUEST_URL = h.address+"/Register.php";
+    //private static final String REGISTER_REQUEST_URL = "https://terminological-hois.000webhostapp.com/Register.php";
     private Map<String, String> params;
 
     public RegisterRequest(String name, String email, String password, String enrollmentid,String department,String gender, Response.Listener<String> listener) {

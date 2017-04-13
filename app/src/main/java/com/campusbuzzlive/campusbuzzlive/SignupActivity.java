@@ -260,7 +260,7 @@ public class SignupActivity extends AppCompatActivity {
 //                                    .show();
 
                             Intent intent = new Intent(SignupActivity.this, LoginActivity.class);
-
+                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
 
                          //  intent.putExtra("enrollmentid",enrollmentid);
                             SignupActivity.this.startActivity(intent);

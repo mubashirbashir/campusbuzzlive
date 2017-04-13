@@ -11,7 +11,10 @@ import java.util.Map;
  */
 
 public class GetEventRequest extends StringRequest {
-    private static final String REGISTER_REQUEST_URL = "https://terminological-hois.000webhostapp.com/getevents.php";
+    static host h =new host();
+
+    private static final String REGISTER_REQUEST_URL = h.address+"/getevents.php";
+  //  private static final String REGISTER_REQUEST_URL = "https://terminological-hois.000webhostapp.com/getevents.php";
     private Map<String, String> params;
 
     public GetEventRequest( Response.Listener<String> listener) {

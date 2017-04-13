@@ -11,7 +11,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class LoginRequest extends StringRequest {
-    private static final String LOGIN_REQUEST_URL = "https://terminological-hois.000webhostapp.com/Login.php";
+    static host h =new host();
+    private static final String LOGIN_REQUEST_URL = h.address+"/Login.php";
+
+    //private static final String LOGIN_REQUEST_URL = "https://terminological-hois.000webhostapp.com/Login.php";
     private Map<String, String> params;
 
     public LoginRequest(String enrollmentid, String password, Response.Listener<String> listener) {

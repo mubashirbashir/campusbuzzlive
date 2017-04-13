@@ -11,8 +11,10 @@ import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.app.TimePickerDialog;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
@@ -20,7 +22,10 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.text.InputType;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.os.Bundle;
@@ -55,6 +60,8 @@ public class EventFragClass extends Fragment {
     JSONArray eventArray = null;
     ArrayList<HashMap<String, String>> eventList;
     HashMap<String,String> eventMap = new HashMap<String,String>();
+    Session session;
+
 
     ImageButton bDate, bTime, bLocation;
     TextView tvDate, tvTime, tvLocation;
@@ -64,6 +71,8 @@ public class EventFragClass extends Fragment {
     private LinearLayout linearLayout = null;
     private int mYear, mMonth, mDay, mHour, mMinute;
     SwipeRefreshLayout   mSwipeRefreshLayout;
+
+
 
 
     public EventFragClass() {
@@ -81,6 +90,9 @@ public class EventFragClass extends Fragment {
         View rt = inflater.inflate(
                 R.layout.event_frag_layout, container, false);
         getActivity().setTitle("Events");
+
+
+
         linearLayout = (LinearLayout) rt.findViewById(R.id.linearLayout);
 
         FloatingActionButton fab = (FloatingActionButton) rt.findViewById(R.id.fab);
@@ -100,7 +112,7 @@ public class EventFragClass extends Fragment {
                 tvLocation = (TextView) dialog.findViewById(R.id.tvloc);
                 etEvent = (EditText) dialog.findViewById(R.id.etEvent);
 
-                dialog.setTitle("ADD Event");
+
                 dialog.show();
 
 
@@ -167,6 +179,7 @@ public class EventFragClass extends Fragment {
                          AlertDialog.Builder alertDialog = new AlertDialog.Builder(getContext());
                         final  EditText etLocations = new EditText(getContext());
                         etLocations.setSingleLine(true);
+                        etLocations.setInputType(InputType.TYPE_TEXT_FLAG_CAP_WORDS);
 
                         alertDialog.setView(etLocations);
                         alertDialog.setTitle("Enter location name");
@@ -176,7 +189,6 @@ public class EventFragClass extends Fragment {
                             public void onClick(DialogInterface dialog, int which) {
                               locText= String.valueOf(etLocations.getText());
                                 tvLocation.setText(locText);
-
 
 
 
@@ -193,6 +205,7 @@ public class EventFragClass extends Fragment {
                 bAdd.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        session = new Session();
 
                         if (setTime && setDate && !etEvent.getText().toString().matches("") && !locText.matches("")) {
                             eventName =etEvent.getText().toString();
@@ -241,7 +254,7 @@ public class EventFragClass extends Fragment {
                                 }
                             };
 
-                            AddEventRequest addEventRequestRequest = new AddEventRequest(eventName, stringDate, stringTime, location, "14045110035",  responseListener);
+                            AddEventRequest addEventRequestRequest = new AddEventRequest(eventName, stringDate, stringTime, location, session.getEnrollSession(),  responseListener);
                             RequestQueue queue = Volley.newRequestQueue(getContext());
                             queue.add(addEventRequestRequest);
 
@@ -338,7 +351,7 @@ public class EventFragClass extends Fragment {
 
 
 
-            Toast.makeText(getContext(),"refreshing",Toast.LENGTH_LONG).show();
+            Toast.makeText(getContext(),"Refreshing...",Toast.LENGTH_SHORT).show();
             }
 
 private void display() {
@@ -366,11 +379,12 @@ private void display() {
         tvDynamicEvent.setText(eventNameText);
         tvDynamicEvent.setTextSize(24);
 
-        tvDynamicName.setTextSize(18);
+        tvDynamicName.setTextSize(16);
         tvDynamicName.setTypeface(Typeface.defaultFromStyle(Typeface.BOLD));
         tvDynamicName.setText(nameText);
+            tvDynamicName.setTextColor(getResources().getColor(R.color.black));
         tvDynamicEnroll.setText(enrollmentText);
-        tvDynamicEnroll.setTextSize(16);
+        tvDynamicEnroll.setTextSize(14);
         //  tvDynamicEvent.setGravity(Gravity.LEFT);
         tvDynamicEvent.setTextColor(getResources().getColor(R.color.buzzcolor));
         tvDynamicEtc.setTextSize(16);
@@ -404,7 +418,7 @@ private void display() {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        refreshItems();
+
         mSwipeRefreshLayout=(SwipeRefreshLayout) getActivity().findViewById(R.id.swipeRefreshLayout);
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -413,6 +427,8 @@ private void display() {
                 refreshItems();
             }
         });
+        mSwipeRefreshLayout.setRefreshing(true);
+        refreshItems();
 
 
     }
