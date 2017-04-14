@@ -30,15 +30,16 @@
                 android:layout_height="wrap_content"
                 android:text="How can i change my password ?"
                 android:textColor="@color/buzzcolor"
-                android:textSize="24sp" />
+                android:textSize="20sp"
+                android:textStyle="normal"/>
 
             <TextView
                 android:id="@+id/tvFA1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:singleLine="false"
-                android:text="Go to your profile settings and click on 'change password'"
-                android:textSize="20sp" />
+                android:text="Go to your profile settings and click on 'change password'."
+                android:textSize="16sp" />
 
             <TextView
                 android:id="@+id/tvFQ2"
@@ -46,15 +47,16 @@
                 android:layout_height="wrap_content"
                 android:text="My friend is having trouble in signing up prompts 'invalid user'"
                 android:textColor="@color/buzzcolor"
-                android:textSize="24sp" />
+                android:textSize="20sp"
+                android:textStyle="normal"/>
 
             <TextView
                 android:id="@+id/tvFA2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:singleLine="false"
-                android:text="Make sure the user is entering the valid enrollment number"
-                android:textSize="20sp" />
+                android:text="Make sure the user is entering the valid enrollment number."
+                android:textSize="16sp" />
 
             <TextView
                 android:id="@+id/tvFQ3"
@@ -62,15 +64,16 @@
                 android:layout_height="wrap_content"
                 android:text="I want to change my E-mail ,whats the procedure ? "
                 android:textColor="@color/buzzcolor"
-                android:textSize="24sp" />
+                android:textSize="20sp"
+                android:textStyle="normal"/>
 
             <TextView
                 android:id="@+id/tvFA3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:singleLine="false"
-                android:text="You can update your E-mail in your profile settings"
-                android:textSize="20sp" />
+                android:text="You can update your E-mail in your profile settings."
+                android:textSize="16sp" />
 
             <TextView
                 android:id="@+id/tvFQ4"
@@ -78,15 +81,16 @@
                 android:layout_height="wrap_content"
                 android:text="How to find a particular department of the campus ?"
                 android:textColor="@color/buzzcolor"
-                android:textSize="24sp" />
+                android:textSize="20sp"
+               android:textStyle="normal"/>
 
             <TextView
                 android:id="@+id/tvFA4"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:singleLine="false"
-                android:text="Click on maps and select your desired department from the given list "
-                android:textSize="20sp" />
+                android:text="Click on maps and select your desired department from the given list. "
+                android:textSize="16sp" />
 
             <TextView
                 android:id="@+id/tvFQ5"
@@ -94,15 +98,16 @@
                 android:layout_height="wrap_content"
                 android:text="Can i set a desired profile picture ?"
                 android:textColor="@color/buzzcolor"
-                android:textSize="24sp" />
+                android:textSize="20sp"
+                android:textStyle="normal"/>
 
             <TextView
                 android:id="@+id/tvFA5"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:singleLine="false"
-                android:text="Yes you can,goto your profile settings and by clicking on your picture,you will get various options there  "
-                android:textSize="20sp" />
+                android:text="Yes you can,goto your profile settings and by clicking on your picture,you will get various options there.  "
+                android:textSize="16sp" />
 
             <TextView
                 android:id="@+id/tvFQ6"
@@ -110,15 +115,16 @@
                 android:layout_height="wrap_content"
                 android:text="In case i forget my password, what's the criteria for that ? "
                 android:textColor="@color/buzzcolor"
-                android:textSize="24sp" />
+                android:textSize="20sp"
+                android:textStyle="normal"/>
 
             <TextView
                 android:id="@+id/tvFA6"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:singleLine="false"
-                android:text="Click on forgot password and set a new password via OTP verification"
-                android:textSize="20sp" />
+                android:text="Click on forgot password and set a new password via OTP verification."
+                android:textSize="16sp" />
 
             <TextView
                 android:id="@+id/tvFQ7"
@@ -126,15 +132,16 @@
                 android:layout_height="wrap_content"
                 android:text="How to add an event ?"
                 android:textColor="@color/buzzcolor"
-                android:textSize="24sp" />
+                android:textSize="20sp"
+                android:textStyle="normal"/>
 
             <TextView
                 android:id="@+id/tvFA7"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:singleLine="false"
-                android:text="Once you click on events ,you will get a + sign down below,On clicking that button you will be able to add an event  "
-                android:textSize="20sp" />
+                android:text="Once you click on events ,you will get a floating 'event' sign down below,On clicking that button you will be able to add an event.  "
+                android:textSize="16sp" />
 
 
 
