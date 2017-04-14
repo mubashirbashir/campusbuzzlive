@@ -41,6 +41,7 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.toolbox.Volley;
@@ -71,6 +72,7 @@ public class EventFragClass extends Fragment {
     private LinearLayout linearLayout = null;
     private int mYear, mMonth, mDay, mHour, mMinute;
     SwipeRefreshLayout   mSwipeRefreshLayout;
+    RequestQueue queue;
 
 
 
@@ -255,7 +257,7 @@ public class EventFragClass extends Fragment {
                             };
 
                             AddEventRequest addEventRequestRequest = new AddEventRequest(eventName, stringDate, stringTime, location, session.getEnrollSession(),  responseListener);
-                            RequestQueue queue = Volley.newRequestQueue(getContext());
+                            queue = Volley.newRequestQueue(getActivity().getApplicationContext());
                             queue.add(addEventRequestRequest);
 
 
@@ -344,7 +346,7 @@ public class EventFragClass extends Fragment {
     };
 
             GetEventRequest getEventRequest = new GetEventRequest(  responseListener);
-            RequestQueue queue = Volley.newRequestQueue(getContext());
+             queue = Volley.newRequestQueue(getContext());
             queue.add(getEventRequest);
 
             // refresf from db
@@ -432,4 +434,17 @@ private void display() {
 
 
     }
+
+    @Override
+    public void onStop() {
+        queue.cancelAll(new RequestQueue.RequestFilter() {
+            @Override
+            public boolean apply(Request<?> request) {
+                return true;
+            }
+        });
+        super.onStop();
+    }
+
+
 }

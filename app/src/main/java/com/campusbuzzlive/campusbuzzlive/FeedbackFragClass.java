@@ -30,6 +30,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.toolbox.Volley;
@@ -54,6 +55,7 @@ public class FeedbackFragClass extends Fragment {
     ArrayList<HashMap<String, String>> questionList;
     HashMap<String, String> questiontMap = new HashMap<String, String>();
     SwipeRefreshLayout mSwipeRefreshLayout;
+    RequestQueue queue;
 
 
     public View onCreateView(LayoutInflater inflater,
@@ -98,6 +100,7 @@ public class FeedbackFragClass extends Fragment {
                                     JSONObject jsonResponse = new JSONObject(response);
                                     boolean error = jsonResponse.getBoolean("error");
                                     if (!error) {
+                                        refreshItems();
                                         progressDialog.dismiss();
                                         // Toast.makeText(getApplicationContext(),"Registration Successfull.Please Log In to continue.",Toast.LENGTH_LONG).show();
                                         android.support.v7.app.AlertDialog.Builder builder = new android.support.v7.app.AlertDialog.Builder(getContext());
@@ -106,7 +109,7 @@ public class FeedbackFragClass extends Fragment {
                                                 .create()
                                                 .show();
 
-                                        refreshItems();
+
                                         //   Intent intent = new Intent(SignupActivity.this, LoginActivity.class);
 
 
@@ -128,7 +131,7 @@ public class FeedbackFragClass extends Fragment {
                         };
 
                         AddQuestionRequest addQuestionRequest = new AddQuestionRequest(etQuery.getText().toString(), java.text.DateFormat.getDateTimeInstance().format((new Date())), session.getEnrollSession(), responseListener);
-                        RequestQueue queue = Volley.newRequestQueue(getContext());
+                         queue = Volley.newRequestQueue(getContext());
                         queue.add(addQuestionRequest);
 
 
@@ -218,7 +221,7 @@ public class FeedbackFragClass extends Fragment {
         };
 
         GetQuestionsRequest getQuestionRequest = new GetQuestionsRequest(responseListener);
-        RequestQueue queue = Volley.newRequestQueue(getContext());
+         queue = Volley.newRequestQueue(getContext());
         queue.add(getQuestionRequest);
 
         // refresf from db
@@ -384,9 +387,19 @@ public class FeedbackFragClass extends Fragment {
 
 
         DeleteQuestionRequest deleteQuestionRequest = new DeleteQuestionRequest(questionid, responseListener);
-        RequestQueue queue = Volley.newRequestQueue(getContext());
+         queue = Volley.newRequestQueue(getContext());
         queue.add(deleteQuestionRequest);
 
 
+    }
+    @Override
+    public void onStop() {
+        queue.cancelAll(new RequestQueue.RequestFilter() {
+            @Override
+            public boolean apply(Request<?> request) {
+                return true;
+            }
+        });
+        super.onStop();
     }
 }
