@@ -34,7 +34,7 @@
         android:layout_height="320dp"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:text="Campus buzz live - primarily designed for the students/staff of kashmir university.It is easy-to-use and a must have app for the KU students, we have set a guest mode where an outsider can have a limited access to it.The main purpose of this application is to remove the gap between the students and faculty by  providing an interactive medium where a student can retrieve all sorts of information (from events to navigation)through this application. and also the highlighting part is the online (live streaming) radio of our own that covers all the news regarding the campus.                    "
+        android:text="Campus buzz live - primarily designed for the students/staff of kashmir university.It is easy-to-use and a must have app for the KU students, we have set a guest mode where an outsider can have a limited access to it.The main purpose of this application is to remove the gap between the students and faculty by  providing an interactive medium where a student can retrieve all sorts of information (from events to navigation)through this application. Also the highlighting part is the online (live streaming) radio of our own that covers all the news regarding the campus.                    "
         android:textColorLink="@android:color/black" />
 
     <TextView
