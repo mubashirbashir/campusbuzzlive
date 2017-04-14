@@ -1,10 +1,12 @@
 package com.campusbuzzlive.campusbuzzlive;
 
+import android.app.Application;
+
 /**
  * Created by mubas on 4/11/2017.
  */
 
-public class host {
+public class host extends Application{
     public static  String address;
 
     public host() {

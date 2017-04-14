@@ -25,19 +25,21 @@ public class RadioActivity extends AppCompatActivity
     String name,enrollmentid;
     SharedPreferences sharedPreferences;
     Session session = new Session();
+    int curid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_radio);
 
-     name  =getIntent().getStringExtra("name");
+
+        name  =getIntent().getStringExtra("name");
         enrollmentid=getIntent().getStringExtra("enrollmentid");
 
         sharedPreferences=getSharedPreferences(LoginActivity.MyPreferences, Context.MODE_PRIVATE);
-String sessionEnroll =sharedPreferences.getString("sessionEnroll",null);
+        String sessionEnroll =sharedPreferences.getString("sessionEnroll",null);
         String sessionName =sharedPreferences.getString("sessionName",null);
-session.setEnrollSession(sessionEnroll);
+        session.setEnrollSession(sessionEnroll);
 
         Toast.makeText(this,"Hi, "+sessionName,Toast.LENGTH_LONG).show();
 
@@ -74,8 +76,12 @@ session.setEnrollSession(sessionEnroll);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-
-                super.onBackPressed();
+            if (curid==R.id.nav_Home){
+                super.onBackPressed();}
+            else {
+                displaySelectedScreen(R.id.nav_Home);
+                curid=R.id.nav_Home;
+            }
 
         }
     }
@@ -150,15 +156,15 @@ session.setEnrollSession(sessionEnroll);
         }
 
         //replacing the fragment
-                if (fragment != null) {
+        if (fragment != null) {
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
 
             ft.replace(R.id.content_frame, fragment);
-                    ft.addToBackStack(null);
+
             ft.commit();
 
-           // ft.addToBackStack(null);
-    }
+            // ft.addToBackStack(null);
+        }
 
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -169,9 +175,9 @@ session.setEnrollSession(sessionEnroll);
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-       // TextView tvusername = (TextView) findViewById(R.id.tvUserName);
+        // TextView tvusername = (TextView) findViewById(R.id.tvUserName);
         //tvusername.setText(name);
-
+        curid=item.getItemId();
         //calling the method displayselectedscreen and passing the id of selected menu
         displaySelectedScreen(item.getItemId());
         //make this method blank

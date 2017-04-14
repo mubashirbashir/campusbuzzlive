@@ -3,12 +3,14 @@ package com.campusbuzzlive.campusbuzzlive;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -382,8 +384,21 @@ session=new Session();
             dynamicDelete.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    AlertDialog.Builder builder=new AlertDialog.Builder(context);
+                    builder.setMessage("Are you sure you want to delete this item?")
+                            .setIcon(R.drawable.ic_delete_black_24dp)
 
-                    deleteanswer(answerid);
+                            .setNegativeButton("Cancel",null)
+                            .setPositiveButton("Delete", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    deleteanswer(answerid);
+                                }
+                            })
+                            .show();
+
+
+
                 }
             });
         }
@@ -391,14 +406,15 @@ session=new Session();
 
     private void deleteanswer(String answerid) {
 
-
+        final ProgressDialog progressDialog=new ProgressDialog(context);
+        progressDialog.setMessage("Please Wait...");
+        progressDialog.setCanceledOnTouchOutside(false);
+        progressDialog.show();
 
         Response.Listener<String> responseListener = new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                ProgressDialog progressDialog=new ProgressDialog(context);
-                progressDialog.setMessage("Please Wait...");
-                progressDialog.show();
+
                 try {
                     JSONObject jsonResponse = new JSONObject(response);
                     boolean error = jsonResponse.getBoolean("error");

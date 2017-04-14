@@ -133,6 +133,7 @@ public class ChangePassword extends AppCompatActivity implements View.OnClickLis
                                 .create()
                                 .show();
                         Intent gotoLogin = new Intent(ChangePassword.this,LoginActivity.class);
+                        gotoLogin.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
                         startActivity(gotoLogin);
                     } else {
                         String msg =jsonResponse.getString("error_msg");
