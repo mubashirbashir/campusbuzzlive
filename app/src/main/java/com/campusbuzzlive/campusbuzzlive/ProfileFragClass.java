@@ -5,6 +5,7 @@ package com.campusbuzzlive.campusbuzzlive;
  */
 
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.Intent;
 
 import android.app.Activity;
@@ -21,6 +22,7 @@ import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.DrawerLayout;
+import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.os.Bundle;
@@ -40,6 +42,13 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -55,6 +64,9 @@ public class ProfileFragClass extends Fragment {
     ImageButton imageButton4;
     Button bChangeDP;
     Uri outputFileUri;
+    Session session;
+    RequestQueue queue;
+    String stringImage;
 
     String selectedImagePath = "";
 
@@ -67,6 +79,7 @@ public class ProfileFragClass extends Fragment {
 
         View rootView = inflater.inflate(
                 R.layout.profile_frag_layout, container, false);
+        session=new Session();
 
         context = rootView.getContext();
 
@@ -192,6 +205,8 @@ public class ProfileFragClass extends Fragment {
             if (resultCode == RESULT_OK&&requestCode==CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE) {
 
                 Bitmap bmp = (Bitmap) data.getExtras().get("data");
+               stringImage= getStringImage(bmp);
+                upload();
                 ByteArrayOutputStream stream = new ByteArrayOutputStream();
 
                 bmp.compress(Bitmap.CompressFormat.PNG, 100, stream);
@@ -233,6 +248,7 @@ public class ProfileFragClass extends Fragment {
 
                 } else {
 
+
                     selectedImagePath = getPath(targetUri);// targetUri.getPath();
 
                     Toast.makeText(
@@ -246,7 +262,10 @@ public class ProfileFragClass extends Fragment {
                             Toast.LENGTH_LONG).show();
 
                     ivDP.setImageBitmap(bitmap);
+
                     bChangeDP.setEnabled(true);
+                    stringImage= getStringImage(bitmap);
+                    upload();
 
                 }
             } catch (FileNotFoundException e) {
@@ -258,6 +277,62 @@ public class ProfileFragClass extends Fragment {
 
 
     }
+
+    private void upload() {
+
+
+        final ProgressDialog progressDialog = new ProgressDialog(getContext());
+        progressDialog.setCanceledOnTouchOutside(false);
+        progressDialog.setTitle("Upoading...");
+        progressDialog.setMessage("Please wait!");
+        progressDialog.show();
+        Response.Listener<String> responseListener = new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject jsonResponse = new JSONObject(response);
+                    boolean error = jsonResponse.getBoolean("error");
+                    if (!error) {
+                        progressDialog.dismiss();
+                        // Toast.makeText(getApplicationContext(),"Registration Successfull.Please Log In to continue.",Toast.LENGTH_LONG).show();
+                        android.support.v7.app.AlertDialog.Builder builder = new android.support.v7.app.AlertDialog.Builder(getContext());
+                        builder.setMessage("   Success!")
+                                .setNegativeButton("ok", null)
+                                .create()
+                                .show();
+
+
+                        //   Intent intent = new Intent(SignupActivity.this, LoginActivity.class);
+
+
+                        //  intent.putExtra("enrollmentid",enrollmentid);
+                        //    SignupActivity.this.startActivity(intent);
+                    } else {
+                        String msg= jsonResponse.getString("error_msg");
+                        android.support.v7.app.AlertDialog.Builder builder = new android.support.v7.app.AlertDialog.Builder(getContext());
+                        builder.setMessage(msg)
+                                .setNegativeButton("Retry", null)
+                                .create()
+                                .show();
+                        progressDialog.dismiss();
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        };
+
+        UploadImageRequest uploadImageRequest = new UploadImageRequest(session.getEnrollSession(),stringImage,  responseListener);
+        queue = Volley.newRequestQueue(getActivity().getApplicationContext());
+        queue.add(uploadImageRequest);
+
+
+
+
+
+
+    }
+
     public String getPath(Uri uri) {
 
         String[] projection = { MediaStore.Images.Media.DATA };
@@ -403,6 +478,13 @@ public class ProfileFragClass extends Fragment {
 
         return inSampleSize;
 
+    }
+    public String getStringImage(Bitmap bmp){
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bmp.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+        byte[] imageBytes = baos.toByteArray();
+        String encodedImage = Base64.encodeToString(imageBytes, Base64.DEFAULT);
+        return encodedImage;
     }
 
 
