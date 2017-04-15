@@ -45,6 +45,7 @@ import android.widget.Toast;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.toolbox.Volley;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -67,6 +68,7 @@ public class ProfileFragClass extends Fragment {
     Session session;
     RequestQueue queue;
     String stringImage;
+    host h = new host();
 
     String selectedImagePath = "";
 
@@ -88,7 +90,15 @@ public class ProfileFragClass extends Fragment {
         Button bPhone= (Button) rootView.findViewById(R.id.bPhone);
         Button bEmail= (Button) rootView.findViewById(R.id.bEmail);
         bChangeDP= (Button) rootView.findViewById(R.id.bChangeDP);
+        String photoURL = (h.address+"/uploads/"+session.getEnrollSession()+".jpeg");
 
+        Picasso.with(getContext())
+                .load(photoURL)
+
+                .placeholder(R.mipmap.userdummy)   // optional
+                .error(R.mipmap.userdummy)      // optional
+                .resize(150,150)                        // optional
+                .into(ivDP);
           /*
           imageButton4.setOnClickListener(new View.OnClickListener() {
                 @Override
