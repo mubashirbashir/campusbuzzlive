@@ -18,6 +18,7 @@ import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
+import android.graphics.drawable.GradientDrawable;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
@@ -25,17 +26,21 @@ import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.PopupMenu;
 import android.text.InputType;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.os.Bundle;
 
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.TimePicker;
@@ -45,6 +50,7 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.toolbox.Volley;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -62,6 +68,7 @@ public class EventFragClass extends Fragment {
     ArrayList<HashMap<String, String>> eventList;
     HashMap<String,String> eventMap = new HashMap<String,String>();
     Session session;
+    host h =new host();
 
 
     ImageButton bDate, bTime, bLocation;
@@ -70,6 +77,7 @@ public class EventFragClass extends Fragment {
     String stringTime, stringDate , locText,location,eventName;
     boolean setDate, setTime; // ad lo alater
     private LinearLayout linearLayout = null;
+   // private LinearLayout linearLayoutin = null;
     private int mYear, mMonth, mDay, mHour, mMinute;
     SwipeRefreshLayout   mSwipeRefreshLayout;
     RequestQueue queue;
@@ -92,10 +100,12 @@ public class EventFragClass extends Fragment {
         View rt = inflater.inflate(
                 R.layout.event_frag_layout, container, false);
         getActivity().setTitle("Events");
+        session = new Session();
 
 
 
         linearLayout = (LinearLayout) rt.findViewById(R.id.linearLayout);
+       // linearLayoutin=(LinearLayout)rt.findViewById(R.id.linearLayoutin);
 
         FloatingActionButton fab = (FloatingActionButton) rt.findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -207,7 +217,7 @@ public class EventFragClass extends Fragment {
                 bAdd.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        session = new Session();
+
 
                         if (setTime && setDate && !etEvent.getText().toString().matches("") && !locText.matches("")) {
                             eventName =etEvent.getText().toString();
@@ -303,6 +313,7 @@ public class EventFragClass extends Fragment {
                     JSONObject c = eventArray.getJSONObject(i);
                     String userName = c.getString("name");
 
+
                     String eventName = c.getString("eventname");
 
                     String date = c.getString("date");
@@ -312,6 +323,8 @@ public class EventFragClass extends Fragment {
                     String location = c.getString("location");
 
                     String enrollmentid = c.getString("enrollmentid");
+                    String photo =c.getString("photo");
+
                     HashMap<String,String> eventMap = new HashMap<String,String>();
 
                     eventMap.put("name",userName);
@@ -320,6 +333,7 @@ public class EventFragClass extends Fragment {
                     eventMap.put("time",time);
                     eventMap.put("location",location);
                     eventMap.put("enrollmentid",enrollmentid);
+                    eventMap.put("photo",photo);
 
 
 
@@ -360,6 +374,14 @@ private void display() {
 
         for (int i=0;i<eventList.size();i++)
         {
+            LinearLayout ll =new LinearLayout(getActivity());
+            ll.setOrientation(LinearLayout.HORIZONTAL);
+            ll.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+            LinearLayout ln =new LinearLayout(getActivity());
+            ln.setOrientation(LinearLayout.VERTICAL);
+            ln.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+
+
 
 
         //display items
@@ -369,6 +391,22 @@ private void display() {
         TextView tvDynamicName = new TextView(getActivity());
         TextView tvDynamicEnroll = new TextView(getActivity());
         View vDynamicLine = new View(getActivity());
+            final ImageView dynamicDelete = new ImageView(getActivity());
+
+            ImageView imageViewdp= new ImageView(getActivity());
+            LinearLayout.LayoutParams paramx =  new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+            paramx.setMargins(0, 0, 10, 0); //substitute parameters for left, top, right, bottom
+            imageViewdp.setLayoutParams(paramx);
+
+            String photoURL = (h.address+"/uploads/"+eventList.get(i).get("photo"));
+
+            Picasso.with(getContext())
+                    .load(photoURL)
+
+                    .placeholder(R.mipmap.userdummy)   // optional
+                    .error(R.mipmap.userdummy)      // optional
+                    .resize(150,150)                        // optional
+                    .into(imageViewdp);
 
         //
         String nameText = (eventList.get(i).get("name"));
@@ -397,12 +435,38 @@ private void display() {
         tvDynamicEvent.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
         tvDynamicEtc.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
         LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) vDynamicLine.getLayoutParams();
-        params.setMargins(40, 40, 40, 40); //substitute parameters for left, top, right, bottom
+        params.setMargins(0, 10, 0, 10); //substitute parameters for left, top, right, bottom
         vDynamicLine.setLayoutParams(params);
+
+
+            tvDynamicName.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+            tvDynamicEnroll.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+
+
         tvDynamicEtc.setText(dateText + "  " + timeText + "  at" + " " + locationText);
-        linearLayout.addView(tvDynamicName);
-        linearLayout.addView(tvDynamicEnroll);
-        linearLayout.addView(tvDynamicEvent);
+
+            if (session.getEnrollSession().toString().equals(tvDynamicEnroll.getText().toString())) {
+                // Toast.makeText(this,session.getEnrollSession(),Toast.LENGTH_LONG).show();
+                dynamicDelete.setImageResource(R.drawable.ic_more_vert_black_24dp);
+
+                dynamicDelete.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.MATCH_PARENT));
+                LinearLayout.LayoutParams params1 = (LinearLayout.LayoutParams) dynamicDelete.getLayoutParams();
+                params1.gravity = (Gravity.RIGHT);
+                dynamicDelete.setLayoutParams(params1);
+                linearLayout.addView(dynamicDelete);
+            }
+
+            linearLayout.addView(ll);
+            ll.addView(imageViewdp);
+            ll.addView(ln);
+            ln.addView(tvDynamicName);
+            ln.addView(tvDynamicEnroll);
+
+
+
+
+
+            linearLayout.addView(tvDynamicEvent);
         linearLayout.addView(tvDynamicEtc);
         linearLayout.addView(vDynamicLine);
 
@@ -411,10 +475,27 @@ private void display() {
 
 
 
+dynamicDelete.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View v) {
+        PopupMenu menu = new PopupMenu(getContext(), v);
 
+        menu.getMenu().add(Menu.NONE,1,1,"Delete");
+
+        menu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            public boolean onMenuItemClick(MenuItem item) {
+                Toast.makeText(getContext(),"You Clicked : " + item.getTitle(),Toast.LENGTH_SHORT).show();
+                return true;
+            }
+        });
+        menu.show();
+
+    }
+});
 
 
         }
+
     }
 
     @Override

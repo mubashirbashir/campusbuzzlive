@@ -17,15 +17,20 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.squareup.picasso.Picasso;
 
 public class RadioActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     String name,enrollmentid;
     SharedPreferences sharedPreferences;
     Session session = new Session();
+    host h = new host();
     int curid;
+    String photoURL;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,13 +38,22 @@ public class RadioActivity extends AppCompatActivity
         setContentView(R.layout.activity_radio);
 
 
+
+
+
+
+
         name  =getIntent().getStringExtra("name");
         enrollmentid=getIntent().getStringExtra("enrollmentid");
+
+
+
 
         sharedPreferences=getSharedPreferences(LoginActivity.MyPreferences, Context.MODE_PRIVATE);
         String sessionEnroll =sharedPreferences.getString("sessionEnroll",null);
         String sessionName =sharedPreferences.getString("sessionName",null);
         session.setEnrollSession(sessionEnroll);
+        photoURL=host.address+"/uploads/"+sessionEnroll+".jpeg";
 
         Toast.makeText(this,"Hi, "+sessionName,Toast.LENGTH_LONG).show();
 
@@ -61,12 +75,22 @@ public class RadioActivity extends AppCompatActivity
         View headerView = navigationView.getHeaderView(0);
         TextView tvUsername  = (TextView) headerView.findViewById(R.id.tvUserName);
         TextView tvEnrollmentid  = (TextView) headerView.findViewById(R.id.tvEnroll);
+        ImageView imageViewdp = (ImageView )headerView.findViewById(R.id.ivProfile);
 
         tvUsername.setText(sessionName);
         tvEnrollmentid.setText(sessionEnroll);
+        Picasso.with(this)
+                .load(photoURL)
+
+                .placeholder(R.mipmap.userdummy)   // optional
+                .error(R.mipmap.userdummy)      // optional
+                .resize(150,150)                        // optional
+                .into(imageViewdp);
+
 
         //add this line to display menu1 when the activity is loaded
         displaySelectedScreen(R.id.nav_Home);
+
 
     }
 

@@ -11,14 +11,19 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.ColorStateList;
+import android.graphics.Bitmap;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.widget.PopupMenu;
 import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.support.v4.app.Fragment;
@@ -34,6 +39,7 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.toolbox.Volley;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -56,6 +62,7 @@ public class FeedbackFragClass extends Fragment {
     HashMap<String, String> questiontMap = new HashMap<String, String>();
     SwipeRefreshLayout mSwipeRefreshLayout;
     RequestQueue queue;
+    host h=new host();
 
 
     public View onCreateView(LayoutInflater inflater,
@@ -181,6 +188,7 @@ public class FeedbackFragClass extends Fragment {
                         for (int i = 0; i < questionArray.length(); i++) {
                             JSONObject c = questionArray.getJSONObject(i);
                             String userName = c.getString("name");
+                            String photo=c.getString("photo");
                             String questionId = c.getString("questionid");
 
                             String questionText = c.getString("question");
@@ -192,6 +200,7 @@ public class FeedbackFragClass extends Fragment {
                             HashMap<String, String> questionMap = new HashMap<String, String>();
 
                             questionMap.put("name", userName);
+                            questionMap.put("photo",photo);
                             questionMap.put("question", questionText);
                             questionMap.put("datetime", datetime);
 
@@ -236,7 +245,31 @@ public class FeedbackFragClass extends Fragment {
 
 
             //display items
+            LinearLayout ll =new LinearLayout(getActivity());
+            ll.setOrientation(LinearLayout.HORIZONTAL);
+            ll.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+            LinearLayout ln =new LinearLayout(getActivity());
+            ln.setOrientation(LinearLayout.VERTICAL);
+            ln.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
 
+
+            final ImageView dynamicMenu = new ImageView(getActivity());
+
+            final ImageView imageViewdp= new ImageView(getActivity());
+            LinearLayout.LayoutParams paramx =  new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+            paramx.setMargins(0, 0, 10, 0); //substitute parameters for left, top, right, bottom
+            imageViewdp.setLayoutParams(paramx);
+
+            final String photoURL = (h.address+"/uploads/"+questionList.get(i).get("photo"));
+           // Toast.makeText(getContext(),photoURL,Toast.LENGTH_LONG).show();
+
+            Picasso.with(getContext())
+                    .load(photoURL)
+
+                    .placeholder(R.mipmap.userdummy)   // optional
+                    .error(R.mipmap.userdummy)      // optional
+                    .resize(150,150)                        // optional
+                    .into(imageViewdp);
 
             //
             final String nameText = (questionList.get(i).get("name"));
@@ -249,7 +282,7 @@ public class FeedbackFragClass extends Fragment {
             final TextView tvDynamicName = new TextView(getActivity());
             final TextView tvDynamicEnroll = new TextView(getActivity());
 
-            final ImageView dynamicDelete = new ImageView(getActivity());
+          //  final ImageView dynamicDelete = new ImageView(getActivity());
 
             final TextView tvDynamicQuery = new TextView(getActivity());
             final TextView tvDynamicEtc = new TextView(getActivity());
@@ -275,26 +308,33 @@ public class FeedbackFragClass extends Fragment {
             tvDynamicQuery.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
             tvDynamicEtc.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
             LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) vDynamicLine.getLayoutParams();
-            params.setMargins(40, 40, 40, 40); //substitute parameters for left, top, right, bottom
+            params.setMargins(0, 5, 0, 30); //substitute parameters for left, top, right, bottom
             vDynamicLine.setLayoutParams(params);
             // String currentDateTimeString = java.text.DateFormat.getDateTimeInstance().format(new Date());
             tvDynamicEtc.setText(dateTimeText);
             final String query = tvDynamicQuery.getText().toString();
 
-
-            linearLayout.addView(tvDynamicName);
-            linearLayout.addView(tvDynamicEnroll);
-
             if (session.getEnrollSession().toString().equals(tvDynamicEnroll.getText().toString())) {
                 // Toast.makeText(this,session.getEnrollSession(),Toast.LENGTH_LONG).show();
-                dynamicDelete.setImageResource(R.drawable.ic_delete_black_24dp);
+                dynamicMenu.setImageResource(R.drawable.ic_more_vert_black_24dp);
 
-                dynamicDelete.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.MATCH_PARENT));
-                LinearLayout.LayoutParams params1 = (LinearLayout.LayoutParams) dynamicDelete.getLayoutParams();
+                dynamicMenu.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.MATCH_PARENT));
+                LinearLayout.LayoutParams params1 = (LinearLayout.LayoutParams) dynamicMenu.getLayoutParams();
                 params1.gravity = (Gravity.RIGHT);
-                dynamicDelete.setLayoutParams(params1);
-                linearLayout.addView(dynamicDelete);
+                dynamicMenu.setLayoutParams(params1);
+                linearLayout.addView(dynamicMenu);
             }
+
+
+            linearLayout.addView(ll);
+            ll.addView(imageViewdp);
+            ll.addView(ln);
+
+
+
+            ln.addView(tvDynamicName);
+            ln.addView(tvDynamicEnroll);
+
 
             linearLayout.addView(tvDynamicQuery);
             linearLayout.addView(tvDynamicEtc);
@@ -307,6 +347,7 @@ public class FeedbackFragClass extends Fragment {
                     showfullquery.putExtra("questionid", questionid);
                     showfullquery.putExtra("name", nameText);
                     showfullquery.putExtra("enrollmentid", enrollmentText);
+                    showfullquery.putExtra("photo", photoURL);
                     showfullquery.putExtra("etc", tvDynamicEtc.getText().toString());
                     startActivity(showfullquery);
                 }
@@ -315,23 +356,35 @@ public class FeedbackFragClass extends Fragment {
             //Toast.makeText(getContext(), "Added", Toast.LENGTH_SHORT).show();
 
             //dialog.dismiss();
-            dynamicDelete.setOnClickListener(new View.OnClickListener() {
+            dynamicMenu.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
 
-                    AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-                    builder.setMessage("Are you sure you want to delete this item? "+questionid)
-                            .setIcon(R.drawable.ic_delete_black_24dp)
 
-                            .setNegativeButton("Cancel", null)
-                            .setPositiveButton("Delete", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    deleteQuestion(questionid);
-                                }
-                            })
-                            .show();
+                    PopupMenu menu = new PopupMenu(getContext(), v);
 
+                    menu.getMenu().add(Menu.NONE, 1, 1, "Delete");
+
+                    menu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                        public boolean onMenuItemClick(MenuItem item) {
+                            AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                            builder.setMessage("Are you sure you want to delete this item? " + questionid)
+                                    .setIcon(R.drawable.ic_delete_black_24dp)
+
+                                    .setNegativeButton("Cancel", null)
+                                    .setPositiveButton("Delete", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            deleteQuestion(questionid);
+                                        }
+                                    })
+                                    .show();
+
+
+                            return true;
+                        }
+                    });
+                    menu.show();
 
                 }
             });
