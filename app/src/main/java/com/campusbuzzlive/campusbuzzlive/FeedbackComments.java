@@ -467,13 +467,13 @@ session=new Session();
                 public void onClick(View v) {
 
 
-                    PopupMenu menu = new PopupMenu(getApplicationContext(), v);
+                    PopupMenu menu = new PopupMenu(context, v);
 
                     menu.getMenu().add(Menu.NONE, 1, 1, "Delete");
 
                     menu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                         public boolean onMenuItemClick(MenuItem item) {
-                            AlertDialog.Builder builder = new AlertDialog.Builder(getApplicationContext());
+                            AlertDialog.Builder builder = new AlertDialog.Builder(context);
                             builder.setMessage("Are you sure you want to delete this item? " )
                                     .setIcon(R.drawable.ic_delete_black_24dp)
 
