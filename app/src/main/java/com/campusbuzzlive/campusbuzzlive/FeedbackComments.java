@@ -102,9 +102,7 @@ session=new Session();
         ln.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
 
 
-        mSwipeRefreshLayout.setRefreshing(true);
-        refreshItems();
-        mSwipeRefreshLayout.setRefreshing(false);
+
         TextView tvDynamicAnswer = new TextView(context);
         TextView tvDynamicEtc = new TextView(context);
 
@@ -203,6 +201,7 @@ session=new Session();
                                     JSONObject jsonResponse = new JSONObject(response);
                                     boolean error = jsonResponse.getBoolean("error");
                                     if (!error) {
+                                        refreshItems();
                                         progressDialog.dismiss();
                                         // Toast.makeText(getApplicationContext(),"Registration Successfull.Please Log In to continue.",Toast.LENGTH_LONG).show();
                                         android.support.v7.app.AlertDialog.Builder builder = new android.support.v7.app.AlertDialog.Builder(context);
@@ -213,7 +212,7 @@ session=new Session();
 
 
 
-                                     refreshItems();
+
                                         //   Intent intent = new Intent(SignupActivity.this, LoginActivity.class);
 
 
@@ -247,6 +246,9 @@ session=new Session();
 
             }
         });
+        mSwipeRefreshLayout.setRefreshing(true);
+        refreshItems();
+        mSwipeRefreshLayout.setRefreshing(false);
 
 
 
@@ -256,7 +258,7 @@ session=new Session();
         // Toast.makeText(this,questionId,Toast.LENGTH_LONG).show();
 
 
-        linearLayout.removeAllViews();
+
         //  answerArray=null;
 
         answerList = new ArrayList<HashMap<String, String>>();
@@ -303,6 +305,7 @@ session=new Session();
 
                         }
 
+                        linearLayout.removeAllViews();
 
                         display();
 
@@ -313,6 +316,7 @@ session=new Session();
 
                        Toast.makeText(getApplicationContext(),"Noting to show",Toast.LENGTH_LONG).show();
                         mSwipeRefreshLayout.setRefreshing(false);
+                        linearLayout.removeAllViews();
                     }
 
                     // }
@@ -344,6 +348,7 @@ session=new Session();
     }
 
     private void display() {
+
 
 
         for (int i = 0; i < answerList.size(); i++) {
@@ -515,6 +520,8 @@ session=new Session();
                     JSONObject jsonResponse = new JSONObject(response);
                     boolean error = jsonResponse.getBoolean("error");
                     if (!error) {
+                        refreshItems();
+
                         progressDialog.dismiss();
                         // Toast.makeText(getApplicationContext(),"Registration Successfull.Please Log In to continue.",Toast.LENGTH_LONG).show();
                         android.support.v7.app.AlertDialog.Builder builder = new android.support.v7.app.AlertDialog.Builder(context);
@@ -522,7 +529,7 @@ session=new Session();
                                 .setNegativeButton("ok", null)
                                 .create()
                                 .show();
-                        refreshItems();
+
 
                         //   Intent intent = new Intent(SignupActivity.this, LoginActivity.class);
 

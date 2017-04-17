@@ -9,22 +9,38 @@
     android:orientation="vertical"
 
     >
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/buzzcolor"
+    android:padding="10dp"
 
+    android:orientation="horizontal">
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/ivBack"
+
+        android:background="@drawable/ic_arrow_back_black_24dp"/>
 
     <TextView
         android:id="@+id/textViewTittle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Locations"
+        android:drawableRight="@drawable/ic_location_on_black_24dp"
         android:textStyle="bold"
         android:textAlignment="center"
         android:textColor="@color/white"
-        android:layout_marginBottom="30dp"
+
+
         android:background="@color/buzzcolor"
         android:textSize="20sp"
-        android:padding="10sp"/>
+        />
+</LinearLayout>
 
     <ScrollView
+        android:layout_marginTop="20dp"
 
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

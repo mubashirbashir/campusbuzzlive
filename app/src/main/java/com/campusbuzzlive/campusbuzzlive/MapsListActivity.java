@@ -18,6 +18,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -35,15 +36,18 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import static android.view.Gravity.CENTER;
+import static android.view.Gravity.LEFT;
+import static android.view.Gravity.START;
 import static com.campusbuzzlive.campusbuzzlive.R.color.buzzcolor;
 
-public class MapsListActivity extends AppCompatActivity {
+public class MapsListActivity extends AppCompatActivity implements View.OnClickListener {
     final Context context= this;
     JSONArray peoples = null;
     ArrayList<HashMap<String, String>> personList;
     HashMap<String,String> persons = new HashMap<String,String>();
      String dynammicCatogoriesText;
     int index;
+    ImageView ivBack;
 
     LinearLayout linearLayout,linearLayout11;
     @Override
@@ -55,6 +59,8 @@ public class MapsListActivity extends AppCompatActivity {
 //       final ProgressDialog pgDialog=new ProgressDialog(this);
 //        pgDialog.setTitle("loading...");
 //        pgDialog.show();
+        ivBack=(ImageView) findViewById(R.id.ivBack);
+        ivBack.setOnClickListener(this);
 
         linearLayout=(LinearLayout)findViewById(R.id.linearLayout);
        final ProgressDialog pb =new ProgressDialog(this);
@@ -88,7 +94,9 @@ public class MapsListActivity extends AppCompatActivity {
                         persons.put("categories",id);
 
 
+
                         personList.add(persons);
+
 
                     }
                   //  pgDialog.dismiss();
@@ -108,6 +116,7 @@ public class MapsListActivity extends AppCompatActivity {
                         tvDyanamicCatogories.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
 
                         tvDyanamicCatogories.setGravity(CENTER);
+
 
                      //   tvDyanamicCatogories.setTypeface(Typeface.DEFAULT_BOLD);
 
@@ -284,5 +293,10 @@ public class MapsListActivity extends AppCompatActivity {
 
 
 
+    }
+
+    @Override
+    public void onClick(View v) {
+        onBackPressed();
     }
 }

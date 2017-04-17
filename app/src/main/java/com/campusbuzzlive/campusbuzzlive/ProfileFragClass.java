@@ -95,10 +95,12 @@ public class ProfileFragClass extends Fragment {
         Picasso.with(getContext())
                 .load(photoURL)
 
+
                 .placeholder(R.mipmap.userdummy)   // optional
                 .error(R.mipmap.userdummy)      // optional
                 .resize(150,150)                        // optional
                 .into(ivDP);
+
           /*
           imageButton4.setOnClickListener(new View.OnClickListener() {
                 @Override
