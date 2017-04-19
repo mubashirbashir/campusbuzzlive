@@ -123,14 +123,32 @@ public class ForgotPassword extends AppCompatActivity implements View.OnClickLis
                                 .setNegativeButton("ok",null)
                                 .create()
                                 .show();
+                        Intent intent= new Intent(ForgotPassword.this,OTP.class);
+                        intent.putExtra("enrollmentid", etEnrollFind.getText().toString());
+                        startActivity(intent);
+
                     } else {
                         progressDialog.dismiss();
                         String msg =jsonResponse.getString("error_msg");
-                        AlertDialog.Builder builder = new AlertDialog.Builder(ForgotPassword.this);
-                        builder.setMessage(msg)
-                                .setNegativeButton("Retry", null)
-                                .create()
-                                .show();
+                        if(msg.equals("Otp already sent!")) {
+                            AlertDialog.Builder builder = new AlertDialog.Builder(ForgotPassword.this);
+                            builder.setMessage(msg)
+                                    .setNegativeButton("Axc", null)
+                                    .create()
+                                    .show();
+                            Intent intent= new Intent(ForgotPassword.this,OTP.class);
+                            intent.putExtra("enrollmentid", etEnrollFind.getText().toString());
+                            startActivity(intent);
+                        }
+                        else {
+
+                            AlertDialog.Builder builder = new AlertDialog.Builder(ForgotPassword.this);
+                            builder.setMessage(msg)
+                                    .setNegativeButton("Retry", null)
+                                    .create()
+                                    .show();
+
+                        }
 
                     }
 

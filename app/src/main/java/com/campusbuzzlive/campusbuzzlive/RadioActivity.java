@@ -130,6 +130,12 @@ public class RadioActivity extends AppCompatActivity
             startActivity(intent);
             return true;
         }
+        if(id==R.id.action_ContactUs){
+            Intent intent = new Intent(RadioActivity.this,ContactUs.class);
+            startActivity(intent);
+            return true;
+
+        }
 
         return super.onOptionsItemSelected(item);
     }

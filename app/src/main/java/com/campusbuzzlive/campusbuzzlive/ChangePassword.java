@@ -25,7 +25,7 @@ public class ChangePassword extends AppCompatActivity implements View.OnClickLis
     boolean NPvalid=false,CPvalid=false;
     String prev;
     Session session= new Session();
-
+    String enrollmentid, enroll;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,7 +33,15 @@ public class ChangePassword extends AppCompatActivity implements View.OnClickLis
         bChange=(Button) findViewById(R.id.bChange);
         etNewPass=(EditText) findViewById(R.id.etNewPass);
         etConfirmPass=(EditText) findViewById(R.id.etConfirmPass);
+        enroll= getIntent().getStringExtra("enrollmentid");
+        if(session.getEnrollSession()!=null){
 
+            enrollmentid= session.getEnrollSession();
+        }
+        else if(enroll != null) {
+
+            enrollmentid=enroll;
+        }
         ChangePW();
        bChange.setOnClickListener(this);
     }
@@ -152,7 +160,7 @@ public class ChangePassword extends AppCompatActivity implements View.OnClickLis
         };
 
 
-         ChangePasswordRequest changePasswordRequest = new ChangePasswordRequest(session.getEnrollSession(), etNewPass.getText().toString(), responseListener);
+         ChangePasswordRequest changePasswordRequest = new ChangePasswordRequest(enrollmentid, etNewPass.getText().toString(), responseListener);
         RequestQueue queue = Volley.newRequestQueue(ChangePassword.this);
         queue.add(changePasswordRequest);
 
