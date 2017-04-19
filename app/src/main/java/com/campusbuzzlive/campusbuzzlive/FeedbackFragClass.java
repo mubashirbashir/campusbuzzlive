@@ -168,7 +168,7 @@ public class FeedbackFragClass extends Fragment {
     }
 
     private void refreshItems() {
-        linearLayout.removeAllViews();
+
 
         questionList = new ArrayList<HashMap<String, String>>();
         linearLayout = (LinearLayout) getActivity().findViewById(R.id.linearLayout);
@@ -211,6 +211,7 @@ public class FeedbackFragClass extends Fragment {
                             questionList.add(questionMap);
 
 
+
                         }
                         mSwipeRefreshLayout.setRefreshing(false);
 
@@ -240,7 +241,7 @@ public class FeedbackFragClass extends Fragment {
     }
 
     private void display() {
-
+        linearLayout.removeAllViews();
         for (int i = 0; i < questionList.size(); i++) {
 
 
@@ -368,7 +369,7 @@ public class FeedbackFragClass extends Fragment {
                     menu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                         public boolean onMenuItemClick(MenuItem item) {
                             AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-                            builder.setMessage("Are you sure you want to delete this item? " + questionid)
+                            builder.setMessage("Are you sure you want to delete this item? " )
                                     .setIcon(R.drawable.ic_delete_black_24dp)
 
                                     .setNegativeButton("Cancel", null)
@@ -409,6 +410,7 @@ public class FeedbackFragClass extends Fragment {
                     JSONObject jsonResponse = new JSONObject(response);
                     boolean error = jsonResponse.getBoolean("error");
                     if (!error) {
+                        refreshItems();
                         progressDialog.dismiss();
                         // Toast.makeText(getApplicationContext(),"Registration Successfull.Please Log In to continue.",Toast.LENGTH_LONG).show();
                         android.support.v7.app.AlertDialog.Builder builder = new android.support.v7.app.AlertDialog.Builder(getContext());
@@ -416,7 +418,7 @@ public class FeedbackFragClass extends Fragment {
                                 .setNegativeButton("ok", null)
                                 .create()
                                 .show();
-                        refreshItems();
+
 
                         //   Intent intent = new Intent(SignupActivity.this, LoginActivity.class);
 

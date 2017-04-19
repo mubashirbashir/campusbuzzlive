@@ -6,6 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/white"
+    android:contentDescription="@string/navigation_drawer_close"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
@@ -34,14 +35,17 @@
         android:id="@+id/etAddNo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/bUpdatePhone"
         android:layout_marginTop="49dp"
+        android:autoLink="phone"
+        android:autoText="false"
+        android:contentDescription="fvdfvvf"
         android:ems="10"
         android:hint="Enter Mobile Number..."
         android:inputType="phone"
-        android:maxLength="10"
-        android:layout_below="@+id/bUpdatePhone"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:maxLength="10" />
 
     <Button
         android:id="@+id/bUpdate"

@@ -237,6 +237,7 @@ public class EventFragClass extends Fragment {
                                         JSONObject jsonResponse = new JSONObject(response);
                                         boolean error = jsonResponse.getBoolean("error");
                                         if (!error) {
+                                            refreshItems();
                                             progressDialog.dismiss();
                                             // Toast.makeText(getApplicationContext(),"Registration Successfull.Please Log In to continue.",Toast.LENGTH_LONG).show();
                                             android.support.v7.app.AlertDialog.Builder builder = new android.support.v7.app.AlertDialog.Builder(getContext());
@@ -244,7 +245,7 @@ public class EventFragClass extends Fragment {
                                                     .setNegativeButton("ok", null)
                                                     .create()
                                                     .show();
-                                            refreshItems();
+
 
                                             //   Intent intent = new Intent(SignupActivity.this, LoginActivity.class);
 
@@ -292,7 +293,7 @@ public class EventFragClass extends Fragment {
     }
 
     private void refreshItems() {
-        linearLayout.removeAllViews();
+
 
     eventList = new ArrayList<HashMap<String,String>>();
     linearLayout=(LinearLayout)getActivity().findViewById(R.id.linearLayout);
@@ -315,6 +316,7 @@ public class EventFragClass extends Fragment {
 
 
                     String eventName = c.getString("eventname");
+                    String eventid = c.getString("eventid");
 
                     String date = c.getString("date");
 
@@ -328,6 +330,7 @@ public class EventFragClass extends Fragment {
                     HashMap<String,String> eventMap = new HashMap<String,String>();
 
                     eventMap.put("name",userName);
+                    eventMap.put("eventid",eventid);
                     eventMap.put("eventname",eventName);
                     eventMap.put("date",date);
                     eventMap.put("time",time);
@@ -342,6 +345,7 @@ public class EventFragClass extends Fragment {
 
 
                 }
+                linearLayout.removeAllViews();
                 mSwipeRefreshLayout.setRefreshing(false);
 
         display();
@@ -409,6 +413,7 @@ private void display() {
                     .into(imageViewdp);
 
         //
+            final String eventIdText = (eventList.get(i).get("eventid"));
         String nameText = (eventList.get(i).get("name"));
         String eventNameText = (eventList.get(i).get("eventname"));
         String dateText = (eventList.get(i).get("date"));
@@ -484,7 +489,20 @@ dynamicDelete.setOnClickListener(new View.OnClickListener() {
 
         menu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
             public boolean onMenuItemClick(MenuItem item) {
-                Toast.makeText(getContext(),"You Clicked : " + item.getTitle(),Toast.LENGTH_SHORT).show();
+                android.support.v7.app.AlertDialog.Builder builder = new android.support.v7.app.AlertDialog.Builder(getContext());
+                builder.setMessage("Are you sure you want to delete this item? ")
+                        .setIcon(R.drawable.ic_delete_black_24dp)
+
+                        .setNegativeButton("Cancel", null)
+                        .setPositiveButton("Delete", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                deleteEvent(eventIdText);
+                            }
+                        })
+                        .show();
+
+
                 return true;
             }
         });
@@ -495,6 +513,52 @@ dynamicDelete.setOnClickListener(new View.OnClickListener() {
 
 
         }
+
+    }
+
+    private void deleteEvent(String eventIdText) {
+        final ProgressDialog progressDialog = new ProgressDialog(getContext());
+        progressDialog.setMessage("Please Wait...");
+        progressDialog.setCanceledOnTouchOutside(false);
+        progressDialog.show();
+
+        Response.Listener<String> responseListener = new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+
+                try {
+                    JSONObject jsonResponse = new JSONObject(response);
+                    boolean error = jsonResponse.getBoolean("error");
+                    if (!error) {
+                        refreshItems();
+                        progressDialog.dismiss();
+                        // Toast.makeText(getApplicationContext(),"Registration Successfull.Please Log In to continue.",Toast.LENGTH_LONG).show();
+                        android.support.v7.app.AlertDialog.Builder builder = new android.support.v7.app.AlertDialog.Builder(getContext());
+                        builder.setMessage(" Successfully Deleted!")
+                                .setNegativeButton("ok", null)
+                                .create()
+                                .show();
+
+
+                    } else {
+                        String msg = jsonResponse.getString("error_msg");
+                        android.support.v7.app.AlertDialog.Builder builder = new android.support.v7.app.AlertDialog.Builder(getContext());
+                        builder.setMessage(msg)
+                                .setNegativeButton("Retry", null)
+                                .create()
+                                .show();
+                        progressDialog.dismiss();
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        };
+
+
+        DeleteEventRequest deleteEventRequest = new DeleteEventRequest(eventIdText, responseListener);
+        queue = Volley.newRequestQueue(getContext());
+        queue.add(deleteEventRequest);
 
     }
 
