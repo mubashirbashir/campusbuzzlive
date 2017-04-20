@@ -27,7 +27,10 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.PopupMenu;
+import android.text.Editable;
 import android.text.InputType;
+import android.text.TextWatcher;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.os.Bundle;
@@ -36,12 +39,14 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
@@ -56,6 +61,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
@@ -64,11 +70,14 @@ import java.util.HashMap;
 public class EventFragClass extends Fragment {
     int i = 0;
     Button bAdd;
+     Double latD,lngD;
     JSONArray eventArray = null;
     ArrayList<HashMap<String, String>> eventList;
     HashMap<String,String> eventMap = new HashMap<String,String>();
     Session session;
     host h =new host();
+     String lat,lng;
+   final Context context=getContext();
 
 
     ImageButton bDate, bTime, bLocation;
@@ -81,6 +90,9 @@ public class EventFragClass extends Fragment {
     private int mYear, mMonth, mDay, mHour, mMinute;
     SwipeRefreshLayout   mSwipeRefreshLayout;
     RequestQueue queue;
+    JSONArray nameArray = null;
+    ArrayList<HashMap<String, String>> nameList;
+    HashMap<String,String> nameMap = new HashMap<String,String>();
 
 
 
@@ -91,7 +103,7 @@ public class EventFragClass extends Fragment {
 
 
     public View onCreateView(LayoutInflater inflater,
-                             @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+                             @Nullable final ViewGroup container, @Nullable Bundle savedInstanceState) {
 
 
 
@@ -101,7 +113,6 @@ public class EventFragClass extends Fragment {
                 R.layout.event_frag_layout, container, false);
         getActivity().setTitle("Events");
         session = new Session();
-
 
 
         linearLayout = (LinearLayout) rt.findViewById(R.id.linearLayout);
@@ -188,14 +199,144 @@ public class EventFragClass extends Fragment {
                 bLocation.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                         AlertDialog.Builder alertDialog = new AlertDialog.Builder(getContext());
+                         final AlertDialog.Builder alertDialog = new AlertDialog.Builder(getContext());
+                        final LinearLayout ln = new LinearLayout(getContext());
+                        ln.setOrientation(LinearLayout.VERTICAL);
+
+
+                        final LinearLayout ll = new LinearLayout(getContext());
+                        ll.setOrientation(LinearLayout.VERTICAL);
+                        final ScrollView sc =new ScrollView(getContext());
+                        sc.addView(ll);
+
                         final  EditText etLocations = new EditText(getContext());
+
                         etLocations.setSingleLine(true);
                         etLocations.setInputType(InputType.TYPE_TEXT_FLAG_CAP_WORDS);
+                        ln.addView(etLocations);
+                        ln.addView(sc);
 
-                        alertDialog.setView(etLocations);
+
+
                         alertDialog.setTitle("Enter location name");
+                        etLocations.addTextChangedListener(new TextWatcher() {
+                            @Override
+                            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
+                            }
+
+                            @Override
+                            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+
+
+                                nameList = new ArrayList<HashMap<String,String>>();
+
+
+                             //Toast.makeText(getContext(),s,Toast.LENGTH_SHORT).show();
+                                Response.Listener<String> responseListener = new Response.Listener<String>() {
+                                    @Override
+                                    public void onResponse(String response) {
+                                        try {
+                                            JSONObject jsonResponse = new JSONObject(response);
+                                           boolean error = jsonResponse.getBoolean("error");
+                                            if (!error) {
+
+                                                nameArray= jsonResponse.getJSONArray("suggestions");
+
+
+
+
+                                                for(int i=0;i<nameArray.length();i++) {
+                                                    JSONObject c = nameArray.getJSONObject(i);
+                                                    String userName = c.getString("name");
+
+
+                                                    HashMap<String,String> nameMap = new HashMap<String,String>();
+
+                                                    nameMap.put("name",userName);
+
+
+
+
+                                                    nameList.add(nameMap);
+
+
+                                                }
+                                                ll.removeAllViews();
+                                                int id=0;
+
+                                                for (int i=0;i<nameList.size();i++) {
+
+                                                    final TextView tvDynamicName = new TextView(getActivity());
+                                                    id=tvDynamicName.getId();
+
+
+                                                    //
+
+                                                    String nameText = (nameList.get(i).get("name"));
+
+                                                    tvDynamicName.setTextSize(16);
+                                                    tvDynamicName.setTypeface(Typeface.defaultFromStyle(Typeface.BOLD));
+                                                    tvDynamicName.setText(nameText);
+                                                    tvDynamicName.setTextColor(getResources().getColor(R.color.black));
+
+                                                    tvDynamicName.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+
+                                                    tvDynamicName.setOnClickListener(new View.OnClickListener() {
+                                                        @Override
+                                                        public void onClick(View v) {
+                                                            etLocations.setText(tvDynamicName.getText().toString());
+                                                        }
+                                                    });
+
+                                                    ll.addView(tvDynamicName);
+
+
+                                                }
+
+
+
+
+
+
+
+
+
+
+
+
+                                                } else {
+                                                String msg= jsonResponse.getString("error_msg");
+                                                android.support.v7.app.AlertDialog.Builder builder = new android.support.v7.app.AlertDialog.Builder(getContext());
+                                                builder.setMessage(msg)
+                                                        .setNegativeButton("Retry", null)
+                                                        .create()
+                                                        .show();
+
+                                            }
+                                        } catch (JSONException e) {
+                                            e.printStackTrace();
+                                        }
+                                    }
+                                };
+                                String g= String.valueOf(s);
+                                GetLocationSuggestionsRequest getLocationSuggestionsRequest = new GetLocationSuggestionsRequest(g,  responseListener);
+                          RequestQueue      queue1 = Volley.newRequestQueue(getActivity().getApplicationContext());
+                                queue1.add(getLocationSuggestionsRequest);
+
+
+
+
+                            }
+
+                            @Override
+                            public void afterTextChanged(Editable s) {
+
+                            }
+                        });
+
+                        alertDialog.setView(ln);
                         alertDialog.setPositiveButton("ok", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
@@ -393,7 +534,7 @@ private void display() {
         TextView tvDynamicEvent = new TextView(getActivity());
         TextView tvDynamicEtc = new TextView(getActivity());
         TextView tvDynamicName = new TextView(getActivity());
-        TextView tvDynamicEnroll = new TextView(getActivity());
+      final  TextView tvDynamicEnroll = new TextView(getActivity());
         View vDynamicLine = new View(getActivity());
             final ImageView dynamicDelete = new ImageView(getActivity());
 
@@ -418,7 +559,7 @@ private void display() {
         String eventNameText = (eventList.get(i).get("eventname"));
         String dateText = (eventList.get(i).get("date"));
         String timeText = (eventList.get(i).get("time"));
-        String locationText = (eventList.get(i).get("location"));
+        final String locationText = (eventList.get(i).get("location"));
         String enrollmentText = (eventList.get(i).get("enrollmentid"));
         //
         tvDynamicEvent.setText(eventNameText);
@@ -439,7 +580,7 @@ private void display() {
         vDynamicLine.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 2));
         tvDynamicEvent.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
         tvDynamicEtc.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
-        LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) vDynamicLine.getLayoutParams();
+        final LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) vDynamicLine.getLayoutParams();
         params.setMargins(0, 10, 0, 10); //substitute parameters for left, top, right, bottom
         vDynamicLine.setLayoutParams(params);
 
@@ -449,17 +590,15 @@ private void display() {
 
 
         tvDynamicEtc.setText(dateText + "  " + timeText + "  at" + " " + locationText);
+            dynamicDelete.setImageResource(R.drawable.ic_more_vert_black_24dp);
 
-            if (session.getEnrollSession().toString().equals(tvDynamicEnroll.getText().toString())) {
-                // Toast.makeText(this,session.getEnrollSession(),Toast.LENGTH_LONG).show();
-                dynamicDelete.setImageResource(R.drawable.ic_more_vert_black_24dp);
+            dynamicDelete.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.MATCH_PARENT));
+            LinearLayout.LayoutParams params1 = (LinearLayout.LayoutParams) dynamicDelete.getLayoutParams();
+            params1.gravity = (Gravity.RIGHT);
+            dynamicDelete.setLayoutParams(params1);
+            linearLayout.addView(dynamicDelete);
 
-                dynamicDelete.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.MATCH_PARENT));
-                LinearLayout.LayoutParams params1 = (LinearLayout.LayoutParams) dynamicDelete.getLayoutParams();
-                params1.gravity = (Gravity.RIGHT);
-                dynamicDelete.setLayoutParams(params1);
-                linearLayout.addView(dynamicDelete);
-            }
+
 
             linearLayout.addView(ll);
             ll.addView(imageViewdp);
@@ -485,26 +624,117 @@ dynamicDelete.setOnClickListener(new View.OnClickListener() {
     public void onClick(View v) {
         PopupMenu menu = new PopupMenu(getContext(), v);
 
-        menu.getMenu().add(Menu.NONE,1,1,"Delete");
+        menu.getMenu().add(Menu.NONE,1,1,"Get Directions");
+
+
+        if (session.getEnrollSession().toString().equals(tvDynamicEnroll.getText().toString())) {
+            // Toast.makeText(this,session.getEnrollSession(),Toast.LENGTH_LONG).show();
+
+
+            menu.getMenu().add(Menu.NONE, 2, 2, "Delete");
+        }
+
+
 
         menu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-            public boolean onMenuItemClick(MenuItem item) {
-                android.support.v7.app.AlertDialog.Builder builder = new android.support.v7.app.AlertDialog.Builder(getContext());
-                builder.setMessage("Are you sure you want to delete this item? ")
-                        .setIcon(R.drawable.ic_delete_black_24dp)
 
-                        .setNegativeButton("Cancel", null)
-                        .setPositiveButton("Delete", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                deleteEvent(eventIdText);
+            public boolean onMenuItemClick(MenuItem item) {
+
+                if(item.getItemId()==1) {
+
+
+                    final ProgressDialog pg = new
+                            ProgressDialog(getContext());
+                    pg.setTitle("Fetching Coordinates");
+                    pg.setMessage("Please Wait...");
+                    pg.setCanceledOnTouchOutside(false);
+                    pg.show();
+                    Response.Listener<String> responseListener = new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String response) {
+                            try {
+                                JSONObject jsonResponse = new JSONObject(response);
+
+                                Boolean error = jsonResponse.getBoolean("error");
+                                if(!error){
+
+
+
+                                lat = jsonResponse.getString("lat");
+                                lng = jsonResponse.getString("lng");
+                                    Log.e("TAdfsdfG", "minnn: " + lat + lng + locationText);
+
+
+
+                                    try {
+                                        latD = Double.parseDouble(lat);
+                                        lngD = Double.parseDouble(lng);
+                                    }
+                                    catch (NumberFormatException e)
+
+                                    {
+                                        latD = 34.1279630000000;
+                                        lngD = 74.83651700000;
+                                        e.printStackTrace();
+                                    }
+                                pg.dismiss();
+                                Intent intent = new Intent(getActivity(),MapsActivity.class);
+
+
+                                intent.putExtra("lat",latD);
+                                intent.putExtra("lng",lngD);
+                                intent.putExtra("name",locationText);
+                                Log.e("TAdfsdfG", "between: " + latD+"   " + lngD + locationText);
+                                startActivity(intent);}
+                                else
+                                {
+                                    pg.dismiss();
+                                    android.support.v7.app.AlertDialog.Builder builder = new android.support.v7.app.AlertDialog.Builder(getContext());
+                                    builder.setMessage("Unavailable")
+                                            .setNegativeButton("Retry", null)
+                                            .create()
+                                            .show();
+
+                                }
+
+
+
+                            } catch (JSONException e) {
+                                e.printStackTrace();
                             }
-                        })
-                        .show();
+                        }
+                    };
+
+                    GetEventLocationRequest getEventLocationRequest = new GetEventLocationRequest(locationText, responseListener);
+                    RequestQueue queue = Volley.newRequestQueue(getActivity().getApplicationContext());
+                    queue.add(getEventLocationRequest);
+                    Log.e("TAdfsdfG", "beforeintent: " + lat + lng + locationText);
+
+                }
+
+
+                if(item.getItemId()==2) {
+                    android.support.v7.app.AlertDialog.Builder builder = new android.support.v7.app.AlertDialog.Builder(getContext());
+                    builder.setMessage("Are you sure you want to delete this item? ")
+                            .setIcon(R.drawable.ic_delete_black_24dp)
+
+                            .setNegativeButton("Cancel", null)
+                            .setPositiveButton("Delete", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    deleteEvent(eventIdText);
+                                }
+                            })
+                            .show();
+                }
+
+
+
 
 
                 return true;
             }
+
         });
         menu.show();
 
