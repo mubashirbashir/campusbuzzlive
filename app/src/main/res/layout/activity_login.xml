@@ -33,7 +33,7 @@
         android:baselineAligned="false">
 
         <Button
-            android:id="@+id/bSign"
+            android:id="@+id/bSignin"
             style="@style/Widget.AppCompat.Button.Borderless"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -54,7 +54,7 @@
         android:text="Log in to Campus Buzz Live"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/bSign"
+        android:layout_below="@+id/bSignin"
         android:layout_marginTop="14dp"
         android:id="@+id/textView"
         android:layout_alignParentRight="true"

@@ -1,39 +1,266 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
+    android:id="@+id/bGuest"
+    android:layout_width="wrap_content"
     android:layout_height="match_parent"
-    tools:context="com.campusbuzzlive.campusbuzzlive.Guestmode">
+    android:background="@color/white"
+    android:orientation="vertical"
 
-    <Button
-        android:id="@+id/button2"
-        android:layout_width="391dp"
-        android:layout_height="83dp"
-        android:layout_marginTop="16dp"
-        android:background="@color/white"
-        android:text="Guest Mode"
-        android:textColor="@color/common_google_signin_btn_text_dark_focused"
-        android:textSize="18sp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintHorizontal_bias="1.0" />
+    >
 
-    <Button
-        android:id="@+id/button3"
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <ImageButton
+                    android:id="@+id/backb"
+                    android:layout_width="80dp"
+                    android:layout_height="60dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_weight=".6"
+                    android:background="@color/buzzcolor"
+                    android:onClick="add"
+                    app:srcCompat="@drawable/ic_arrow_back_black_24dp" />
+
+                <TextView
+                    android:id="@+id/Gtext"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:paddingTop="15dp"
+                    android:layout_weight="1.4"
+                    android:background="@color/buzzcolor"
+
+                    android:text="                 Guest mode "
+                    android:textColor="@color/white"
+                    android:textSize="20dp"
+                    android:textStyle="bold"
+
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:orientation="horizontal"
+
+                >
+
+                <Button
+                    android:id="@+id/bSignup"
+                    style="@style/Widget.AppCompat.Button.Borderless"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:background="@color/white"
+                    android:onClick="add"
+                    android:padding="0dp"
+                    android:text="Sign up"
+                    android:textAllCaps="false"
+                    android:textColor="@color/buzzcolor"
+                    android:textSize="15sp" />
+
+                <Button
+                    android:id="@+id/blogin"
+                    style="@style/Widget.AppCompat.Button.Borderless"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:background="@color/white"
+                    android:onClick="add"
+
+
+                    android:padding="0dp"
+                    android:text="Sign in"
+                    android:textAllCaps="false"
+                    android:textColor="@color/buzzcolor"
+                    android:textSize="15sp" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/campbt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="18dp"
+                android:text="Welcome  to CampusBuzzLive!"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:textStyle="normal" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <ImageButton
+                    android:id="@+id/navb"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/transparent_button"
+                    android:onClick="add"
+
+
+                    app:srcCompat="@drawable/ic_navigation_pink_24dp" />
+
+                <ImageButton
+                    android:id="@+id/notb"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/transparent_button"
+                    android:clickable="true"
+                    android:onClick="add"
+
+
+                    app:srcCompat="@drawable/ic_notifications_pink_24dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <TextView
+                    android:id="@+id/tvnav"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+
+
+                    android:layout_weight="1"
+                    android:text="Navigate"
+                    android:textAlignment="center"
+                    android:textAllCaps="false"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    android:typeface="sans" />
+
+                <TextView
+                    android:id="@+id/tvOr"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+
+                    android:layout_weight="1"
+                    android:text="Notifications"
+                    android:textAlignment="center"
+                    android:textAllCaps="false"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+
+                    android:typeface="sans" />
+            </LinearLayout>
+
+
+            <ImageButton
+                android:id="@+id/imageButton9"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="70dp"
+                android:background="@color/white"
+                android:onClick="add"
+                app:srcCompat="@drawable/ic_radio_black_24dp" />
+
+            <TextView
+                android:id="@+id/textView12"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:text="Radio"
+                android:textAlignment="center" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="70dp"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <ImageButton
+                    android:id="@+id/imageButton8"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/transparent_button"
+                    android:clickable="true"
+                    android:onClick="add"
+                    app:srcCompat="@drawable/ic_forum_black_24dp" />
+
+                <ImageButton
+                    android:id="@+id/imageButton7"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+
+                    android:background="@drawable/transparent_button"
+                    android:onClick="add"
+                    app:srcCompat="@drawable/ic_events_fade_24dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+
+                <TextView
+                    android:id="@+id/textView11"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="KU forum"
+                    android:textAlignment="center"
+                    android:textColor="@color/common_google_signin_btn_text_light_default" />
+
+                <TextView
+                    android:id="@+id/textView7"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="Events"
+                    android:textAlignment="center"
+                    android:textColor="@color/common_google_signin_btn_text_light_default" />
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+
+    <TextView
+        android:id="@+id/mywidget"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Button"
-        tools:layout_editor_absoluteX="32dp"
-        tools:layout_editor_absoluteY="186dp" />
+        android:layout_height="match_parent"
+        android:layout_marginTop="20dp"
+        android:ellipsize="marquee"
+        android:fadingEdge="horizontal"
+        android:lines="1"
+        android:marqueeRepeatLimit="marquee_forever"
+        android:scrollHorizontally="true"
+        android:text="     To get full access to the app.Please Signin or Signup                                                             "
 
-    <Button
-        android:id="@+id/button5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Button"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        tools:layout_editor_absoluteY="273dp" />
-</android.support.constraint.ConstraintLayout>
+        android:textColor="#ff4500"
+        android:gravity="bottom"/>
+
+
+</LinearLayout>

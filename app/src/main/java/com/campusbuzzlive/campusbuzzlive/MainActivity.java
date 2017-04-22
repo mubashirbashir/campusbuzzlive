@@ -17,7 +17,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Button bSign = (Button) findViewById(R.id.bSign);
+        Button bSign = (Button) findViewById(R.id.bSignin);
         Button bLogin = (Button) findViewById(R.id.bLog);
         Button bGuest =(Button) findViewById(R.id.bGuest);
     }
@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
     public void add(View v)
 
     {
-        if (v.getId() == R.id.bSign) {
+        if (v.getId() == R.id.bSignin) {
             Intent abc = new Intent(MainActivity.this, SignupActivity.class);
             startActivity(abc);
         }
