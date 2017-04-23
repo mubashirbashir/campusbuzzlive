@@ -100,6 +100,8 @@ public class ForgotPassword extends AppCompatActivity implements View.OnClickLis
 
     @Override
     public void onClick(View v) {
+        bSearch.setEnabled(false);
+
         final ProgressDialog progressDialog =new ProgressDialog(this);
         progressDialog.setTitle("Checking details");
         progressDialog.setMessage("Please Wait...");
@@ -133,7 +135,7 @@ public class ForgotPassword extends AppCompatActivity implements View.OnClickLis
                         if(msg.equals("Otp already sent!")) {
                             AlertDialog.Builder builder = new AlertDialog.Builder(ForgotPassword.this);
                             builder.setMessage(msg)
-                                    .setNegativeButton("Axc", null)
+                                    .setNegativeButton("ok", null)
                                     .create()
                                     .show();
                             Intent intent= new Intent(ForgotPassword.this,OTP.class);
@@ -141,7 +143,7 @@ public class ForgotPassword extends AppCompatActivity implements View.OnClickLis
                             startActivity(intent);
                         }
                         else {
-
+                            progressDialog.dismiss();
                             AlertDialog.Builder builder = new AlertDialog.Builder(ForgotPassword.this);
                             builder.setMessage(msg)
                                     .setNegativeButton("Retry", null)
@@ -160,6 +162,7 @@ public class ForgotPassword extends AppCompatActivity implements View.OnClickLis
         ForgotPasswordRequest forgotPasswordRequest = new ForgotPasswordRequest( etEmailFind.getText().toString(), etEnrollFind.getText().toString(), responseListener);
         RequestQueue queue = Volley.newRequestQueue(ForgotPassword.this);
         queue.add(forgotPasswordRequest);
+        bSearch.setEnabled(true);
 
 
 

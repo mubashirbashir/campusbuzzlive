@@ -11,12 +11,13 @@
     android:paddingTop="@dimen/activity_vertical_margin"
 
    >
+
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:id="@+id/ivControl"
-        android:background="@drawable/ic_play_arrow_black_24dp"
+
 
         />
     <ImageView
@@ -25,6 +26,18 @@
         android:layout_height="wrap_content"
         android:id="@+id/ivCircle"
         android:background="@drawable/ic_brightness_1_black_24dp"
+
+        />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/ivCircle"
+        android:textAlignment="center"
+        android:gravity="center_vertical"
+        android:textColor="@color/grey"
+        android:id="@+id/tvTextDisplay"
+
+        android:textSize="20sp"
 
         />
 
