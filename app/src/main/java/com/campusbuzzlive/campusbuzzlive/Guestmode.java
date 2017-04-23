@@ -43,7 +43,7 @@ public class Guestmode extends AppCompatActivity {
             startActivity(abc);
         }
         if (v.getId() == R.id.notb) {
-            Intent np = new Intent(Guestmode.this, NotificationFragClass.class);
+            Intent np = new Intent(Guestmode.this, GuestNotification.class);
             startActivity(np);
 
         }

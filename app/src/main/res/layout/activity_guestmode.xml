@@ -38,14 +38,13 @@
                     app:srcCompat="@drawable/ic_arrow_back_black_24dp" />
 
                 <TextView
-                    android:id="@+id/Gtext"
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
                     android:paddingTop="15dp"
                     android:layout_weight="1.4"
                     android:background="@color/buzzcolor"
 
-                    android:text="                 Guest mode "
+                    android:text="               Guest mode "
                     android:textColor="@color/white"
                     android:textSize="20dp"
                     android:textStyle="bold"
@@ -93,7 +92,6 @@
             </LinearLayout>
 
             <TextView
-                android:id="@+id/campbt"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="18dp"
@@ -142,7 +140,6 @@
                 android:weightSum="2">
 
                 <TextView
-                    android:id="@+id/tvnav"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
 
@@ -156,7 +153,6 @@
                     android:typeface="sans" />
 
                 <TextView
-                    android:id="@+id/tvOr"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
 
@@ -181,7 +177,6 @@
                 app:srcCompat="@drawable/ic_radio_black_24dp" />
 
             <TextView
-                android:id="@+id/textView12"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
@@ -225,7 +220,6 @@
 
 
                 <TextView
-                    android:id="@+id/textView11"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -234,7 +228,6 @@
                     android:textColor="@color/common_google_signin_btn_text_light_default" />
 
                 <TextView
-                    android:id="@+id/textView7"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
