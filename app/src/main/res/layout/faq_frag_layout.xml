@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/faq_frag_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/white"
@@ -25,7 +24,6 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/tvFQ1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="How can i change my password ?"
@@ -34,7 +32,6 @@
                 android:textStyle="normal"/>
 
             <TextView
-                android:id="@+id/tvFA1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:singleLine="false"
@@ -42,7 +39,6 @@
                 android:textSize="16sp" />
 
             <TextView
-                android:id="@+id/tvFQ2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="My friend is having trouble in signing up prompts 'invalid user'"
@@ -51,7 +47,6 @@
                 android:textStyle="normal"/>
 
             <TextView
-                android:id="@+id/tvFA2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:singleLine="false"
@@ -59,7 +54,6 @@
                 android:textSize="16sp" />
 
             <TextView
-                android:id="@+id/tvFQ3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="I want to change my E-mail ,whats the procedure ? "
@@ -68,7 +62,6 @@
                 android:textStyle="normal"/>
 
             <TextView
-                android:id="@+id/tvFA3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:singleLine="false"
@@ -76,7 +69,6 @@
                 android:textSize="16sp" />
 
             <TextView
-                android:id="@+id/tvFQ4"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="How to find a particular department of the campus ?"
@@ -85,7 +77,6 @@
                android:textStyle="normal"/>
 
             <TextView
-                android:id="@+id/tvFA4"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:singleLine="false"
@@ -93,7 +84,6 @@
                 android:textSize="16sp" />
 
             <TextView
-                android:id="@+id/tvFQ5"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Can i set a desired profile picture ?"
@@ -102,7 +92,6 @@
                 android:textStyle="normal"/>
 
             <TextView
-                android:id="@+id/tvFA5"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:singleLine="false"
@@ -110,7 +99,6 @@
                 android:textSize="16sp" />
 
             <TextView
-                android:id="@+id/tvFQ6"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="In case i forget my password, what's the criteria for that ? "
@@ -119,7 +107,6 @@
                 android:textStyle="normal"/>
 
             <TextView
-                android:id="@+id/tvFA6"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:singleLine="false"
@@ -127,7 +114,6 @@
                 android:textSize="16sp" />
 
             <TextView
-                android:id="@+id/tvFQ7"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="How to add an event ?"
@@ -136,7 +122,6 @@
                 android:textStyle="normal"/>
 
             <TextView
-                android:id="@+id/tvFA7"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:singleLine="false"

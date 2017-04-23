@@ -14,13 +14,17 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 
 
 public class HomeFragClass extends Fragment {
     double lat = 34.063751;
 
     double lng = 74.809215;
+    ImageView ivControl,ivCircle ;
 
     String format = "geo:0,0?q=" + lat + "," + lng + "(Convocation Complex)";
     @Override
@@ -31,6 +35,16 @@ public class HomeFragClass extends Fragment {
 
         View rootView = inflater.inflate(
                 R.layout.home_frag_layout, container, false);
+        ivControl = (ImageView) rootView.findViewById(R.id.ivControl);
+        ivCircle = (ImageView) rootView.findViewById(R.id.ivCircle);
+
+       // ivControl.setImageResource(R.drawable.ic_event_black_24dp);
+        Animation animation = AnimationUtils.loadAnimation(getActivity(), R.anim.zoom);
+
+      //  animation.setRepeatMode();
+        ivCircle.startAnimation(animation);
+        animation.setRepeatCount(Animation.INFINITE);
+
 
         return rootView;
     }

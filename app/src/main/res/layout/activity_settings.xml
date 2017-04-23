@@ -7,7 +7,6 @@
     tools:context="com.campusbuzzlive.campusbuzzlive.SettingsActivity">
 
     <TextView
-        android:id="@+id/tvTheme"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="32dp"
