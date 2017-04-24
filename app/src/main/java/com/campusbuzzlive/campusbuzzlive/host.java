@@ -11,7 +11,7 @@ public class host extends Application{
 
     public host() {
        // address="http://192.168.1.2/android_connect";
-     address="http://192.168.1.37/android_connect";
+     address="http://192.168.43.87/android_connect";
          // address="https://terminological-hois.000webhostapp.com";
     }
 

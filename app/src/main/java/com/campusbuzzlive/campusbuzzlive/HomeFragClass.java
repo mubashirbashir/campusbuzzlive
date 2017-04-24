@@ -28,12 +28,13 @@ import java.io.IOException;
 
 
 public class HomeFragClass extends Fragment {
-    private final static String stream = "http://bbcmedia.ic.llnwd.net/stream/bbcmedia_radio2_mf_p";
+    private final static String stream = "http://192.168.43.87:8000/live";
    ImageView ivControl,ivCircle;
     TextView tvTextDisplay;
     MediaPlayer mediaPlayer;
     boolean started = false;
     boolean prepared = false;
+    Animation animationRotate;
 
     ProgressDialog pg;
 
@@ -52,6 +53,8 @@ public class HomeFragClass extends Fragment {
     //    mediaPlayer.start();
         final Animation animation =AnimationUtils.loadAnimation(getActivity(),R.anim.zoom);
         ivCircle.startAnimation(animation);
+         animationRotate =AnimationUtils.loadAnimation(getActivity(),R.anim.rotate);
+
         ivControl.setImageResource(R.drawable.ic_play_arrow_black_24dp);
         tvTextDisplay.setText("Tune in to Live stream by pressing the Play button");
 
@@ -78,6 +81,7 @@ public class HomeFragClass extends Fragment {
                    // ivControl.setText("Play");
                 } else {
                     tvTextDisplay.setText("Hold on, while the stream is loading...");
+                    ivControl.startAnimation(animationRotate);
 
 
                    ivControl.setImageResource(R.drawable.ic_hourglass_empty_black_24dp);
@@ -85,6 +89,7 @@ public class HomeFragClass extends Fragment {
                     ivControl.setEnabled(false);
 
                     new PlayTask().execute(stream);
+
                     mediaPlayer.start();
 
                //     ivControl.setImageResource(R.drawable.ic_power_settings_new_black_24dp);
@@ -134,6 +139,7 @@ public class HomeFragClass extends Fragment {
          ivControl.setEnabled(true);
             mediaPlayer.start();
             started = true;
+            ivControl.clearAnimation();
            ivControl.setImageResource(R.drawable.ic_power_settings_new_black_24dp);
             tvTextDisplay.setText("Don't like what you're listening, press the Stop Button.");
 
