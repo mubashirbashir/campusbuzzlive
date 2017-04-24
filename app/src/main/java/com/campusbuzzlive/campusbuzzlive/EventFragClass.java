@@ -19,6 +19,8 @@ import android.content.res.Resources;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
+import android.os.Build;
+import android.provider.CalendarContract;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
@@ -61,10 +63,14 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.Format;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.Locale;
 
 
 public class EventFragClass extends Fragment {
@@ -555,10 +561,10 @@ private void display() {
 
         //
             final String eventIdText = (eventList.get(i).get("eventid"));
-        String nameText = (eventList.get(i).get("name"));
-        String eventNameText = (eventList.get(i).get("eventname"));
-        String dateText = (eventList.get(i).get("date"));
-        String timeText = (eventList.get(i).get("time"));
+        final String nameText = (eventList.get(i).get("name"));
+        final String eventNameText = (eventList.get(i).get("eventname"));
+        final String dateText = (eventList.get(i).get("date"));
+        final String timeText = (eventList.get(i).get("time"));
         final String locationText = (eventList.get(i).get("location"));
         String enrollmentText = (eventList.get(i).get("enrollmentid"));
         //
@@ -634,6 +640,7 @@ dynamicDelete.setOnClickListener(new View.OnClickListener() {
             menu.getMenu().add(Menu.NONE, 2, 2, "Delete");
         }
 
+         menu.getMenu().add(Menu.NONE,3,3,"Add to Calender");
 
 
         menu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
@@ -726,6 +733,49 @@ dynamicDelete.setOnClickListener(new View.OnClickListener() {
                                 }
                             })
                             .show();
+                }
+                if(item.getItemId()==3)
+
+                {
+
+                    Calendar cal = Calendar.getInstance();
+                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss",Locale.US);
+                    try {
+                        cal.setTime(sdf.parse(dateText+" "+timeText));
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+
+                    Log.e("errr", "onMenuItemClick: " + cal.getTimeInMillis());
+                  //  Date date = d
+
+                    if (Build.VERSION.SDK_INT >= 14) {
+
+                        Intent intent = new Intent(Intent.ACTION_INSERT)
+                                .setData(CalendarContract.Events.CONTENT_URI)
+                                .putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME,cal.getTimeInMillis())
+                             //   .putExtra(CalendarContract.EXTRA_EVENT_ALL_DAY, false)
+                                .putExtra(CalendarContract.Events.TITLE,eventNameText)
+                                .putExtra(CalendarContract.Events.DESCRIPTION, "Event added from Campus Buzz Live")
+                                .putExtra(CalendarContract.Events.EVENT_LOCATION,"Venue: " +locationText)
+                                .putExtra(CalendarContract.Events.AVAILABILITY, CalendarContract.Events.AVAILABILITY_BUSY)
+                                .putExtra(Intent.EXTRA_EMAIL, "campusbuzzlive@gmail.com");
+                        startActivity(intent);
+                    }
+
+                    else {
+
+                        Intent intent = new Intent(Intent.ACTION_EDIT);
+                        intent.setType("vnd.android.cursor.item/event");
+                        intent.putExtra("beginTime", cal.getTimeInMillis());
+                       intent.putExtra("allDay", true);
+                        intent.putExtra("rrule", "FREQ=YEARLY");
+                        intent.putExtra("endTime", cal.getTimeInMillis()+60*60*1000);
+                        intent.putExtra("title", eventNameText);
+                        startActivity(intent);
+                    }
+
+
                 }
 
 
