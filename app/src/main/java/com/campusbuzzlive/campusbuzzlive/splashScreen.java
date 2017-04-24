@@ -6,6 +6,8 @@ import android.content.SharedPreferences;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Window;
+import android.view.WindowManager;
 
 public class splashScreen extends AppCompatActivity {
     SharedPreferences sharedPreferences;
@@ -13,6 +15,10 @@ public class splashScreen extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        this.requestWindowFeature(Window.FEATURE_NO_TITLE);
+
+//Remove notification bar
+        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_splash_screen);
         sharedPreferences = getSharedPreferences(LoginActivity.MyPreferences, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor=sharedPreferences.edit();
@@ -32,6 +38,6 @@ public class splashScreen extends AppCompatActivity {
                     splashScreen.this.startActivity(intent);
                     splashScreen.this.finish();
                 }
-            }        },1000);
+            }        },3000);
     }
 }

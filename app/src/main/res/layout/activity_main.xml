@@ -40,7 +40,7 @@
             android:layout_alignLeft="@+id/textView9"
             android:layout_alignStart="@+id/textView9"
             android:layout_centerVertical="true"
-            android:text="Keeping University Pulsating"
+            android:text="Keeping University Pulsating..."
             android:textColor="@android:color/white"
             android:textSize="24sp" />
 
@@ -79,15 +79,11 @@
             android:textStyle="normal|bold" />
 
         <ImageView
-            android:layout_width="@android:dimen/app_icon_size"
-            android:layout_height="@android:dimen/notification_large_icon_height"
+            android:layout_width="180dp"
+            android:layout_height="180dp"
             android:layout_above="@+id/textView8"
-            android:layout_marginBottom="26dp"
-            android:layout_marginLeft="41dp"
-            android:layout_marginStart="41dp"
-            android:layout_toEndOf="@+id/textView9"
-            android:layout_toRightOf="@+id/textView9"
-            android:background="@mipmap/logol"
+
+            android:background="@mipmap/logowhite"
             android:gravity="center" />
 
         <Button
