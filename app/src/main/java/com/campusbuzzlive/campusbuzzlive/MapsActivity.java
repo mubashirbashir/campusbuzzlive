@@ -26,6 +26,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
    String title;
     private GoogleMap mMap;
     Double lat, lng;
+    
 
 
     @Override
