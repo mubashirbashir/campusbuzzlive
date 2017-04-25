@@ -12,6 +12,7 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:background="@color/buzzcolor"
+        android:backgroundTintMode="src_atop"
         android:gravity="center"
         android:orientation="vertical"
         tools:layout_editor_absoluteX="0dp"
@@ -19,10 +20,10 @@
 
 
         <ImageView
-            android:layout_width="240dp"
+            android:layout_width="150dp"
 
-            android:layout_height="236dp"
-            android:background="@mipmap/logowhite"
+            android:layout_height="150dp"
+            android:background="@mipmap/ic_logo_white"
             android:gravity="right" />
 
         <TextView

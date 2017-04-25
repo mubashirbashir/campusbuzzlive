@@ -83,7 +83,7 @@
             android:layout_height="180dp"
             android:layout_above="@+id/textView8"
 
-            android:background="@mipmap/logowhite"
+            android:background="@mipmap/ic_logo_white"
             android:gravity="center" />
 
         <Button
