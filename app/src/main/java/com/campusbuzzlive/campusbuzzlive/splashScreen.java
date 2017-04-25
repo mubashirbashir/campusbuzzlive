@@ -29,7 +29,7 @@ public class splashScreen extends AppCompatActivity {
             @Override
             public void run() {
                 if (isLoggedIn) {
-                    Intent intent = new Intent(splashScreen.this, RadioActivity.class);
+                    Intent intent = new Intent(splashScreen.this, SchoolsClass.class);
                     splashScreen.this.startActivity(intent);
                     splashScreen.this.finish();
                 }

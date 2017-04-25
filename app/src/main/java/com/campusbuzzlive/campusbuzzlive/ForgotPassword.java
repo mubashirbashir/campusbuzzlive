@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -25,7 +26,7 @@ public class ForgotPassword extends AppCompatActivity implements View.OnClickLis
     EditText etEnrollFind, etEmailFind;
     String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
     boolean EFvalid=false, EMFvalid=false;
-
+    RequestQueue queue;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -115,9 +116,10 @@ public class ForgotPassword extends AppCompatActivity implements View.OnClickLis
                     JSONObject jsonResponse = new JSONObject(response);
 
 
-                    boolean error = jsonResponse.getBoolean("error");
+                    boolean error = jsonResponse.getBoolean("errorm");
 
-                    if (!error) {
+
+                  if (!error) {
                         progressDialog.dismiss();
 
                         AlertDialog.Builder builder =new AlertDialog.Builder(ForgotPassword.this);
@@ -159,8 +161,8 @@ public class ForgotPassword extends AppCompatActivity implements View.OnClickLis
                 }
             }
         };
-        ForgotPasswordRequest forgotPasswordRequest = new ForgotPasswordRequest( etEmailFind.getText().toString(), etEnrollFind.getText().toString(), responseListener);
-        RequestQueue queue = Volley.newRequestQueue(ForgotPassword.this);
+        ForgotPasswordRequest forgotPasswordRequest = new ForgotPasswordRequest( etEmailFind.getText().toString().trim(), etEnrollFind.getText().toString().trim(), responseListener);
+         queue = Volley.newRequestQueue(ForgotPassword.this);
         queue.add(forgotPasswordRequest);
         bSearch.setEnabled(true);
 
