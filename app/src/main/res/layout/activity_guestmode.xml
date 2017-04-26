@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/bGuest"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
     android:orientation="vertical"
@@ -235,25 +235,27 @@
                     android:textAlignment="center"
                     android:textColor="@color/common_google_signin_btn_text_light_default" />
             </LinearLayout>
+            <TextView
+                android:id="@+id/mywidget"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_marginTop="20dp"
+                android:ellipsize="marquee"
+                android:fadingEdge="horizontal"
+                android:lines="1"
+                android:marqueeRepeatLimit="marquee_forever"
+                android:scrollHorizontally="true"
+                android:text="     To get full access to the application.Please Signup or Signin                                          "
+
+                android:textColor="#ff4500"
+                android:gravity="bottom"/>
+
 
         </LinearLayout>
     </ScrollView>
 
 
-    <TextView
-        android:id="@+id/mywidget"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_marginTop="20dp"
-        android:ellipsize="marquee"
-        android:fadingEdge="horizontal"
-        android:lines="1"
-        android:marqueeRepeatLimit="marquee_forever"
-        android:scrollHorizontally="true"
-        android:text="     To get full access to the app.Please Signin or Signup                                                             "
-
-        android:textColor="#ff4500"
-        android:gravity="bottom"/>
 
 
 </LinearLayout>

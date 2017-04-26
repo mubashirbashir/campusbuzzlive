@@ -49,7 +49,7 @@
            android:layout_marginTop="15dp"
            android:background="@android:color/white"
 
-           android:onClick="add"
+
            android:text="name"
 
 
@@ -66,7 +66,7 @@
            android:layout_marginTop="15dp"
            android:background="@android:color/white"
 
-           android:onClick="add"
+
            android:text="enroll"
 
 
@@ -84,7 +84,7 @@
 
 
            android:gravity="left|center"
-           android:onClick="add"
+
            android:text="gender"
 
            android:textAllCaps="false"
@@ -102,7 +102,7 @@
 
 
            android:gravity="left|center"
-           android:onClick="add"
+
            android:text="department"
 
            android:textAllCaps="false"

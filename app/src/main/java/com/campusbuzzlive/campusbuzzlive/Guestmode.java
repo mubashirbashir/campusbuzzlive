@@ -40,16 +40,15 @@ public class Guestmode extends AppCompatActivity {
         if (v.getId() == R.id.navb) {
             Intent abc = new Intent(Guestmode.this, MapsListActivity.class);
 
-            startActivity(abc);
-        }
+        startActivity(abc);
+    }
         if (v.getId() == R.id.notb) {
             Intent np = new Intent(Guestmode.this, GuestNotification.class);
             startActivity(np);
 
         }
         if (v.getId() == R.id.backb) {
-            Intent back = new Intent(Guestmode.this, MainActivity.class);
-            startActivity(back);
+           onBackPressed();
         }
         if (v.getId() == R.id.imageButton9) {
             Toast.makeText(getApplicationContext(), "Access Denied", Toast.LENGTH_LONG).show();

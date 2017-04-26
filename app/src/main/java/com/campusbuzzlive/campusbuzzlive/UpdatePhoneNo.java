@@ -1,6 +1,7 @@
 package com.campusbuzzlive.campusbuzzlive;
 
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.preference.EditTextPreference;
 import android.support.v7.app.AlertDialog;
@@ -88,9 +89,20 @@ public class UpdatePhoneNo extends AppCompatActivity implements View.OnClickList
 
                         AlertDialog.Builder builder =new AlertDialog.Builder(UpdatePhoneNo.this);
                         builder.setMessage("Contact Number Successfully updated to "+etAddNo.getText().toString())
-                                .setNegativeButton("Ok",null)
+                                .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        Intent intent = new Intent(getApplicationContext(),RadioActivity.class);
+                                        startActivity(intent);
+
+                                    }
+                                })
                                 .create()
+
                                 .show();
+
+
+
 
                     } else {
                         String msg =jsonResponse.getString("error_msg");

@@ -1,7 +1,9 @@
 package com.campusbuzzlive.campusbuzzlive;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -25,6 +27,7 @@ public class ChangePassword extends AppCompatActivity implements View.OnClickLis
     boolean NPvalid=false,CPvalid=false;
     String prev;
     Session session= new Session();
+    SharedPreferences sharedPreferences;
     String enrollmentid, enroll;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -120,7 +123,7 @@ public class ChangePassword extends AppCompatActivity implements View.OnClickLis
         progressDialog.setMessage("Please Wait...");
         progressDialog.setCanceledOnTouchOutside(false);
         progressDialog.show();
-
+        sharedPreferences=getSharedPreferences(LoginActivity.MyPreferences, Context.MODE_PRIVATE);
 
 
         Response.Listener<String> responseListener = new Response.Listener<String>() {
@@ -140,6 +143,9 @@ public class ChangePassword extends AppCompatActivity implements View.OnClickLis
                                 .setNegativeButton("ok",null)
                                 .create()
                                 .show();
+                        SharedPreferences.Editor editor =sharedPreferences.edit();
+                        editor.putBoolean("isLoggedIn",false);
+                        editor.commit();
                         Intent gotoLogin = new Intent(ChangePassword.this,LoginActivity.class);
                         gotoLogin.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
                         startActivity(gotoLogin);

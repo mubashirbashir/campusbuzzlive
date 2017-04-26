@@ -47,6 +47,7 @@ public class SignupActivity extends AppCompatActivity {
         etConfirm = (EditText) findViewById(R.id.etConfirm);
         bLog = (Button) findViewById(R.id.bLog);
         rgGender=(RadioGroup)findViewById(R.id.rgGender);
+        rgGender.check(R.id.rgf);
 
 
         SigInV();
@@ -232,6 +233,7 @@ public class SignupActivity extends AppCompatActivity {
             final String password = etPassword.getText().toString();
             final String department = etDepartment.getText().toString();
             final String enrollmentid = etEnroll.getText().toString();
+
             int selectedId = rgGender.getCheckedRadioButtonId();
 
             // find the radiobutton by returned id

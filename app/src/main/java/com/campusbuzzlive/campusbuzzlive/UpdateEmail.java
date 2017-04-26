@@ -1,6 +1,7 @@
 package com.campusbuzzlive.campusbuzzlive;
 
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -83,9 +84,17 @@ public class UpdateEmail extends AppCompatActivity implements View.OnClickListen
 
                         AlertDialog.Builder builder =new AlertDialog.Builder(UpdateEmail.this);
                         builder.setMessage("Email Successfully updated to "+etEmailUD.getText().toString())
-                                .setNegativeButton("ok",null)
+                                .setPositiveButton("ok", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        Intent intent = new Intent(getApplicationContext(),RadioActivity.class);
+                                        startActivity(intent);
+
+                                    }
+                                })
                                 .create()
                                 .show();
+
                     } else {
                         String msg =jsonResponse.getString("error_msg");
                         AlertDialog.Builder builder = new AlertDialog.Builder(UpdateEmail.this);

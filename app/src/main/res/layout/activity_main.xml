@@ -79,11 +79,11 @@
             android:textStyle="normal|bold" />
 
         <ImageView
-            android:layout_width="180dp"
-            android:layout_height="180dp"
+            android:layout_width="220dp"
+            android:layout_height="160dp"
             android:layout_above="@+id/textView8"
 
-            android:background="@mipmap/ic_logo_white"
+            android:background="@mipmap/ic_logo_w"
             android:gravity="center" />
 
         <Button

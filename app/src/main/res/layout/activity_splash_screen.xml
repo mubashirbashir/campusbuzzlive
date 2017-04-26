@@ -20,10 +20,10 @@
 
 
         <ImageView
-            android:layout_width="150dp"
+            android:layout_width="160dp"
 
-            android:layout_height="150dp"
-            android:background="@mipmap/ic_logo_white"
+            android:layout_height="160dp"
+            android:background="@mipmap/ic_logo_w"
             android:gravity="right" />
 
         <TextView
