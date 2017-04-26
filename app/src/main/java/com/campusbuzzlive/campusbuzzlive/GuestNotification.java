@@ -22,7 +22,7 @@ public class GuestNotification extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_guest_notification);
         progressBarT4 = (ProgressBar) findViewById(R.id.progressBarT4);
-        mWebView = (WebView) findViewById(R.id.webview);
+        mWebView = (WebView) findViewById(R.id.webview1);
         mWebView.setWebViewClient(new WebViewClient());
         mWebView.setWebChromeClient(new WebChromeClient(){
             public void onProgressChanged(WebView view, int progress) {
@@ -67,11 +67,7 @@ public class GuestNotification extends AppCompatActivity {
             return true;
         }
 
-        @Override
-        public void onPageFinished(WebView view, String url)
-        {
-            view.loadUrl("javascript:document.getElementsByClassName('wrapper row1').style.display = 'none';");
-        }
+
 
     }
 
