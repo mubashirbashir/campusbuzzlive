@@ -9,10 +9,19 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/schoolName"
+        android:textSize="20sp"
+        android:padding="2dp"
+
+        android:paddingLeft="5dp"
         android:background="@color/buzzcolor"
-        android:textColor="@color/white"/>
+        android:textColor="@color/white"
+        android:layout_marginBottom="2dp"/>
 
     <ListView
+        android:divider="@color/grey"
+        android:dividerHeight="3dp"
+        android:padding="10dp"
+        android:layout_below="@id/schoolName"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/lvDepartments">
