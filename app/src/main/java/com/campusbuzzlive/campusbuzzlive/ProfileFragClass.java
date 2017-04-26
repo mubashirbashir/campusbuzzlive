@@ -42,17 +42,21 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.toolbox.Volley;
 import com.squareup.picasso.Picasso;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -66,11 +70,14 @@ public class ProfileFragClass extends Fragment {
     Button bChangeDP;
     Uri outputFileUri;
     Session session;
-    RequestQueue queue;
+
     String stringImage;
     host h = new host();
 
     String selectedImagePath = "";
+    RequestQueue queue;
+
+
 
 
     public View onCreateView(LayoutInflater inflater,
@@ -84,18 +91,21 @@ public class ProfileFragClass extends Fragment {
         session=new Session();
 
         context = rootView.getContext();
+        session=new Session();
 
         ivDP = (ImageView) rootView.findViewById(R.id.ivDP);
-        Button bChangePW = (Button)rootView.findViewById(R.id.bChangePW) ;
-        Button bPhone= (Button) rootView.findViewById(R.id.bPhone);
-        Button bEmail= (Button) rootView.findViewById(R.id.bEmail);
-        bChangeDP= (Button) rootView.findViewById(R.id.bChangeDP);
-        String photoURL = (h.address+"/uploads/"+session.getEnrollSession()+".jpeg");
+     final    Button bChangePW = (Button)rootView.findViewById(R.id.bChangePW) ;
+      final   Button bPhone= (Button) rootView.findViewById(R.id.bPhone);
+        final Button bEmail= (Button) rootView.findViewById(R.id.bEmail);
+     final    Button bName = (Button)rootView.findViewById(R.id.bName) ;
+       final Button bEnroll= (Button) rootView.findViewById(R.id.benroll);
+        final Button bDepartment= (Button) rootView.findViewById(R.id.bDepartment);
+        final Button bGender= (Button) rootView.findViewById(R.id.bGender);
+        final String photoURL = (h.address+"/uploads/"+session.getEnrollSession()+".jpeg");
 
         Picasso.with(getContext())
                 .load(photoURL)
-
-
+                .skipMemoryCache()
                 .placeholder(R.mipmap.userdummy)   // optional
                 .error(R.mipmap.userdummy)      // optional
                 .resize(150,150)                        // optional
@@ -113,6 +123,63 @@ public class ProfileFragClass extends Fragment {
                 }
             }
            }); */
+          final ProgressDialog progressDialog = new ProgressDialog(getActivity());
+        progressDialog.setCanceledOnTouchOutside(false);
+        progressDialog.setMessage("loading...");
+        progressDialog.show();
+        Response.Listener<String> responseListener = new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject jsonResponse = new JSONObject(response);
+                    // boolean error = jsonResponse.getBoolean("error");
+                    String name = jsonResponse.getString("name");
+
+
+                        String gender = jsonResponse.getString("gender");
+
+
+                        String department = jsonResponse.getString("department");
+                        String phone = jsonResponse.getString("phone");
+
+                        String email = jsonResponse.getString("email");
+
+
+
+
+
+                    bName.setText(name);
+                    bGender.setText(gender);
+                    bDepartment.setText(department);
+                    bPhone.setText(phone);
+
+                    bEmail.setText(email);
+                    bEnroll.setText(session.getEnrollSession());
+
+
+
+
+
+
+
+progressDialog.dismiss();
+
+
+
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        };
+
+        GetProfileRequest getProfileRequest = new GetProfileRequest( session.getEnrollSession(), responseListener);
+        queue = Volley.newRequestQueue(getContext());
+        queue.add(getProfileRequest);
+
+
+
+
 
           ivDP.setOnClickListener(new View.OnClickListener() {
                                       @Override
@@ -513,6 +580,16 @@ public class ProfileFragClass extends Fragment {
 
 
 
+    }
+    @Override
+    public void onStop() {
+        queue.cancelAll(new RequestQueue.RequestFilter() {
+            @Override
+            public boolean apply(Request<?> request) {
+                return true;
+            }
+        });
+        super.onStop();
     }
 
 

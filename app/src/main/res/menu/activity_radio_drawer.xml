@@ -20,6 +20,10 @@
             android:icon="@drawable/ic_events"
             android:title="Events" />
         <item
+            android:id="@+id/nav_Schools"
+            android:icon="@drawable/ic_school_black_24dp"
+            android:title="Schools" />
+        <item
             android:id="@+id/nav_Notifications"
             android:icon="@drawable/ic_notifications"
             android:title="News and Notifications" />

@@ -84,6 +84,7 @@ public class EventFragClass extends Fragment {
     host h =new host();
      String lat,lng;
    final Context context=getContext();
+    ScrollView scrollView;
 
 
     ImageButton bDate, bTime, bLocation;
@@ -112,17 +113,18 @@ public class EventFragClass extends Fragment {
                              @Nullable final ViewGroup container, @Nullable Bundle savedInstanceState) {
 
 
-
         //Inflate the layout for this fragment
 
         View rt = inflater.inflate(
                 R.layout.event_frag_layout, container, false);
         getActivity().setTitle("Events");
         session = new Session();
+        scrollView =(ScrollView) rt.findViewById(R.id.eventScrollView);
 
 
-        linearLayout = (LinearLayout) rt.findViewById(R.id.linearLayout);
+                linearLayout = (LinearLayout) rt.findViewById(R.id.linearLayout);
        // linearLayoutin=(LinearLayout)rt.findViewById(R.id.linearLayoutin);
+       // scrollView.
 
         FloatingActionButton fab = (FloatingActionButton) rt.findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -638,6 +640,7 @@ dynamicDelete.setOnClickListener(new View.OnClickListener() {
 
 
             menu.getMenu().add(Menu.NONE, 2, 2, "Delete");
+
         }
 
          menu.getMenu().add(Menu.NONE,3,3,"Add to Calender");

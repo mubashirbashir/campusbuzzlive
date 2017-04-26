@@ -82,6 +82,9 @@ public class RadioActivity extends AppCompatActivity
         Picasso.with(this)
                 .load(photoURL)
 
+               .noFade()
+                .skipMemoryCache()
+
                 .placeholder(R.mipmap.userdummy)   // optional
                 .error(R.mipmap.userdummy)      // optional
                 .resize(150,150)                        // optional
@@ -169,6 +172,9 @@ public class RadioActivity extends AppCompatActivity
                 break;
             case R.id.nav_About:
                 fragment = new AboutFragClass();
+                break;
+            case R.id.nav_Schools:
+                fragment = new SchoolsFragClass();
                 break;
             case R.id.nav_SignOut:
                 Intent intent = new Intent(RadioActivity.this,MainActivity.class);

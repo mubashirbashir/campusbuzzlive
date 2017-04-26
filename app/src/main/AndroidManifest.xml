@@ -74,7 +74,6 @@
         <activity android:name=".Guestmode" />
         <activity android:name=".OTP" />
         <activity android:name=".ContactUs" />
-        <activity android:name=".SchoolsClass" />
         <activity android:name=".DepartmentsActivity"></activity>
     </application>
 
