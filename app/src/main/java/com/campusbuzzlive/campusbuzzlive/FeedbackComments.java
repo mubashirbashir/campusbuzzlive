@@ -115,6 +115,8 @@ session=new Session();
         LinearLayout.LayoutParams paramx =  new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
         paramx.setMargins(0, 0, 10, 0); //substitute parameters for left, top, right, bottom
         imageViewdp.setLayoutParams(paramx);
+        imageViewdp.setBackgroundResource(R.color.white);
+        imageViewdp.setPadding(2,2,2,2);
 
 
         // Toast.makeText(getContext(),photoURL,Toast.LENGTH_LONG).show();

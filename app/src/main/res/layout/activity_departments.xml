@@ -17,11 +17,12 @@
         android:padding="10dp"
         android:background="@color/buzzcolor"
         android:textColor="@color/white"
-        android:layout_marginBottom="5dp"/>
+        android:layout_marginBottom="2dp"/>
 
     <ListView
-        android:divider="@color/grey"
-        android:dividerHeight="3dp"
+        android:layout_below="@id/schoolName"
+        android:divider="@color/buzzcolor1"
+        android:dividerHeight="1dp"
         android:padding="10dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

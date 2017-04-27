@@ -34,7 +34,7 @@
 
 
 
-            android:background="@color/buzzcolor"
+            android:background="@color/buzzcolor1"
             android:scaleType="fitXY"
             android:padding="1dp"
             />

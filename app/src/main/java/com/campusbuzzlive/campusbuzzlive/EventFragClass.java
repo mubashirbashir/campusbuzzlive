@@ -540,6 +540,7 @@ private void display() {
         //display items
 
         TextView tvDynamicEvent = new TextView(getActivity());
+            TextView tvDynamicloc = new TextView(getActivity());
         TextView tvDynamicEtc = new TextView(getActivity());
         TextView tvDynamicName = new TextView(getActivity());
       final  TextView tvDynamicEnroll = new TextView(getActivity());
@@ -583,6 +584,7 @@ private void display() {
         tvDynamicEvent.setTextColor(getResources().getColor(R.color.buzzcolor));
         tvDynamicEtc.setTextSize(16);
         tvDynamicEtc.setGravity(Gravity.RIGHT);
+            tvDynamicloc.setGravity(Gravity.RIGHT);
         // tvDynamicEtc.setId(i++);
         vDynamicLine.setBackgroundColor(getResources().getColor(R.color.colorPrimaryDark));
         vDynamicLine.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 2));
@@ -593,11 +595,15 @@ private void display() {
         vDynamicLine.setLayoutParams(params);
 
 
+
             tvDynamicName.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
             tvDynamicEnroll.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
 
 
-        tvDynamicEtc.setText(dateText + "  " + timeText + "  at" + " " + locationText);
+        tvDynamicEtc.setText(dateText + "  " + timeText);
+            tvDynamicloc.setText(locationText);
+            tvDynamicEtc.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.ic_access_time_black_24dp,0);
+            tvDynamicloc.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.ic_location_on_black_14dp,0);
             dynamicDelete.setImageResource(R.drawable.ic_more_vert_black_24dp);
 
             dynamicDelete.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.MATCH_PARENT));
@@ -620,6 +626,7 @@ private void display() {
 
             linearLayout.addView(tvDynamicEvent);
         linearLayout.addView(tvDynamicEtc);
+            linearLayout.addView(tvDynamicloc);
         linearLayout.addView(vDynamicLine);
 
 
