@@ -20,6 +20,8 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.PopupMenu;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -87,6 +89,35 @@ public class FeedbackFragClass extends Fragment {
                 etQuery = (EditText) dialog.findViewById(R.id.etQuery);
                 //dialog.setTitle("Post a Query");
                 dialog.show();
+
+                etQuery.addTextChangedListener(new TextWatcher() {
+                    @Override
+                    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                    }
+
+                    @Override
+                    public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                    }
+
+                    @Override
+                    public void afterTextChanged(Editable s) {
+                        if(etQuery.getText().toString().length()==0) {
+
+                            etQuery.setError("Enter a query");
+                            bPost.setEnabled(false);
+
+                        }
+                            else{
+
+                            bPost.setEnabled(true);
+
+                        }
+                    }
+                });
+
+
                 bPost.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {

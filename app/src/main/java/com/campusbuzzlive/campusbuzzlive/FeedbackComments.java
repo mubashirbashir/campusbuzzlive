@@ -14,6 +14,8 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.PopupMenu;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -181,6 +183,32 @@ session=new Session();
                 etAnswer= (EditText) dialog.findViewById(R.id.etAnswer);
                // dialog.setTitle("Post an Answer");
                 dialog.show();
+                etAnswer.addTextChangedListener(new TextWatcher() {
+                    @Override
+                    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                    }
+
+                    @Override
+                    public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                    }
+
+                    @Override
+                    public void afterTextChanged(Editable s) {
+
+                        if(etAnswer.getText().toString().length()==0) {
+                            etAnswer.setError("Provide Answer");
+                            bComment.setEnabled(false);
+                        }
+                            else{
+                            bComment.setEnabled(true);
+                        }
+
+                    }
+                });
+
+
                 bComment.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -194,6 +222,7 @@ session=new Session();
                         progressDialog.setMessage("please wait!");
                         progressDialog.show();
                         dialog.dismiss();
+
 
                         progressDialog.setCanceledOnTouchOutside(false);
                         Response.Listener<String> responseListener = new Response.Listener<String>() {
