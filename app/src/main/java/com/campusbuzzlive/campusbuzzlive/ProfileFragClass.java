@@ -67,7 +67,7 @@ public class ProfileFragClass extends Fragment {
     Context context;
     ImageView ivDP;
     ImageButton imageButton4;
-    Button bChangeDP;
+
     Uri outputFileUri;
     Session session;
 
@@ -298,7 +298,7 @@ progressDialog.dismiss();
 
 
                 ivDP.setImageBitmap(bitmap);
-                bChangeDP.setEnabled(true);
+
             }
 
 
@@ -342,7 +342,7 @@ progressDialog.dismiss();
 
                     ivDP.setImageBitmap(bitmap);
 
-                    bChangeDP.setEnabled(true);
+
                     stringImage= getStringImage(bitmap);
                     upload();
 
