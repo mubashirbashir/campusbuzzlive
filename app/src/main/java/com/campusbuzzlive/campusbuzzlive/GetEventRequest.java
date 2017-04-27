@@ -17,8 +17,8 @@ public class GetEventRequest extends StringRequest {
   //  private static final String REGISTER_REQUEST_URL = "https://terminological-hois.000webhostapp.com/getevents.php";
     private Map<String, String> params;
 
-    public GetEventRequest( Response.Listener<String> listener) {
-        super(Method.POST, REGISTER_REQUEST_URL, listener, null);
+    public GetEventRequest( Response.Listener<String> listener,Response.ErrorListener errorListener) {
+        super(Method.POST, REGISTER_REQUEST_URL, listener, errorListener);
         params = new HashMap<>();
 //        params.put("eventName", eventName);
 //        params.put("date", date);

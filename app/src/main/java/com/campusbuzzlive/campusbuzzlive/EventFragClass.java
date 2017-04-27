@@ -16,6 +16,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
+import android.drm.DrmManagerClient;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
@@ -56,6 +57,7 @@ import android.widget.Toast;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
+import com.android.volley.VolleyError;
 import com.android.volley.toolbox.Volley;
 import com.squareup.picasso.Picasso;
 
@@ -328,6 +330,7 @@ public class EventFragClass extends Fragment {
                                         }
                                     }
                                 };
+
                                 String g= String.valueOf(s);
                                 GetLocationSuggestionsRequest getLocationSuggestionsRequest = new GetLocationSuggestionsRequest(g,  responseListener);
                           RequestQueue      queue1 = Volley.newRequestQueue(getActivity().getApplicationContext());
@@ -415,8 +418,30 @@ public class EventFragClass extends Fragment {
                                     }
                                 }
                             };
+                            Response.ErrorListener errorListener = new Response.ErrorListener() {
 
-                            AddEventRequest addEventRequestRequest = new AddEventRequest(eventName, stringDate, stringTime, location, session.getEnrollSession(),  responseListener);
+                                @Override
+                                public void onErrorResponse(final VolleyError error) {
+
+
+
+
+
+                                    progressDialog.dismiss();
+
+                                    final AlertDialog.Builder alert = new AlertDialog.Builder(getContext());
+
+                                    alert.setTitle("No response");
+                                    alert.setMessage("Please check your internet connection");
+
+                                    alert.setNegativeButton("Ok",null);
+                                    alert.show();
+
+
+                                }
+                            };
+
+                            AddEventRequest addEventRequestRequest = new AddEventRequest(eventName, stringDate, stringTime, location, session.getEnrollSession(),  responseListener,errorListener);
                             queue = Volley.newRequestQueue(getActivity().getApplicationContext());
                             queue.add(addEventRequestRequest);
 
@@ -511,10 +536,47 @@ public class EventFragClass extends Fragment {
     }
 }
     };
+        Response.ErrorListener errorListener = new Response.ErrorListener() {
 
-            GetEventRequest getEventRequest = new GetEventRequest(  responseListener);
+            @Override
+            public void onErrorResponse(final VolleyError error) {
+                mSwipeRefreshLayout.setRefreshing(false);
+                ImageView errorshow =new ImageView(getActivity());
+                errorshow.setImageResource(R.drawable.ic_sentiment_dissatisfied_black_24dp);
+                linearLayout.removeAllViews();
+
+
+
+
+                linearLayout.addView(errorshow);
+
+                final AlertDialog.Builder alert = new AlertDialog.Builder(getContext());
+
+                alert.setTitle("No response");
+                alert.setMessage("Please check your internet connection");
+                alert.setPositiveButton("Retry", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        mSwipeRefreshLayout.setRefreshing(true);
+
+                        refreshItems();
+
+                        linearLayout.removeAllViews();
+
+                    }
+                });
+                alert.setNegativeButton("Cancel",null);
+                alert.show();
+
+
+            }
+        };
+
+            GetEventRequest getEventRequest = new GetEventRequest(  responseListener,errorListener);
              queue = Volley.newRequestQueue(getContext());
             queue.add(getEventRequest);
+
+
 
             // refresf from db
 
