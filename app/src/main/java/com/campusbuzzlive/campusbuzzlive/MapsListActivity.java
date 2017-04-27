@@ -36,6 +36,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import static android.view.Gravity.CENTER;
+import static android.view.Gravity.CENTER_VERTICAL;
 import static android.view.Gravity.LEFT;
 import static android.view.Gravity.START;
 import static com.campusbuzzlive.campusbuzzlive.R.color.buzzcolor;
@@ -107,15 +108,16 @@ public class MapsListActivity extends AppCompatActivity implements View.OnClickL
                    final      Button tvDyanamicCatogories = new Button(context);
                         String locationtext = (personList.get(i).get("categories"));
                         tvDyanamicCatogories.setText(locationtext);
-                        tvDyanamicCatogories.setBackgroundResource(R.drawable.transparent_button);
+                        tvDyanamicCatogories.setBackgroundResource(R.drawable.my_border);
                         tvDyanamicCatogories.setTextSize(19);
+                        tvDyanamicCatogories.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_location_on_black_14dp,0,R.drawable.ic_navigate_next_black_24dp,0);
 
 
                         //tvDyanamicCatogories.setBackgroundResource(R.color.buzzcolor);
-                        tvDyanamicCatogories.setPadding(10,10,10,10);
+                        tvDyanamicCatogories.setPadding(20,10,10,10);
                         tvDyanamicCatogories.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
 
-                        tvDyanamicCatogories.setGravity(CENTER);
+                        tvDyanamicCatogories.setGravity(CENTER_VERTICAL);
 
 
                      //   tvDyanamicCatogories.setTypeface(Typeface.DEFAULT_BOLD);
@@ -125,7 +127,7 @@ public class MapsListActivity extends AppCompatActivity implements View.OnClickL
                        tvDyanamicCatogories.setAllCaps(false);
                         tvDyanamicCatogories.setTextColor(getResources().getColor(R.color.buzzcolor));
                         LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) tvDyanamicCatogories.getLayoutParams();
-                        params.setMargins(10, 10,10, 10); //substitute parameters for left, top, right, bottom
+                        params.setMargins(30, 10,30, 10); //substitute parameters for left, top, right, bottom
                         tvDyanamicCatogories.setLayoutParams(params);
                         linearLayout.addView(tvDyanamicCatogories);
                         tvDyanamicCatogories.setOnClickListener(new View.OnClickListener() {
