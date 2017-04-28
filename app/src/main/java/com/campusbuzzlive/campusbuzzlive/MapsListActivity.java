@@ -3,6 +3,7 @@ package com.campusbuzzlive.campusbuzzlive;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Color;
@@ -26,6 +27,7 @@ import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
+import com.android.volley.VolleyError;
 import com.android.volley.toolbox.Volley;
 
 import org.json.JSONArray;
@@ -257,10 +259,28 @@ public class MapsListActivity extends AppCompatActivity implements View.OnClickL
                                         }
                                     }
                                 };
+                                Response.ErrorListener errorListener = new Response.ErrorListener() {
+
+                                    @Override
+                                    public void onErrorResponse(final VolleyError error) {
 
 
 
-                                CoordinatesRequest coordinatesRequest = new CoordinatesRequest(dynammicCatogoriesText, responseListener1);
+                                        final android.app.AlertDialog.Builder alert = new android.app.AlertDialog.Builder(context);
+
+                                        alert.setTitle("No response");
+                                        alert.setMessage("Please check your internet connection");
+
+                                        alert.setNegativeButton("Ok",null);
+                                        alert.show();
+
+
+                                    }
+                                };
+
+
+
+                                CoordinatesRequest coordinatesRequest = new CoordinatesRequest(dynammicCatogoriesText, responseListener1,errorListener);
                                 RequestQueue queue1 = Volley.newRequestQueue(MapsListActivity.this);
                                 queue1.add(coordinatesRequest);
 
@@ -280,9 +300,35 @@ public class MapsListActivity extends AppCompatActivity implements View.OnClickL
                 }
             }
         };
+        Response.ErrorListener errorListener = new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(final VolleyError error) {
+
+                ImageView errorshow =new ImageView(context);
+                errorshow.setImageResource(R.drawable.ic_sentiment_dissatisfied_black_24dp);
+                linearLayout.removeAllViews();
+pb.dismiss();
 
 
-        LocationRequest locationRequest = new LocationRequest( responseListener);
+
+                linearLayout.addView(errorshow);
+
+                final android.app.AlertDialog.Builder alert = new android.app.AlertDialog.Builder(context);
+
+                alert.setTitle("No response");
+                alert.setMessage("Please check your internet connection");
+
+                alert.setNegativeButton("Cancel",null);
+                linearLayout.removeAllViews();
+                alert.show();
+
+
+            }
+        };
+
+
+        LocationRequest locationRequest = new LocationRequest( responseListener,errorListener);
         RequestQueue queue = Volley.newRequestQueue(MapsListActivity.this);
         queue.add(locationRequest);
 

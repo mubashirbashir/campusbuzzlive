@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
+import com.android.volley.VolleyError;
 import com.android.volley.toolbox.Volley;
 
 import org.json.JSONException;
@@ -280,8 +281,26 @@ public class SignupActivity extends AppCompatActivity {
                     }
                 }
             };
+            Response.ErrorListener errorListener = new Response.ErrorListener() {
 
-            RegisterRequest registerRequest = new RegisterRequest(name, email, password, enrollmentid, department, gender, responseListener);
+                @Override
+                public void onErrorResponse(final VolleyError error) {
+
+
+                    final android.app.AlertDialog.Builder alert = new android.app.AlertDialog.Builder(SignupActivity.this);
+                    progressDialog.dismiss();
+
+                    alert.setTitle("No response");
+                    alert.setMessage("Please check your internet connection");
+
+                    alert.setNegativeButton("ok",null);
+                    alert.show();
+
+
+                }
+            };
+
+            RegisterRequest registerRequest = new RegisterRequest(name, email, password, enrollmentid, department, gender, responseListener,errorListener);
             RequestQueue queue = Volley.newRequestQueue(SignupActivity.this);
             queue.add(registerRequest);
 

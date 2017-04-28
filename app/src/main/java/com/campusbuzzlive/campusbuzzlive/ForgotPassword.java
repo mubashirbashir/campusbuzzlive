@@ -14,6 +14,7 @@ import android.widget.EditText;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
+import com.android.volley.VolleyError;
 import com.android.volley.toolbox.Volley;
 
 import org.json.JSONException;
@@ -161,7 +162,25 @@ public class ForgotPassword extends AppCompatActivity implements View.OnClickLis
                 }
             }
         };
-        ForgotPasswordRequest forgotPasswordRequest = new ForgotPasswordRequest( etEmailFind.getText().toString().trim(), etEnrollFind.getText().toString().trim(), responseListener);
+        Response.ErrorListener errorListener = new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(final VolleyError error) {
+
+
+                final android.app.AlertDialog.Builder alert = new android.app.AlertDialog.Builder(ForgotPassword.this);
+                progressDialog.dismiss();
+
+                alert.setTitle("No response");
+                alert.setMessage("Please check your internet connection");
+
+                alert.setNegativeButton("ok",null);
+                alert.show();
+
+
+            }
+        };
+        ForgotPasswordRequest forgotPasswordRequest = new ForgotPasswordRequest( etEmailFind.getText().toString().trim(), etEnrollFind.getText().toString().trim(), responseListener,errorListener);
          queue = Volley.newRequestQueue(ForgotPassword.this);
         queue.add(forgotPasswordRequest);
         bSearch.setEnabled(true);

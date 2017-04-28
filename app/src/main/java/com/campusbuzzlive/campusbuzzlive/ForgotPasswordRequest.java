@@ -19,9 +19,9 @@ public class ForgotPasswordRequest extends StringRequest {
     private static final String REGISTER_REQUEST_URL = h.address+"/forgotPassword.php";
     private Map<String, String> params;
 
-    public ForgotPasswordRequest(String email,String enrollmentid , Response.Listener<String> listener) {
+    public ForgotPasswordRequest(String email,String enrollmentid , Response.Listener<String> listener,Response.ErrorListener errorListener) {
 
-        super(Method.POST, REGISTER_REQUEST_URL, listener, null);
+        super(Method.POST, REGISTER_REQUEST_URL, listener, errorListener);
         params = new HashMap<>();
         params.put("email", email);
         params.put("enrollmentid", enrollmentid);

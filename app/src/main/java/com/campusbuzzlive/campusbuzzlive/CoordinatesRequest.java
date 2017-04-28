@@ -17,8 +17,8 @@ public class CoordinatesRequest extends StringRequest {
     //private static final String LOGIN_REQUEST_URL = "https://terminological-hois.000webhostapp.com/getcoordinates.php";
     private Map<String, String> params;
 
-    public CoordinatesRequest(String name ,Response.Listener<String> listener) {
-        super(Method.POST, LOGIN_REQUEST_URL, listener, null);
+    public CoordinatesRequest(String name ,Response.Listener<String> listener,Response.ErrorListener errorListener) {
+        super(Method.POST, LOGIN_REQUEST_URL, listener, errorListener);
         params = new HashMap<>();
         // Toast.makeText(this,enrollmentid+" "+password,Toast.LENGTH_LONG).show();
 

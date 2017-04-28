@@ -4,8 +4,10 @@ package com.campusbuzzlive.campusbuzzlive;
  * Created by mubas on 3/6/2017.
  */
 
+import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 
 import android.app.Activity;
@@ -45,6 +47,7 @@ import android.widget.Toast;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
+import com.android.volley.VolleyError;
 import com.android.volley.toolbox.Volley;
 import com.squareup.picasso.Picasso;
 
@@ -172,8 +175,26 @@ progressDialog.dismiss();
                 }
             }
         };
+        Response.ErrorListener errorListener = new Response.ErrorListener() {
 
-        GetProfileRequest getProfileRequest = new GetProfileRequest( session.getEnrollSession(), responseListener);
+            @Override
+            public void onErrorResponse(final VolleyError error) {
+              progressDialog.dismiss();
+
+
+                final AlertDialog.Builder alert = new AlertDialog.Builder(getContext());
+
+                alert.setTitle("No response");
+                alert.setMessage("Please check your internet connection");
+
+                alert.setNegativeButton("Ok",null);
+                alert.show();
+
+
+            }
+        };
+
+        GetProfileRequest getProfileRequest = new GetProfileRequest( session.getEnrollSession(), responseListener,errorListener);
         queue = Volley.newRequestQueue(getContext());
         queue.add(getProfileRequest);
 

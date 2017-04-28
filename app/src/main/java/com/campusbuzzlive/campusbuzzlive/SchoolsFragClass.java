@@ -1,5 +1,7 @@
 package com.campusbuzzlive.campusbuzzlive;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -19,6 +21,7 @@ import android.widget.TextView;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
+import com.android.volley.VolleyError;
 import com.android.volley.toolbox.Volley;
 
 import org.json.JSONArray;
@@ -38,6 +41,7 @@ public class SchoolsFragClass extends Fragment {
     JSONArray schoolArray = null;
     ArrayList<HashMap<String, String>> schoolList;
     HashMap<String, String> schoolMap = new HashMap<String, String>();
+    ProgressBar progreebar;
 
     RequestQueue queue;
     @Nullable
@@ -84,13 +88,13 @@ public class SchoolsFragClass extends Fragment {
 
 
         listView.setAdapter(arrayAdapter);
-        ProgressBar progreebar = (ProgressBar)rt.findViewById(R.id.pgbar);
+        progreebar = (ProgressBar)rt.findViewById(R.id.pgbar);
         progreebar.setVisibility(View.VISIBLE);
 
 
 
         refreshitems();
-        progreebar.setVisibility(View.INVISIBLE);
+     //   progreebar.setVisibility(View.INVISIBLE);
 
 
 
@@ -147,7 +151,7 @@ public class SchoolsFragClass extends Fragment {
                     arrayAdapter.addAll(schoolList);
 
 
-
+                 progreebar.setVisibility(View.INVISIBLE);
 
 
 
@@ -156,8 +160,25 @@ public class SchoolsFragClass extends Fragment {
                 }
             }
         };
+        Response.ErrorListener errorListener = new Response.ErrorListener() {
 
-        GetSchoolsRequest getSchoolsRequest = new GetSchoolsRequest(  responseListener);
+            @Override
+            public void onErrorResponse(final VolleyError error) {
+                progreebar.setVisibility(View.INVISIBLE);
+
+
+                final AlertDialog.Builder alert = new AlertDialog.Builder(getContext());
+
+                alert.setTitle("No response");
+                alert.setMessage("Please check your internet connection");
+
+                alert.setNegativeButton("Ok",null);
+                alert.show();
+
+
+            }
+        };
+        GetSchoolsRequest getSchoolsRequest = new GetSchoolsRequest(  responseListener,errorListener);
         queue = Volley.newRequestQueue(getActivity().getApplicationContext());
         queue.add(getSchoolsRequest);
     }

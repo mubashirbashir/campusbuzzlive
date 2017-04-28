@@ -26,9 +26,11 @@ import android.widget.TextView;
 
 import java.io.IOException;
 
+import wseemann.media.FFmpegMediaPlayer;
+
 
 public class HomeFragClass extends Fragment {
-    private final static String stream = "http://192.168.43.87:8000/live";
+    private final static String stream = "http://192.168.43.171:8000";
    ImageView ivControl,ivCircle;
     TextView tvTextDisplay;
     MediaPlayer mediaPlayer;
@@ -60,8 +62,11 @@ public class HomeFragClass extends Fragment {
 
 
 
-        mediaPlayer = new MediaPlayer();
-        mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
+      //  mediaPlayer = new MediaPlayer();
+       // mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
+
+      final   FFmpegMediaPlayer mp = new FFmpegMediaPlayer();
+
 
 
         ivControl.setOnClickListener(new View.OnClickListener() {
@@ -72,7 +77,7 @@ public class HomeFragClass extends Fragment {
 
 
                 if (started) {
-                    mediaPlayer.stop();
+                    mp.stop();
                     started = false;
                     tvTextDisplay.setText("Tune in to Live stream by pressing the Play button.");
 
@@ -84,13 +89,51 @@ public class HomeFragClass extends Fragment {
                     ivControl.startAnimation(animationRotate);
 
 
+
                    ivControl.setImageResource(R.drawable.ic_hourglass_empty_black_24dp);
 
                     ivControl.setEnabled(false);
+                ;
+                    mp.setOnPreparedListener(new FFmpegMediaPlayer.OnPreparedListener() {
 
-                    new PlayTask().execute(stream);
+                        @Override
+                        public void onPrepared(FFmpegMediaPlayer mp) {
+                            mp.start();
+                          //  mp.stop();
+                        }
+                    });
+                    mp.setOnErrorListener(new FFmpegMediaPlayer.OnErrorListener() {
 
-                    mediaPlayer.start();
+                        @Override
+                        public boolean onError(FFmpegMediaPlayer mp, int what, int extra) {
+                            mp.release();
+                            return false;
+                        }
+                    });
+
+                    try {
+                        mp.setDataSource(stream);
+                        mp.prepareAsync();
+                    } catch (IllegalArgumentException e) {
+                        e.printStackTrace();
+                    } catch (SecurityException e) {
+                        e.printStackTrace();
+                    } catch (IllegalStateException e) {
+                        e.printStackTrace();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+
+                    ivControl.setEnabled(true);
+                  //  mediaPlayer.start();
+                    started = true;
+                    ivControl.clearAnimation();
+                    ivControl.setImageResource(R.drawable.ic_power_settings_new_black_24dp);
+                    tvTextDisplay.setText("Don't like what you're listening, press the Stop Button.");
+
+                   // new PlayTask().execute(stream);
+
+                    //mediaPlayer.start();
 
                //     ivControl.setImageResource(R.drawable.ic_power_settings_new_black_24dp);
 
@@ -124,7 +167,7 @@ public class HomeFragClass extends Fragment {
             try {
                 //mediaPlayer.
                 mediaPlayer.setDataSource(strings[0]);
-                mediaPlayer.prepare();
+                mediaPlayer.prepareAsync();
                 prepared = true;
             } catch (IOException e) {
                 e.printStackTrace();

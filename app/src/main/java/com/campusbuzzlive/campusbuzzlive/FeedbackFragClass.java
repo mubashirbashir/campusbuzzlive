@@ -40,6 +40,7 @@ import android.widget.Toast;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
+import com.android.volley.VolleyError;
 import com.android.volley.toolbox.Volley;
 import com.squareup.picasso.Picasso;
 
@@ -167,8 +168,31 @@ public class FeedbackFragClass extends Fragment {
                                 }
                             }
                         };
+                        Response.ErrorListener errorListener = new Response.ErrorListener() {
 
-                        AddQuestionRequest addQuestionRequest = new AddQuestionRequest(etQuery.getText().toString(), java.text.DateFormat.getDateTimeInstance().format((new Date())), session.getEnrollSession(), responseListener);
+                            @Override
+                            public void onErrorResponse(final VolleyError error) {
+
+
+
+
+
+                                progressDialog.dismiss();
+
+                                final android.app.AlertDialog.Builder alert = new android.app.AlertDialog.Builder(getContext());
+
+                                alert.setTitle("No response");
+                                alert.setMessage("Please check your internet connection");
+
+                                alert.setNegativeButton("Ok",null);
+                                alert.show();
+
+
+                            }
+                        };
+
+
+                        AddQuestionRequest addQuestionRequest = new AddQuestionRequest(etQuery.getText().toString(), java.text.DateFormat.getDateTimeInstance().format((new Date())), session.getEnrollSession(), responseListener,errorListener);
                          queue = Volley.newRequestQueue(getContext());
                         queue.add(addQuestionRequest);
 
@@ -260,8 +284,44 @@ public class FeedbackFragClass extends Fragment {
                 }
             }
         };
+        Response.ErrorListener errorListener = new Response.ErrorListener() {
 
-        GetQuestionsRequest getQuestionRequest = new GetQuestionsRequest(responseListener);
+            @Override
+            public void onErrorResponse(final VolleyError error) {
+                mSwipeRefreshLayout.setRefreshing(false);
+                ImageView errorshow =new ImageView(getActivity());
+                errorshow.setImageResource(R.drawable.ic_sentiment_dissatisfied_black_24dp);
+                linearLayout.removeAllViews();
+
+
+
+
+                linearLayout.addView(errorshow);
+
+                final android.app.AlertDialog.Builder alert = new android.app.AlertDialog.Builder(getContext());
+
+                alert.setTitle("No response");
+                alert.setMessage("Please check your internet connection");
+                alert.setPositiveButton("Retry", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        mSwipeRefreshLayout.setRefreshing(true);
+
+                        refreshItems();
+
+                        linearLayout.removeAllViews();
+
+                    }
+                });
+                alert.setNegativeButton("Cancel",null);
+                alert.show();
+
+
+            }
+        };
+
+
+        GetQuestionsRequest getQuestionRequest = new GetQuestionsRequest(responseListener,errorListener);
          queue = Volley.newRequestQueue(getContext());
         queue.add(getQuestionRequest);
 

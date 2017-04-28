@@ -16,8 +16,8 @@ public class GetSchoolsRequest extends StringRequest {
     private static final String REGISTER_REQUEST_URL = h.address+"/getSchools.php";
     private Map<String, String> params;
 
-    public GetSchoolsRequest( Response.Listener<String> listener) {
-        super(Method.POST, REGISTER_REQUEST_URL, listener, null);
+    public GetSchoolsRequest( Response.Listener<String> listener,Response.ErrorListener errorListener) {
+        super(Method.POST, REGISTER_REQUEST_URL, listener, errorListener);
         params = new HashMap<>();
 
     }
