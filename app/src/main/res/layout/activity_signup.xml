@@ -93,7 +93,7 @@
                 android:layout_marginTop="5dp"
                 android:hint="Name"
                 android:inputType="textCapWords|textPersonName"
-                android:maxLength="20"
+                android:maxLength="30"
                 android:digits="abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ"
                 android:singleLine="true" />
         </android.support.design.widget.TextInputLayout>
