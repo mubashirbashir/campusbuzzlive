@@ -26,12 +26,10 @@ import android.widget.TextView;
 
 import java.io.IOException;
 
-import wseemann.media.FFmpegMediaPlayer;
-
 
 public class HomeFragClass extends Fragment {
-    private final static String stream = "http://192.168.43.171:8000";
-   ImageView ivControl,ivCircle;
+    private final static String stream = "http://192.168.1.38:8000/live";
+    ImageView ivControl,ivCircle;
     TextView tvTextDisplay;
     MediaPlayer mediaPlayer;
     boolean started = false;
@@ -52,21 +50,18 @@ public class HomeFragClass extends Fragment {
         ivCircle = (ImageView) rootView.findViewById(R.id.ivCircle);
         tvTextDisplay = (TextView) rootView.findViewById(R.id.tvTextDisplay);
         // ivControl.setImageResource(R.drawable.ic_event_black_24dp);
-    //    mediaPlayer.start();
+        //    mediaPlayer.start();
         final Animation animation =AnimationUtils.loadAnimation(getActivity(),R.anim.zoom);
         ivCircle.startAnimation(animation);
-         animationRotate =AnimationUtils.loadAnimation(getActivity(),R.anim.rotate);
+        animationRotate =AnimationUtils.loadAnimation(getActivity(),R.anim.rotate);
 
         ivControl.setImageResource(R.drawable.ic_play_arrow_black_24dp);
         tvTextDisplay.setText("Tune in to Live stream by pressing the Play button");
 
 
 
-      //  mediaPlayer = new MediaPlayer();
-       // mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
-
-      final   FFmpegMediaPlayer mp = new FFmpegMediaPlayer();
-
+        mediaPlayer = new MediaPlayer();
+        mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
 
 
         ivControl.setOnClickListener(new View.OnClickListener() {
@@ -77,67 +72,29 @@ public class HomeFragClass extends Fragment {
 
 
                 if (started) {
-                    mp.stop();
+                    mediaPlayer.stop();
                     started = false;
                     tvTextDisplay.setText("Tune in to Live stream by pressing the Play button.");
 
                     ivControl.setImageResource(R.drawable.ic_play_arrow_black_24dp);
 
-                   // ivControl.setText("Play");
+                    // ivControl.setText("Play");
                 } else {
                     tvTextDisplay.setText("Hold on, while the stream is loading...");
                     ivControl.startAnimation(animationRotate);
 
 
-
-                   ivControl.setImageResource(R.drawable.ic_hourglass_empty_black_24dp);
+                    ivControl.setImageResource(R.drawable.ic_hourglass_empty_black_24dp);
 
                     ivControl.setEnabled(false);
-                ;
-                    mp.setOnPreparedListener(new FFmpegMediaPlayer.OnPreparedListener() {
 
-                        @Override
-                        public void onPrepared(FFmpegMediaPlayer mp) {
-                            mp.start();
-                          //  mp.stop();
-                        }
-                    });
-                    mp.setOnErrorListener(new FFmpegMediaPlayer.OnErrorListener() {
+                    new PlayTask().execute(stream);
 
-                        @Override
-                        public boolean onError(FFmpegMediaPlayer mp, int what, int extra) {
-                            mp.release();
-                            return false;
-                        }
-                    });
+                    mediaPlayer.start();
 
-                    try {
-                        mp.setDataSource(stream);
-                        mp.prepareAsync();
-                    } catch (IllegalArgumentException e) {
-                        e.printStackTrace();
-                    } catch (SecurityException e) {
-                        e.printStackTrace();
-                    } catch (IllegalStateException e) {
-                        e.printStackTrace();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
+                    //     ivControl.setImageResource(R.drawable.ic_power_settings_new_black_24dp);
 
-                    ivControl.setEnabled(true);
-                  //  mediaPlayer.start();
-                    started = true;
-                    ivControl.clearAnimation();
-                    ivControl.setImageResource(R.drawable.ic_power_settings_new_black_24dp);
-                    tvTextDisplay.setText("Don't like what you're listening, press the Stop Button.");
-
-                   // new PlayTask().execute(stream);
-
-                    //mediaPlayer.start();
-
-               //     ivControl.setImageResource(R.drawable.ic_power_settings_new_black_24dp);
-
-                 //   ivControl.setText("Pause");
+                    //   ivControl.setText("Pause");
                 }
 
             }
@@ -167,7 +124,7 @@ public class HomeFragClass extends Fragment {
             try {
                 //mediaPlayer.
                 mediaPlayer.setDataSource(strings[0]);
-                mediaPlayer.prepareAsync();
+                mediaPlayer.prepare();
                 prepared = true;
             } catch (IOException e) {
                 e.printStackTrace();
@@ -178,12 +135,12 @@ public class HomeFragClass extends Fragment {
         @Override
         protected void onPostExecute(Boolean aBoolean) {
             super.onPostExecute(aBoolean);
-          //  play.setEnabled(true);
-         ivControl.setEnabled(true);
+            //  play.setEnabled(true);
+            ivControl.setEnabled(true);
             mediaPlayer.start();
             started = true;
             ivControl.clearAnimation();
-           ivControl.setImageResource(R.drawable.ic_power_settings_new_black_24dp);
+            ivControl.setImageResource(R.drawable.ic_power_settings_new_black_24dp);
             tvTextDisplay.setText("Don't like what you're listening, press the Stop Button.");
 
         }

@@ -168,14 +168,16 @@ public class ForgotPassword extends AppCompatActivity implements View.OnClickLis
             public void onErrorResponse(final VolleyError error) {
 
 
-                final android.app.AlertDialog.Builder alert = new android.app.AlertDialog.Builder(ForgotPassword.this);
                 progressDialog.dismiss();
 
-                alert.setTitle("No response");
-                alert.setMessage("Please check your internet connection");
-
-                alert.setNegativeButton("ok",null);
-                alert.show();
+                AlertDialog.Builder builder =new AlertDialog.Builder(ForgotPassword.this);
+                builder.setMessage("Please check your email")
+                        .setNegativeButton("ok",null)
+                        .create()
+                        .show();
+                Intent intent= new Intent(ForgotPassword.this,OTP.class);
+                intent.putExtra("enrollmentid", etEnrollFind.getText().toString());
+                startActivity(intent);
 
 
             }

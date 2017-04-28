@@ -96,7 +96,7 @@ public class DepartmentsActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         Intent intent= new Intent((Intent.ACTION_DIAL));
-                        intent.setData(Uri.parse("tel:"+tvPhone.getText().toString()));
+                        intent.setData(Uri.parse("tel:0"+tvPhone.getText().toString()));
                         startActivity(intent);
                     }
                 });

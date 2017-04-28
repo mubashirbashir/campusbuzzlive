@@ -128,11 +128,7 @@ public class RadioActivity extends AppCompatActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            Intent intent = new Intent(RadioActivity.this,SettingsActivity.class);
-            startActivity(intent);
-            return true;
-        }
+
         if(id==R.id.action_ContactUs){
             Intent intent = new Intent(RadioActivity.this,ContactUs.class);
             startActivity(intent);
