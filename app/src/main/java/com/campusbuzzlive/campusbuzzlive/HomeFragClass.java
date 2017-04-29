@@ -28,7 +28,7 @@ import java.io.IOException;
 
 
 public class HomeFragClass extends Fragment {
-    private final static String stream = "http://192.168.1.38:8000/live";
+    private final static String stream = "http://192.168.43.87:8000/live";
     ImageView ivControl,ivCircle;
     TextView tvTextDisplay;
     MediaPlayer mediaPlayer;

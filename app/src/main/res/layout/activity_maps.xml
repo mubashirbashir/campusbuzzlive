@@ -4,17 +4,6 @@
     android:name="com.google.android.gms.maps.SupportMapFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-  >
+  />
 
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/go"
-        android:layout_gravity="right|center"
-        android:background="@drawable/ic_navigation_black_24dp"
-
-
-        />
-
-</fragment>

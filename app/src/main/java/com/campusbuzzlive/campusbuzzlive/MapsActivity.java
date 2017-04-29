@@ -51,7 +51,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                   .setNegativeButton("ok", null)
                   .create()
                     .show();
-        Button go = (Button) findViewById(R.id.go);
+     /*   Button go = (Button) findViewById(R.id.go);
         go.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -63,7 +63,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 startActivity(intent);
 
             }
-        });
+        });*/
     }
 
 
