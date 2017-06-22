@@ -24,7 +24,7 @@
         android:layout_marginLeft="10dp"
 
         android:textColor="@color/buzzcolor"
-        android:text="School of Applied Sciences and tvfvfvffvfyyg"
+        android:text="School of Applied Sciences "
         android:textSize="16dp"/>
 
         <TextView
